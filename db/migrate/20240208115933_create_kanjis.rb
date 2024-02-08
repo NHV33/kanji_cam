@@ -3,9 +3,9 @@ class CreateKanjis < ActiveRecord::Migration[7.1]
     create_table :kanjis do |t|
       t.string :character
       t.string :radical
-      t.integer :jlpt_level
+      t.integer :jlpt
       t.integer :grade
-      t.integer :stroke_count
+      t.integer :strokes
       t.integer :frequency
 
       t.timestamps
