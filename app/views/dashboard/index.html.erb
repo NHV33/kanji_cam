@@ -1,0 +1,14 @@
+<!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
+
+<h1>Kanji Dashboard</h1>
+
+<p>Learned Kanji: <%= @total_learned_kanji %></p>
+<p>Total Stored Kanji: <%= @total_kanji %></p>
+<p>My Deck: <% if @deck.present? %>
+  <% @deck.each do |d| %>
+    <%= d.name %>
+    <%= d.comment %>
+  <% end %>
+<% else %>
+  No decks found.
+<% end %></p>
