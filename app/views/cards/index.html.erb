@@ -1,0 +1,11 @@
+<div class="container d-flex flex-column">
+  <div class="row custom-card justify-content-center">
+      <% @cards.each do |card| %>
+        <div class="col-sm-3 custom-card m-1">
+          <div class="card m-2 p-1 bg-primary custom-card">
+            <%= image_tag "kanji_photo.png", class: "card-img-top"%>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>
