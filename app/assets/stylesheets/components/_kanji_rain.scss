@@ -1,0 +1,62 @@
+#bg-filter {
+  z-index: -110;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* backdrop-filter: blur(1px); */
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#rain-box {
+  z-index: -109;
+  // background-color: rgb(65, 159, 159);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#rain-filter {
+  z-index: -108;
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.kanji-rain {
+  // background-color: blue;
+  position: absolute;
+  color: white;
+  width: 10%;
+  height: 10vh;
+  text-align: center;
+  font-size: 9vmin;
+}
+
+@keyframes fall-down {
+  0% {
+      transform: translate(0vh, 0vh);
+      opacity: 0%;
+  }
+  10% {
+      transform: translate(0vh, 10vh);
+      opacity: 90%;
+  }
+  100% {
+      transform: translate(0vh, 100vh);
+      opacity: 0%;
+  }
+}
+
+.fall {
+  animation: fall-down 7s linear 0s 1 normal forwards;
+}
