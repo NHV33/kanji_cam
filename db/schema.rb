@@ -52,9 +52,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_123407) do
   create_table "kanjis", force: :cascade do |t|
     t.string "character"
     t.string "radical"
-    t.integer "jlpt_level"
+    t.integer "jlpt"
     t.integer "grade"
-    t.integer "stroke_count"
+    t.integer "strokes"
     t.integer "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
