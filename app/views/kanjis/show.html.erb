@@ -1,20 +1,52 @@
 <div class="container">
-<%= image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block w-30 rounded "%>
-<div class="default-card d-flex justify-content-center gap-3 mt-3 col-sm-12">
-<div>
-  <h1 class="display-1"><%= @kanji.character %></h1>
-  </div>
-  <div>
-   <div><span>JLPT Level: </span><h3>N<%= @kanji.jlpt %><% if @kanji.jlpt == 1 || @kanji.jlpt == 2 %><%=  "👑" %><% end %></h3></div>
-    <div><span>Grade: </span><h3><%= @kanji.grade %></h3></div>
+  <%= image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block rounded w-80"%>
+  <div class="default-card d-flex justify-content-center gap-3 mt-3 col-sm-12">
+    <div><span>JLPT: </span>
+      <h3>N<%= @kanji.jlpt %>
+        <% if @kanji.jlpt == 1 %><%=  " 👹" %>
+        <% elsif @kanji.jlpt == 2 %><%=  " 🕺" %>
+        <% elsif @kanji.jlpt == 3 %><%=  " 😎" %>
+        <% elsif @kanji.jlpt == 4 %><%=  " 😺" %>
+        <% elsif @kanji.jlpt == 5 %><%=  " 🐣" %>
+        <% end %></h3>
+    </div>
+    <div>
+      <h1 style="font-size: 100px;"><%= @kanji.character %></h1>
+    </div>
+    <div>
+      <div><span>Grade: </span>
+        <h3><%= @kanji.grade %></h3>
+      </div>
+      <div><span>Stroke Count: </span>
+        <h3><%= @kanji.strokes %></h3>
+      </div>
     </div>
   </div>
-
-<div class="default-card mt-3 col-sm-12">
-<div><p>Meaning: </p><h2><%= @kanji.meaning_list %></h2></div>
-<div><p>1st meaning: </p><h2><%= @kanji.meaning_list[0] %></h2></div>
-<div><span class="badge badge-pill badge-primary">音</span><h3><%= @kanji.on_reading_list %></h3></div>
-<div><p>訓</p><h3><%= @kanji.kun_reading_list %></h3></div>
-
+  <div class="default-card mt-3 col-sm-12">
+    <div>
+      <p class="mb-0">Meaning (意味): </p>
+      <h2><%= @kanji.meaning_list %></h2>
+    </div>
+    <div>
+      <p class="mb-0">1st meaning: </p>
+      <h2><%= @kanji.meaning_list[0] %></h2>
+    </div>
+    <div class="d-flex mb-2">
+      <span class="badge bg-warning" style="font-size: 16px; border-radius: 4px">音</span>
+      <h3 class="mb-0 ms-2"><% if @kanji.on_reading_list.blank? %>
+          <p class="mb-0"><%= "There is no on reading" %></p>
+        <% else %><%= @kanji.on_reading_list %><% end %></h3>
+      <i class="fa-solid fa-volume-high"></i>
+    </div>
+    <div class="d-flex mb-2">
+      <span class="badge bg-primary" style="font-size: 16px; border-radius: 4px">訓</span>
+      <h3 class="mb-0 ms-2"><% if @kanji.kun_reading_list.blank? %>
+          <p class="mb-0"><%= "There is no kun reading" %></p>
+        <% else %><%= @kanji.kun_reading_list %><% end %></h3>
+      <i class="fa-solid fa-volume-high"></i>
+    </div>
   </div>
+  <div class="default-card mt-3 col-sm-12">
+    <h1>Example</h1>
   </div>
+</div>
