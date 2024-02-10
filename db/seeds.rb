@@ -88,7 +88,6 @@ if Entry.all.empty?
   beginner_cards.each do |card|
     beginner_deck.entries.create(card_id: card.id)
   end
-
   intermediate_cards = Card.joins(:kanji).where(kanjis: { jlpt: [3, 4] }).order("RANDOM()").limit(5)
   intermediate_cards.each do |card|
     intermediate_deck.entries.create(card_id: card.id)
