@@ -10,9 +10,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body style="background-color: #cccccc; position: relative;">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <%# <div id="bg-filter"></div> %>
+    <div id="rain-box"></div>
+    <div id="rain-filter"></div>
+
     <%= yield %>
+    <script src="/kanji-rain/kanji-rain.js"></script>
   </body>
 </html>
