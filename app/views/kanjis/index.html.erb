@@ -3,6 +3,7 @@
 
 <div>
   <% @kanjis.each do |kanji| %>
-   <h1><% kanji.character %></h1>
+   <h1><%= kanji.character %></h1>
+     <%= link_to "Check this kanji", kanji_path(kanji) %>
   <% end %>
 </div>

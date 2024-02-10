@@ -1,2 +1,20 @@
-<h1>Kanjis#show</h1>
-<p>Find me in app/views/kanjis/show.html.erb</p>
+<div class="container">
+<%= image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block w-30 rounded "%>
+<div class="default-card d-flex justify-content-center gap-3 mt-3 col-sm-12">
+<div>
+  <h1 class="display-1"><%= @kanji.character %></h1>
+  </div>
+  <div>
+   <div><span>JLPT Level: </span><h3>N<%= @kanji.jlpt %><% if @kanji.jlpt == 1 || @kanji.jlpt == 2 %><%=  "👑" %><% end %></h3></div>
+    <div><span>Grade: </span><h3><%= @kanji.grade %></h3></div>
+    </div>
+  </div>
+
+<div class="default-card mt-3 col-sm-12">
+<div><p>Meaning: </p><h2><%= @kanji.meaning_list %></h2></div>
+<div><p>1st meaning: </p><h2><%= @kanji.meaning_list[0] %></h2></div>
+<div><span class="badge badge-pill badge-primary">音</span><h3><%= @kanji.on_reading_list %></h3></div>
+<div><p>訓</p><h3><%= @kanji.kun_reading_list %></h3></div>
+
+  </div>
+  </div>
