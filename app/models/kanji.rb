@@ -1,8 +1,6 @@
 class Kanji < ApplicationRecord
-  validates :character, presense: :true #validate length
-  validates :strokes, presense: :true
+  validates :strokes, presence: true
+  validates :character, presence: true, length: { is: 1 }
 
-  acts_as_taggable_on :meanings
-  acts_as_taggable_on :on_readings
-  acts_as_taggable_on :kun_readings
+  acts_as_taggable_on :meanings, :on_readings, :kun_readings
 end

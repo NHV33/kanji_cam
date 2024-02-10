@@ -52,7 +52,7 @@ gem "sassc-rails"
 
 # Manually Added:
 gem "devise"
-gem 'acts-as-taggable-on', '~> 10.0'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem "dotenv-rails"
