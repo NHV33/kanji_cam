@@ -84,11 +84,11 @@ if Entry.all.empty?
   beginner_deck = Deck.find_by(title: "Beginner Kanji Deck")
   intermediate_deck = Deck.find_by(title: "Intermediate Kanji Deck")
 
-  beginner_cards = Card.joins(:kanji).where(kanjis: { jlpt: [1, 2] }).order("RANDOM()").limit(5)
+  beginner_cards = Card.joins(:kanji).where(kanjis: { jlpt: [4, 5] }).order("RANDOM()").limit(5)
   beginner_cards.each do |card|
     beginner_deck.entries.create(card_id: card.id)
   end
-  intermediate_cards = Card.joins(:kanji).where(kanjis: { jlpt: [3, 4] }).order("RANDOM()").limit(5)
+  intermediate_cards = Card.joins(:kanji).where(kanjis: { jlpt: [2, 3] }).order("RANDOM()").limit(5)
   intermediate_cards.each do |card|
     intermediate_deck.entries.create(card_id: card.id)
   end
