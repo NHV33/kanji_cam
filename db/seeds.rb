@@ -59,3 +59,38 @@ if Card.all.empty?
     card.save!
   end
 end
+
+# Deck seeds
+if Deck.all.empty?
+  user = User.find_by(email: "test@me.com")
+
+  beginner_deck = Deck.new(
+    user_id: user.id,
+    title: "Beginner Kanji Deck",
+    comment: "A deck containing basic Kanji characters for beginners."
+  )
+  beginner_deck.save!
+
+  intermediate_deck = Deck.new(
+    user_id: user.id,
+    title: "Intermediate Kanji Deck",
+    comment: "A deck containing intermediate level Kanji characters."
+  )
+  intermediate_deck.save!
+end
+
+# Entry seeds
+if Entry.all.empty?
+  beginner_deck = Deck.find_by(title: "Beginner Kanji Deck")
+  intermediate_deck = Deck.find_by(title: "Intermediate Kanji Deck")
+
+  beginner_cards = Card.joins(:kanji).where(kanjis: { jlpt: [1, 2] }).order("RANDOM()").limit(5)
+  beginner_cards.each do |card|
+    beginner_deck.entries.create(card_id: card.id)
+  end
+
+  intermediate_cards = Card.joins(:kanji).where(kanjis: { jlpt: [3, 4] }).order("RANDOM()").limit(5)
+  intermediate_cards.each do |card|
+    intermediate_deck.entries.create(card_id: card.id)
+  end
+end
