@@ -1,0 +1,9 @@
+<h1>Kanjis#index</h1>
+<p>Find me in app/views/kanjis/index.html.erb</p>
+
+<div>
+  <% @kanjis.each do |kanji| %>
+   <h1><%= kanji.character %></h1>
+     <%= link_to "Check this kanji", kanji_path(kanji) %>
+  <% end %>
+</div>
