@@ -3,14 +3,16 @@
     <p class="fs-4"><i class="fa-solid fa-circle-left me-2"></i><%= link_to 'Back to my dashboard', '#' %></p>
     <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
     <% @cards.each do |card| %>
-      <div class="col-sm-3 custom-card m-1 pt-0 px-1">
+      <div class="col-3 custom-card m-1 pt-0 px-1">
           <div class="position-relative">
             <%= image_tag "kanji_photo.png", class: "card-img-top py-1 justify-content-center"%>
-            <i class="fa-regular fa-star position-absolute top-3 end-0 fs-5 text-secondary align-items-start"></i>
+            <div class="favorite-icon">
+              <i class="fa-regular fa-star top-3 end-0 fs-5 text-secondary align-items-start"></i>
+            </div>
           </div>
-          <div>
-            <span class="badge badge-success"><%= card.kanji.meaning_list %></span>
-            <span class="badge badge-primary"><%= card.kanji.radical %></span>
+          <div class="kanji-badge">
+            <span class="badge bg-success"><%= card.kanji.meaning_list.first %></span>
+            <span class="badge bg-success"><%= card.kanji.character %></span>
           </div>
       </div>
     <% end %>
