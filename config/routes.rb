@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :cards
 
-  resources :kanjis, [:index, :show]
+  resources :kanjis, only: [:index, :show]
 
   # Defines the root path route ("/")
   # root "posts#index"
