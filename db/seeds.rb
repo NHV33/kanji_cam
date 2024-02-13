@@ -43,12 +43,12 @@ end
 
 # Card seeds
 if Card.all.empty?
-  Kanji.all.each do |kanji|
+  Kanji.limit(64).all.each do |kanji|
     card = Card.new(
       user_id: User.find_by(email: "test@me.com").id,
       kanji_id: kanji.id,
-      learned: false,
-      practice_count: (1..5).to_a.sample,
+      learned: [true, false].sample,
+      practice_count: rand(1..5),
       prev_practice_at: nil,
       next_practice_at: nil,
       latitude: rand(35.65...35.69),

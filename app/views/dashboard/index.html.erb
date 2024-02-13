@@ -1,0 +1,58 @@
+<!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
+<%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
+<div class="container">
+<h1>Dashboard</h1>
+<br>
+
+<h3>Captured Kanji/Total Kanji</h3>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
+</div>
+<br>
+
+<h3>Learned Kanji/Captured Kanji</h3>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
+</div>
+
+<br>
+<h3>JLPT Kanji Proficiency Distribution</h3>
+<%= pie_chart @learned_kanji_by_jlpt,
+              id: "jlpt_kanji_distribution",
+              height: "250px",
+              library: {
+                legend: { position: 'top' },
+                tooltip: { enabled: true },
+                plotOptions: {
+                  pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                  }
+                }
+              } %>
+</div>
+
+
+<div class="container mt-4">
+  <div class="row">
+    <% if @decks.present? %>
+      <% @decks.each do |deck| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= deck.title %></h5>
+              <p class="card-text"><%= deck.comment.presence || "No description available" %></p>
+              <a href="#" class="btn btn-primary">View Deck</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No decks found.</p>
+    <% end %>
+  </div>
+</div>
