@@ -1,11 +1,20 @@
 <div class="container d-flex flex-column">
-  <div class="row custom-card justify-content-center">
-      <% @cards.each do |card| %>
-        <div class="col-sm-3 custom-card m-1">
-          <div class="card m-2 p-1 bg-primary custom-card">
-            <%= image_tag "kanji_image.png", class: "card-img-top"%>
+  <div class="row justify-content-center">
+    <p class="fs-4"><i class="fa-solid fa-circle-left me-2"></i><%= link_to 'Back to my dashboard', '#' %></p>
+    <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
+    <% @cards.each do |card| %>
+      <div class="col-4 custom-card m-1 pt-1 px-2">
+          <div class="position-relative">
+            <%= image_tag "kanji_image.png", class: "card-img-top py-1 justify-content-center"%>
+            <div class="favorite-icon">
+              <i class="fa-regular fa-bookmark top-3 end-0 fs-2 text-secondary align-items-start"></i>
+            </div>
           </div>
-        </div>
-      <% end %>
+          <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1">
+            <span><%= card.kanji.character %></span>
+            <span><%= card.kanji.meaning_list.first %></span>
+          </div>
+      </div>
+    <% end %>
   </div>
 </div>
