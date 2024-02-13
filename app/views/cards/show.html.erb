@@ -41,7 +41,7 @@
       <% encoded_kanji = URI.encode_www_form_component(kanji_to_search) %>
       <% advanced_url = "https://jisho.org/search/#{encoded_kanji}%20%23kanji" %>
 
-    <div class="d-flex mb-2">
+    <div class="d-flex mb-2" data-controller="audio">
       <span class="badge bg-warning" style="font-size: 16px; width: 50px; border-radius: 4px">On</span>
       <h3 class="mb-0 ms-2">
 
@@ -51,7 +51,7 @@
         <% else %>
         <%= @card.kanji.on_reading_list %>
         <% end %></h3>
-      <i class="fa-solid fa-volume-high ms-2 <%= "d-none" if @card.kanji.on_reading_list.blank? %>" ></i>
+      <button data-action="click->audio#audioRequest"><i class="fa-solid fa-volume-high ms-2 <%= "d-none" if @card.kanji.on_reading_list.blank? %>" ></i></button>
     </div>
     <div class="d-flex mb-2">
       <span class="badge bg-primary" style="font-size: 16px; width: 50px; border-radius: 4px">Kun</span>
