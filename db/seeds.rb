@@ -43,7 +43,7 @@ end
 
 # Card seeds
 if Card.all.empty?
-  Kanji.all.each do |kanji|
+  Kanji.limit(64).all.each do |kanji|
     card = Card.new(
       user_id: User.find_by(email: "test@me.com").id,
       kanji_id: kanji.id,

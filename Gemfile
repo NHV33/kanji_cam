@@ -53,6 +53,8 @@ gem "sassc-rails"
 # Manually Added:
 gem "devise"
 gem 'acts-as-taggable-on'
+gem "chartkick"
+
 
 group :development, :test do
   gem "dotenv-rails"
