@@ -15,7 +15,7 @@ export default class extends Controller {
       // if (voice.lang.includes("ja") && voice.name.includes("female")) {
       if (voice.lang.includes("ja")) {
           this.japaneseVoices.push(voice);
-        console.log("voice: ", voice);
+        // console.log("voice: ", voice);
       }
     });
 
