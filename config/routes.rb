@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :cards
 
   resources :kanjis, only: [:index, :show]
-
+  resources :decks
   # Defines the root path route ("/")
   # root "posts#index"
   get 'dashboard', to: 'dashboard#index', as: :dashboard

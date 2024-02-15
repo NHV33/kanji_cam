@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Your Decks</h1>
+  <div class="row">
+    <% @decks.each do |deck| %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= deck.title %></h5>
+            <p class="card-text"><%= deck.comment %></p>
+            <%= link_to 'Study this Deck', deck_path(deck), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h2 class="toggle-heading">
+    <a href="#" class="toggle-link" data-bs-toggle="collapse" data-bs-target="#masterDeck" aria-expanded="true" aria-controls="masterDeck">
+      Master Deck <i class="bi bi-chevron-up toggle-indicator"></i>
+    </a>
+  </h2>
+  <div class="collapse show" id="masterDeck">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= @master_deck.title %></h5>
+            <p class="card-text"><%= @master_deck.comment %></p>
+            <%= link_to 'Study this Deck', deck_path(@master_deck), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="toggle-heading">
+    <a href="#" class="toggle-link" data-bs-toggle="collapse" data-bs-target="#jlptdeck" aria-expanded="true" aria-controls="jlptdeck">
+      JLPT Deck <i class="bi bi-chevron-up toggle-indicator"></i>
+    </a>
+  </h2>
+  <div class="collapse show" id="jlptdeck">
+    <div class="row">
+      <% @jlpt_decks.each do |jlpt_deck| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= jlpt_deck.title %></h5>
+              <p class="card-text"><%= jlpt_deck.comment %></p>
+              <%= link_to 'Study this Deck', deck_path(jlpt_deck), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
