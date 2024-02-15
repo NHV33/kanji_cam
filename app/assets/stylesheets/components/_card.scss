@@ -1,0 +1,40 @@
+.custom-card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  background-color: white;
+  &:hover {
+    transition-property: box-shadow;
+    transition: ease;
+    transition-duration: 300ms;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.default-card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: white;
+}
+
+.card-img-top {
+  border-radius: 10px;
+}
+
+.kanji-badge {
+  font-size: 4vmin;
+}
+
+.badge-custom {
+  color: white;
+  background-color: #2B2A4C;
+  opacity: 0.8;
+}
+
+
+.font-color {
+  color: $custom-color;
+}

@@ -1,0 +1,94 @@
+<div class="container">
+<p class="fs-4"><i class="fa-solid fa-circle-left me-2"></i><%= link_to 'Go back to your cards', cards_path %></p>
+  <%= image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block rounded w-80"%>
+  <div class="default-card mt-3 col-sm-12">
+    <div class="row">
+      <div class="col-3"><span>JLPT: </span>
+        <% rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
+        <h3>N<%= @card.kanji.jlpt %><%= " #{rank_emoji[@card.kanji.jlpt]}" %></h3>
+      </div>
+      <div class="col-6">
+        <div class="text-center">
+          <h1 style="font-size: 140px;"><%= @card.kanji.character %></h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 mx-auto">
+            <p class="mb-0 text-left fs-5"><strong><%= @card.kanji.strokes %></strong> strokes</p>
+            <% if @card.kanji.grade <= 6 %>
+              <p class="mb-0 fs-5">taught in grade <%= @card.kanji.grade %></p>
+            <% elsif @card.kanji.grade == 7 %>
+              <p class="mb-0 fs-5">taught in junior high</p>
+            <% end %>
+            <p class="mb-0 fs-5">Radical: <strong><%= @card.kanji.radical %></strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="default-card mt-3 col-12">
+    <div>
+      <p class="mb-0">Meaning (意味): </p>
+      <h2><%= @card.kanji.meaning_list %></h2>
+    </div>
+    <div>
+      <p class="mb-0">1st meaning: </p>
+      <h2><%= @card.kanji.meaning_list[0] %></h2>
+    </div>
+
+      <% kanji_to_search = @card.kanji.character %>
+      <% encoded_kanji = URI.encode_www_form_component(kanji_to_search) %>
+      <% advanced_url = "https://jisho.org/search/#{encoded_kanji}%20%23kanji" %>
+
+    <%# On & Kun Readings Section -- Includes TTS functionality %>
+    <div data-controller="tts">
+
+      <div class="d-flex mb-2">
+        <span class="badge bg-warning" style="font-size: 16px; width: 50px; border-radius: 4px">On</span>
+        <h3 class="mb-0 ms-2">
+
+          <% if @card.kanji.on_reading_list.blank? %>
+            <p class="mb-0"><%= "No commonly used on reading." %></p>
+            <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
+          <% else %>
+            <%# Loop through each on reading and create a div tag with a clickable sound icon %>
+            <% @card.kanji.on_reading_list.each do |reading| %>
+              <div class="reading" >
+                <%= reading %>
+                <i class="sound-icon fa-solid fa-volume-high ms-2" ></i>
+              </div>
+            <% end %>
+          <% end %>
+
+        </h3>
+
+      </div>
+
+      <div class="d-flex mb-2">
+        <span class="badge bg-primary" style="font-size: 16px; width: 50px; border-radius: 4px">Kun</span>
+        <h3 class="mb-0 ms-2">
+
+          <% if @card.kanji.kun_reading_list.blank? %>
+            <p class="mb-0 fs-4"><%= "No commonly used kun reading." %></p>
+            <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
+          <% else %>
+            <%# Loop through each kun reading and create a div tag with a clickable sound icon %>
+            <% @card.kanji.kun_reading_list.each do |reading| %>
+              <div class="reading" >
+                <%= reading %>
+                <i class="sound-icon fa-solid fa-volume-high ms-2" ></i>
+              </div>
+            <% end %>
+          <% end %>
+
+        </h3>
+
+      </div>
+
+    </div>
+
+  <div class="default-card mt-3 col-sm-12">
+    <h1>Example</h1>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <%= link_to dashboard_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-circle-chevron-left me-2"></i>
+    <% end %>
+  </div>
+</nav>
+
+<div class="container d-flex flex-column">
+  <div class="row justify-content-center mt-5">
+    <div class="d-flex justify-content-between">
+      <h2>My collection</h2>
+      <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
+    </div>
+    <% @cards.each do |card| %>
+      <div class="col-4 col-md-3 custom-card m-1 pt-1 px-2">
+        <%= link_to card_path(card), style: "text-decoration: none;" do %>
+            <div class="position-relative">
+              <%= image_tag "kanji_image.png", class: "card-img-top py-1 justify-content-center"%>
+            </div>
+            <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1 font-color">
+              <span><%= card.kanji.character %></span>
+              <span><%= card.kanji.meaning_list.first %></span>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
