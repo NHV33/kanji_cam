@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
     @total_learned_kanji = total_learned_kanji
     @total_kanji = Kanji.count
-    @decks = current_user
+    @decks = current_user 
   end
 
   private
