@@ -9,7 +9,7 @@ class CardsController < ApplicationController
     encoded_kanji = URI.encode_www_form_component(kanji_to_search)
     url = "https://www.kanshudo.com/searcht?q=#{encoded_kanji}"
     scraper = Scraper.new(url)
-    @titles = scraper.scrape
+    @jp_sentences, @eng_translations = scraper.scrape
   end
 
   # def create
