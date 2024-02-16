@@ -1,4 +1,4 @@
-<div class="navbar bg-white fixed-bottom d-flex flex-nowrap justify-content-around">
+<div id="navbar" class="navbar bg-white fixed-bottom d-flex flex-nowrap justify-content-around">
   <%= link_to dashboard_path do %>
     <%= image_tag "navbar_icons/nav_home.svg", class: "navbar-icon"%>
   <% end %>
@@ -7,9 +7,9 @@
     <%= image_tag "navbar_icons/nav_cards.svg", class: "navbar-icon"%>
   <% end %>
 
-  <%# link_to new_card_path do %>
+  <%= link_to capture_path do %>
     <%= image_tag "navbar_icons/nav_camera.svg", class: "navbar-icon"%>
-  <%# end %>
+  <% end %>
 
   <%# link_to dashboard_path do %>
     <%= image_tag "navbar_icons/nav_map.svg", class: "navbar-icon"%>
