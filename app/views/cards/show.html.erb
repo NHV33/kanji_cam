@@ -89,20 +89,12 @@
     </div>
 
     <h2 class="mt-4">Example Sentences</h2>
+    <% @jp_sentences[0..2].each_with_index do |sentence, index| %>
+  <% if sentence.present? %>
     <div class="bg-info-subtle p-2 mb-3">
-    <p class="mb-0 fs-6"><%= @jp_sentences[0] %></p>
-    <p class="mb-0"><%= @eng_translations[0] %></p>
+      <p class="mb-0 fs-6"><%= sentence %></p>
+        <p class="mb-0"><%= @eng_translations[index] %></p>
     </div>
-    <% if @jp_sentences[1].present?  %>
-    <div class="bg-info-subtle p-2 mb-3">
-    <p class="mb-0 fs-6"><%= @jp_sentences[1] %></p>
-    <p class="mb-0"><%= @eng_translations[1] %></p>
-    </div>
-    <% end %>
-     <% if @jp_sentences[2].present?  %>
-    <div class="bg-info-subtle p-2 mb-3">
-    <p class="mb-0 fs-6"><%= @jp_sentences[2] %></p>
-    <p class="mb-0"><%= @eng_translations[2] %></p>
-  </div>
   <% end %>
+<% end %>
 </div>
