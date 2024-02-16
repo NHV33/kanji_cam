@@ -8,7 +8,9 @@ class CardsController < ApplicationController
   end
 
   # def create
-  #   @card = current_user.cards.build(card_params)
+  #   # @card = current_user.cards.build(card_params)
+  #   @card = Card.new
+  #   @card.kanji = params(:kanji_data)
   #   if @card.save
   #    redirect_to @card
   #   else
@@ -19,6 +21,21 @@ class CardsController < ApplicationController
   # def new
   #   @card = Card.new
   # end
+
+  def capture
+    # p params[:kanji_data]
+  end
+
+  def new_capture
+    new_kanji = params[:kanji_data]
+    @card = Card.new
+    @card.user_id = current_user.id
+    @card.kanji_id = Kanji.find_by(character: new_kanji).id
+
+    if @card.save!
+      redirect_to @card
+    end
+  end
 
   # def update
   #   @card = Card.find(params[:id])
@@ -36,7 +53,7 @@ class CardsController < ApplicationController
   # private
 
   # def card_params
-  #   params.require(:card).permit(:user, )
+  #   params.require(:card).permit(:user)
   # end
 
 end

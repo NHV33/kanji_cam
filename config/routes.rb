@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get 'dashboard', to: 'dashboard#index', as: :dashboard
+
+  get "capture" => 'cards#capture', as: :capture
+  post "capture" => 'cards#new_capture', as: :new_capture
+
 end
