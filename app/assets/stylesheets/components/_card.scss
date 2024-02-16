@@ -47,3 +47,7 @@
   font-size: responsive; /* Example, use a specific strategy like vw units or media queries */
   word-wrap: break-word;
 }
+
+.temp-fix {
+  height: 30vmin;
+}
