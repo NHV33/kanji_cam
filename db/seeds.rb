@@ -24,7 +24,7 @@ if Kanji.all.empty?
   csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
 
   CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
-    break if index > 100
+    # break if index > 100
 
     kanji = Kanji.new(
       character: row["kanji"],
@@ -38,6 +38,7 @@ if Kanji.all.empty?
     kanji.on_reading_list = row["on"].split("|") unless row["on"].nil?
     kanji.kun_reading_list = row["kun"].split("|") unless row["kun"].nil?
     kanji.save!
+    puts "Saved Kanji: #{row["kanji"]} # #{index}"
   end
 end
 
@@ -57,6 +58,7 @@ if Card.all.empty?
       comment: nil,
     )
     card.save!
+    puts "Saved Card: # #{kanji.id}"
   end
 end
 
@@ -77,6 +79,7 @@ if Deck.all.empty?
     comment: "A deck containing intermediate level Kanji characters."
   )
   intermediate_deck.save!
+  puts "Decks saved."
 end
 
 # Entry seeds
@@ -92,4 +95,6 @@ if Entry.all.empty?
   intermediate_cards.each do |card|
     intermediate_deck.entries.create(card_id: card.id)
   end
+
+  puts "Entries saved."
 end

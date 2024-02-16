@@ -31,7 +31,7 @@ class CardsController < ApplicationController
     @card = Card.new
     @card.user_id = current_user.id
     # @card.kanji_id = 1
-    @card.kanji_id = Kanji.find_by(character: "員").id
+    @card.kanji_id = Kanji.find_by(character: new_kanji).id
 
     if @card.save!
       redirect_to @card
