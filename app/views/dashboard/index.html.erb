@@ -1,5 +1,15 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <%= link_to dashboard_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-circle-chevron-left me-2"></i>
+    <% end %>
+    <div class="mx-auto custom-collection-position">
+      <span class="navbar-text text-white">Dashboard</span>
+    </div>
+  </div>
+</nav>
 <div class="container">
   <h1>Dashboard</h1>
   <br>
@@ -36,15 +46,14 @@
   <div class="row">
     <% if @decks.present? %>
       <% @decks.each do |deck| %>
-        <div class="col-md-4 mb-4">
-          <div class="card">
+        <%= link_to deck_path(deck), class: "col-md-4 mb-4 d-block text-decoration-none" do %>
+          <div class="card p-3 custom-card">
             <div class="card-body">
               <h5 class="card-title"><%= deck.title %></h5>
               <p class="card-text"><%= deck.comment.presence || "No description available" %></p>
-              <a href="#" class="btn btn-primary">View Deck</a>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% else %>
       <p>No decks found.</p>
