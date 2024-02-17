@@ -60,5 +60,4 @@ class CardsController < ApplicationController
   # def card_params
   #   params.require(:card).permit(:user)
   # end
-
 end

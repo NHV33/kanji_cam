@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-
   def initialize(url)
     @url = url
   end
@@ -45,7 +44,7 @@ class Scraper
 
             # Before: node.text == "たい平らな"
             # _After: node.text == "平らな"
-            sentence += (node.text.gsub(furigana_text, ""))
+            sentence += node.text.gsub(furigana_text, "")
           end
         elsif node.classes.include?("tatvoc-stop")
           sentence += node.text

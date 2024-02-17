@@ -1,7 +1,17 @@
 <div class="container">
-<p class="fs-4"><i class="fa-solid fa-circle-left me-2"></i><%= link_to 'Go back to your cards', cards_path %></p>
-  <%# image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block rounded w-80"%>
-  <div class="default-card mt-3 col-sm-12">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top mb-5">
+  <div class="container-fluid">
+    <%= link_to cards_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-circle-chevron-left me-2"></i>
+    <% end %>
+    <div class="mx-auto custom-collection-position">
+      <span class="navbar-text text-white">Kanji Info</span>
+    </div>
+  </div>
+</nav>
+  <!-- image_tag "kanji_image.png", alt: "kanji-img", class: "mx-auto d-block rounded w-80" -->
+
+  <div class="default-card col-sm-12" style="margin-top: 80px">
     <div class="row">
       <div class="col-3"><span>JLPT: </span>
         <% rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
