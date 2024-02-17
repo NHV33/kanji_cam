@@ -108,3 +108,9 @@
   <% end %>
 <% end %>
 </div>
+<div class="container text-center mt-3">
+<%= link_to "Delete this card",
+  card_path(@card),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-primary' %>
+</div>
+</div>
