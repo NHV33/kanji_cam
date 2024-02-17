@@ -12,6 +12,12 @@ class CardsController < ApplicationController
     @jp_sentences, @eng_translations = scraper.scrape
   end
 
+  def destroy
+    @card = Card.find(params[:id])
+    @card.destroy
+    redirect_to cards_path
+  end
+
   # def create
   #   # @card = current_user.cards.build(card_params)
   #   @card = Card.new
@@ -38,7 +44,7 @@ class CardsController < ApplicationController
     @card.kanji_id = Kanji.find_by(character: new_kanji).id
 
     if @card.save!
-      redirect_to @card
+      redirect_to @card, notice: 'New card was successfully saved to your colletion!.'
     end
   end
 
