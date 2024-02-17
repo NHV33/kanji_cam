@@ -5,6 +5,11 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
+    kanji_to_search = @card.kanji.character
+    encoded_kanji = URI.encode_www_form_component(kanji_to_search)
+    url = "https://www.kanshudo.com/searcht?q=#{encoded_kanji}"
+    scraper = Scraper.new(url)
+    @jp_sentences, @eng_translations = scraper.scrape
   end
 
   # def create
@@ -55,5 +60,4 @@ class CardsController < ApplicationController
   # def card_params
   #   params.require(:card).permit(:user)
   # end
-
 end
