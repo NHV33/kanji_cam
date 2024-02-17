@@ -40,8 +40,9 @@ CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
     kanji.kun_reading_list = row["kun"].split("|") unless row["kun"].nil?
     kanji.save!
     puts "Saved NEW Kanji: #{row["kanji"]} # #{index}"
+  else
+    puts "Kanji ALREADY saved: #{row["kanji"]} # #{index}"
   end
-  puts "Kanji ALREADY saved: #{row["kanji"]} # #{index}"
 end
 # end
 
