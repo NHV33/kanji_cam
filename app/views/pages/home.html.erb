@@ -1,2 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row mx-auto p-3 home-page">
+  <h1 class="fs-2"><strong>Kanji Cam: Snap Your Way to Kanji Mastery</strong></h1>
+  <p class="fs-7">Kanji.cam transforms every snapshot into a learning opportunity, making Kanji mastery not just a goal but a journey filled with fun and discovery. </p>
+  <div class="">
+    <%= link_to 'Take a photo', capture_path, class: "btn btn-primary" %>
+  </div>
+  </div>
+</div>
+
+
+<script src="/kanji-rain/kanji-rain.js"></script>
