@@ -186,11 +186,39 @@ confirmButton.addEventListener('click', () => {
   kanjiField.value = kanjiText;
   console.log("kanjiField: ", kanjiField);
 
-  // submitFormWithImageData();
-  if (kanjiField !== "") {
-    document.getElementById('kanji-form').submit();
-    // document.getElementById("submit-button").click();
+  // confetti
+  var duration = 8 * 1000;
+
+  var startTime = Date.now();
+
+  var formSubmitted = false;
+
+(function frame() {
+  // launch a few confetti from the left edge
+  confetti({
+    particleCount: 7,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0 }
+  });
+  // and launch a few from the right edge
+  confetti({
+    particleCount: 7,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1 }
+  });
+
+  // submit the form after confetti duration has passed
+  if (Date.now() - startTime < duration) {
+    requestAnimationFrame(frame);
+  } else {
+    if (!formSubmitted) {
+      document.getElementById('kanji-form').submit();
+      formSubmitted = true;
+    }
   }
+}());
 });
 
 function displayKanji(kanjiList) {
