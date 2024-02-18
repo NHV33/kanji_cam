@@ -2,63 +2,74 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-  def initialize(url)
-    @url = url
+  def initialize(kanji)
+    encoded_kanji = URI.encode_www_form_component(kanji)
+    @url = "https://www.kanshudo.com/searcht?q=#{encoded_kanji}"
+  end
+
+  def list_include_any?(list1, list2)
+    list2.each { |item| return true if list1.include?(item) }
+
+    return false
+  end
+
+  def check_child_nodes(node)
+
+    node.children.each { |child_node| check_child_nodes(child_node) }
+
+    target_text = list_include_any?(node.parent.classes, ["f_kanji", "furigana", "tatvoc-stop", "noflip"])
+    if target_text and node.classes.empty? #or node.classes.empty?
+      text_type = "plain"
+      text_type = "kanji" if node.parent.classes.include?("f_kanji")
+      text_type = "furigana" if node.parent.classes.include?("furigana")
+      $text_segments << { "type" => text_type, "text" => node.text}
+    end
+  end
+
+  def assemble_text(segments)
+    output = []
+    prev_seg = {"type" => nil}
+    segments.each do |segment|
+
+      output << "</span>" if segment["type"] != "plain" and prev_seg["type"] == "plain"
+
+      output << "<ruby>" if segment["type"] == "furigana"
+
+      output << "#{segment["text"]}<rt>#{prev_seg["text"]}</rt></ruby>" if segment["type"] == "kanji"
+
+      output << "<span>" if prev_seg["type"] != "plain" and segment["type"] == "plain"
+
+      output << segment["text"] if segment["type"] == "plain"
+
+      prev_seg = segment
+    end
+
+    output << "</span>" if prev_seg["type"] == "plain"
+
+    return output.join
   end
 
   def scrape
     html_file = URI.open(@url).read
     html_doc = Nokogiri::HTML.parse(html_file)
 
-    # Declare an array to store texts
-    jp_sentences = []
-    eng_translations = []
+    jpn_sentences = []
+    eng_sentences = []
 
-    # find all the div nodes/elements with classname "tatoeba"
     all_tatoeba = html_doc.css(".tatoeba")
 
     all_tatoeba.each do |tatoeba|
-      # Declare a variable to store a single sentence
-      sentence = ""
 
-      # Iterate through each node/element of the "tatoeba" div.
-      # This is necessary because the "tatoeba" div contains many different types of nodes/elements
-      # Each node/element needs to be handled differently based on its content.
-      tatoeba.children.each do |node|
-        if node.classes.include?("tatvoc")
-          # Search inside the node/element for a tag with classname "furigana"
-          furigana_text = node.css(".furigana").text
+      $text_segments = []
 
-          # Search inside the node/element for a tag with classname "f_kanji"
-          # kanji_text = node.css(".f_kanji").text
+      check_child_nodes(tatoeba)
 
-          # Look for text inside tag with classname "furigana"
-          # Blank ("") means there was no furigana.
-          if furigana_text == ""
-            sentence += node.text
-          else
+      jpn_sentences << assemble_text($text_segments)
 
-            # Because there was furigana, remove the furigana text from the node text with .gsub().
-            # Node text includes the text from all sub-nodes (e.g., the nodes with class "f_kanji" and "furigana")
-            # The okurigana is actually plaintext inside the <a> tag.
+      eng_sentences << "<span>#{tatoeba.css(".tat_eng .text").text}</span>"
 
-            # Before: node.text == "たい平らな"
-            # _After: node.text == "平らな"
-            sentence += node.text.gsub(furigana_text, "")
-          end
-        elsif node.classes.include?("tatvoc-stop")
-          sentence += node.text
-        end
-      end
-
-      # Add the current sentence to the array of sentences if it's not empty
-      jp_sentences << sentence.strip unless sentence.empty?
     end
 
-    html_doc.search(".text").each do |element|
-      eng_translations << element.text.strip
-    end
-
-    return jp_sentences, eng_translations
+    return jpn_sentences, eng_sentences
   end
 end
