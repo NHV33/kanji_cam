@@ -6,10 +6,8 @@ class CardsController < ApplicationController
   def show
     @card = Card.find(params[:id])
     kanji_to_search = @card.kanji.character
-    encoded_kanji = URI.encode_www_form_component(kanji_to_search)
-    url = "https://www.kanshudo.com/searcht?q=#{encoded_kanji}"
-    scraper = Scraper.new(url)
-    @jp_sentences, @eng_translations = scraper.scrape
+    # scraper =
+    @jpn_sentences, @eng_sentences = Scraper.new(kanji_to_search).scrape
   end
 
   def destroy
