@@ -55,6 +55,67 @@
 
 
 
+
+<%# <script src="/kanji-scanner/kanji-scanner.js" async defer></script> %>
+<script src="/kanji-scanner/kanji-scanner.js" defer></script>
+<style>
+  body {
+    background-color: black;
+    overflow: hidden;
+  }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js' async defer></script>
+<dialog>
+  <div class="d-flex flex-column align-items-center">
+    <div id="kanji-selection-box">
+    </div>
+    <div style="margin: 2vmin;">
+      <div id="confirm-button" class="btn btn-success rounded-pill text-white">Confirm</div>
+      <div id="cancel-button" class="btn btn-danger rounded-pill text-white">Cancel</div>
+    </div>
+  </div>
+</dialog>
+
+<!-- autoPlay playsInline muted <== these attrs must be present for iOS compatibility -->
+<video id="camera-feed" class="full-screen" width="1000" height="500" autoPlay playsInline muted></video>
+<canvas id="canvas" class="full-screen" width="2000" height="480"></canvas>
+
+<%= link_to dashboard_path do %>
+  <div id="home-button">
+    <%= image_tag 'navbar_icons/nav_home.svg', class: "camera-icon" %>
+  </div>
+<% end %>
+
+<div id="retake-button">
+  <%= image_tag 'capture_page/refresh_icon.svg', class: "camera-icon" %>
+</div>
+
+<div id="button-bar">
+  <div id="button-border">
+    <div id="capture-button"></div>
+  </div>
+</div>
+
+<div id="alert-bar">
+  <span id="alert-text">Take a picture of some kanji.</span>
+</div>
+
+<%= form_with(path: capture_path, method: :post, id: 'kanji-form') do |form| %>
+  <%# form.hidden_field :image_data, id: 'image-data' %>
+  <%= form.hidden_field :kanji_data, id: 'kanji-data' %>
+  <%= form.submit 'Submit', id: 'submit-button', style: "visibility: hidden;" %>
+<% end %>
+
+<!--<form id="kanji-form" action="/cards/new" method="post">
+  <input type="hidden" name="image_data" id="image-data">
+  <input type="hidden" name="kanji_data" id="kanji-data">
+  <button type="submit" id="submit-button">Submit</button>
+</form> -->
+
+
+
+
 <%# <script src="/kanji-scanner/kanji-scanner.js" async defer></script> %>
 <script src="/kanji-scanner/kanji-scanner.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>

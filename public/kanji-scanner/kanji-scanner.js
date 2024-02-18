@@ -178,6 +178,7 @@ const imageField = document.getElementById('image-data');
 const kanjiField = document.getElementById('kanji-data');
 
 confirmButton.addEventListener('click', () => {
+  console.log("capture button pressed");
 
   const kanjiText = document.querySelector('.selected').innerText;
   console.log("kanjiText: ", kanjiText);
@@ -185,6 +186,17 @@ confirmButton.addEventListener('click', () => {
   // imageField.value = newDataURL;
   kanjiField.value = kanjiText;
   console.log("kanjiField: ", kanjiField);
+
+  // display "You just captured xxth kanji!" with confetti
+  const element = document.getElementById('e0DQ82qcIov1');
+  element.svgatorPlayer.ready(function() {
+    // this refers to the player object
+    const player = element ? element.svgatorPlayer : {};
+    if (player.play) {
+      player.play();
+    }
+
+  });
 
   // confetti
   var duration = 8 * 1000;
