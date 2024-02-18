@@ -6,7 +6,6 @@ class CardsController < ApplicationController
   def show
     @card = Card.find(params[:id])
     kanji_to_search = @card.kanji.character
-    # scraper =
     @jpn_sentences, @eng_sentences = Scraper.new(kanji_to_search).scrape
   end
 
@@ -15,21 +14,6 @@ class CardsController < ApplicationController
     @card.destroy
     redirect_to cards_path
   end
-
-  # def create
-  #   # @card = current_user.cards.build(card_params)
-  #   @card = Card.new
-  #   @card.kanji = params(:kanji_data)
-  #   if @card.save
-  #    redirect_to @card
-  #   else
-  #     render :new, status: 422
-  #   end
-  # end
-
-  # def new
-  #   @card = Card.new
-  # end
 
   def capture
     # p params[:kanji_data]
