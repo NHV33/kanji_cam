@@ -21,29 +21,29 @@ end
 
 # Kanji seeds
 # if Kanji.all.empty?
-csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
+# csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
 
-CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
-  # break if index > 100
+# CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
+#   # break if index > 100
 
-  if Kanji.where(character: row['kanji']).empty?
-    kanji = Kanji.new(
-    character: row["kanji"],
-    radical: row["radical"],
-    jlpt: row["jlpt"].nil? || row["jlpt"].empty? ? 0 : row["jlpt"].to_i,
-    grade: row["grade"] == "S" ? 7 : row["grade"].to_i,
-    strokes: row["strokes"].to_i,
-    frequency: row["frequency"].nil? || row["frequency"].empty? ? 9_999_999 : row["frequency"].to_i,
-  )
-    kanji.meaning_list = row["meanings"].split("|") unless row["meanings"].nil?
-    kanji.on_reading_list = row["on"].split("|") unless row["on"].nil?
-    kanji.kun_reading_list = row["kun"].split("|") unless row["kun"].nil?
-    kanji.save!
-    puts "Saved NEW Kanji: #{row["kanji"]} # #{index}"
-  else
-    puts "Kanji ALREADY saved: #{row["kanji"]} # #{index}"
-  end
-end
+#   if Kanji.where(character: row['kanji']).empty?
+#     kanji = Kanji.new(
+#     character: row["kanji"],
+#     radical: row["radical"],
+#     jlpt: row["jlpt"].nil? || row["jlpt"].empty? ? 0 : row["jlpt"].to_i,
+#     grade: row["grade"] == "S" ? 7 : row["grade"].to_i,
+#     strokes: row["strokes"].to_i,
+#     frequency: row["frequency"].nil? || row["frequency"].empty? ? 9_999_999 : row["frequency"].to_i,
+#   )
+#     kanji.meaning_list = row["meanings"].split("|") unless row["meanings"].nil?
+#     kanji.on_reading_list = row["on"].split("|") unless row["on"].nil?
+#     kanji.kun_reading_list = row["kun"].split("|") unless row["kun"].nil?
+#     kanji.save!
+#     puts "Saved NEW Kanji: #{row["kanji"]} # #{index}"
+#   else
+#     puts "Kanji ALREADY saved: #{row["kanji"]} # #{index}"
+#   end
+# end
 # end
 
 # Card seeds
