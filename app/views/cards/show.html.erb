@@ -63,7 +63,7 @@
 
     <div>
       <p class="mb-0">Meanings (意味): </p>
-      <h2><%= @card_kanji.meaning_list %></h2>
+      <h2><%= @card_kanji.meaning_list.join(", ") %></h2>
     </div>
 
     <!-- Do we need to show the first meaning in a separate place?
