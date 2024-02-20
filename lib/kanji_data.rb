@@ -47,18 +47,17 @@ class KanjiData
   end
 end
 
-# If implemented as a class method: <== chose NOT to do this
+# If implemented using a class method: <== chose NOT to do this
 
 # example_kanji = KanjiData.find(444)
-
 # p example_kanji[:character]
 
 # ---------------------------------------------
 
-# If implemented as an instance method: <== chose to do this
-# With instance methods, we can use dot notation, which is more
-# consistent with the rest of the ActiveRecord code (e.g., "Card.all.first", etc.)
+# If implemented using an instance method: <== chose to do this
+# Lets us use dot notation, which is more
+# consistent with the rest of the ActiveRecord
+# code (e.g., "Card.all.first", etc.)
 
 # example_kanji = KanjiData.new(2200)
-
 # p example_kanji.exists?
