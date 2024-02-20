@@ -5,7 +5,7 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
-    @card_kanji = KanjiData.new(@card.kanji.id)
+    @card_kanji = KanjiData.new(@card.kanji_id)
     kanji_to_search = @card_kanji.character
     # kanji_to_search = @card.kanji.character
     # @jpn_sentences, @eng_sentences = [], []
