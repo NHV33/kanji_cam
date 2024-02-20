@@ -1,7 +1,6 @@
 class Card < ApplicationRecord
   belongs_to :kanji
   belongs_to :user
-  has_many :entries, dependent: :destroy
   has_many :decks, through: :entries#, source: :cards
 
   # validates :user_id, presence: true
