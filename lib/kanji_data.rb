@@ -20,6 +20,9 @@ class KanjiData
       @grade = row["grade"] == "S" ? 7 : row["grade"].to_i
       @strokes = row["strokes"].to_i
       @frequency = row["frequency"].nil? || row["frequency"].empty? ? 9_999_999 : row["frequency"].to_i
+
+      # For the array-type data, an empty array [] is returned when the CSV column is empty or nil.
+      # This should behave exactly as it did with the acts_as_taggable gem.
       @meaning_list = row["meanings"].nil? || row["meanings"].empty? ? [] : row["meanings"].split("|")
       @on_reading_list = row["on"].nil? || row["on"].empty? ? [] : row["on"].split("|")
       @kun_reading_list = row["kun"].nil? || row["kun"].empty? ? [] : row["kun"].split("|")
