@@ -3,20 +3,27 @@ require "csv"
 $csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
 
 class KanjiData
-  attr_reader :row, :character, :radical, :jlpt, :grade, :strokes, :frequency, :meaning_list, :on_reading_list, :kun_reading_list
+  attr_reader :exists, :row, :character, :radical, :jlpt, :grade, :strokes, :frequency, :meaning_list, :on_reading_list, :kun_reading_list
 
   def initialize(search_term)
     row = find(search_term)
-    @row = row
-    @character = row["kanji"]
-    @radical = row["radical"]
-    @jlpt = row["jlpt"].nil? || row["jlpt"].empty? ? 0 : row["jlpt"].to_i
-    @grade = row["grade"] == "S" ? 7 : row["grade"].to_i
-    @strokes = row["strokes"].to_i
-    @frequency = row["frequency"].nil? || row["frequency"].empty? ? 9_999_999 : row["frequency"].to_i
-    @meaning_list = row["meanings"].nil? || row["meanings"].empty? ? [] : row["meanings"].split("|")
-    @on_reading_list = row["on"].nil? || row["on"].empty? ? [] : row["on"].split("|")
-    @kun_reading_list = row["kun"].nil? || row["kun"].empty? ? [] : row["kun"].split("|")
+
+    if row.nil?
+      @exists = false
+
+    else
+      @exists = true
+      @row = row
+      @character = row["kanji"]
+      @radical = row["radical"]
+      @jlpt = row["jlpt"].nil? || row["jlpt"].empty? ? 0 : row["jlpt"].to_i
+      @grade = row["grade"] == "S" ? 7 : row["grade"].to_i
+      @strokes = row["strokes"].to_i
+      @frequency = row["frequency"].nil? || row["frequency"].empty? ? 9_999_999 : row["frequency"].to_i
+      @meaning_list = row["meanings"].nil? || row["meanings"].empty? ? [] : row["meanings"].split("|")
+      @on_reading_list = row["on"].nil? || row["on"].empty? ? [] : row["on"].split("|")
+      @kun_reading_list = row["kun"].nil? || row["kun"].empty? ? [] : row["kun"].split("|")
+    end
   end
     # def initialize
   #   @row = nil
@@ -30,6 +37,10 @@ class KanjiData
   #   @on_reading_list = nil
   #   @kun_reading_list = nil
   # end
+
+  def exists?
+    return @exists
+  end
 
   private
 
@@ -56,6 +67,8 @@ class KanjiData
         # }
       end
     end
+
+    return nil #if no matches found
   end
 end
 
@@ -63,9 +76,9 @@ end
 
 # p example_kanji[:character]
 
-# example_kanji = KanjiData.new(444)
+# example_kanji = KanjiData.new(2200)
 
-# p example_kanji.character
+# p example_kanji.exists?
 
 # row = example_kanji.row
 # kun = example_kanji.kun_reading_list
