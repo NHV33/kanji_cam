@@ -5,9 +5,6 @@ export default class extends Controller {
 
   navBar = document.getElementById("navbar");
 
-  // videoElement = document.getElementById('camera-feed');
-  // canvas = document.getElementById('canvas');
-  // context = canvas.getContext('2d');
   videoElement;
   canvas;
   context;
@@ -28,10 +25,16 @@ export default class extends Controller {
   captureInstruction = "Take a picture of some kanji."
   selectionInstruction = "Drag to select kanji."
 
-  topEdge = 0;
-  leftEdge = 0;
-  rightEdge = canvas.width;
-  bottomEdge = canvas.height;
+  topEdge;
+  leftEdge;
+  rightEdge;
+  bottomEdge;
+
+  xOffset;
+  yOffset;
+
+  xScale;
+  yScale;
 
   prevX;
   prevY;
@@ -58,15 +61,45 @@ export default class extends Controller {
   }
 
   updateCanvasDimensions() {
-    /** TODO: try adjusting the canvas dimentions
-     * may require centering both the canvas and video stream in
-     * a div together. Overlap posible? Maybe put in
-     * separate pos:fixed divs.
-     */
-    // canvas.width = video.videoWidth;
-    // canvas.height = video.videoHeight;
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    const ww = window.innerWidth;
+    const wh = window.innerHeight;
+    const vw = this.videoElement.videoWidth
+    const vh = this.videoElement.videoHeight
+
+    let canvasHeight;
+    let canvasWidth;
+    if (wh > ww) {
+      canvasHeight = (vh * ww) / vw;
+      canvasWidth = ww;
+    } else {
+      canvasHeight = wh;
+      canvasWidth = (wh * vw) / vh;
+    }
+
+    // this.xScale = ww / canvasWidth;
+    // this.yScale = wh / (canvasHeight);
+
+    this.xOffset = (ww - canvasWidth) / 2;
+    this.yOffset = (wh - canvasHeight) / 2;
+
+    // this.canvas.width = this.videoElement.videoWidth;
+    // this.canvas.height = this.videoElement.videoHeight;
+    // this.canvas.width = window.innerWidth;
+    // this.canvas.height = window.innerHeight;
+    this.canvas.width = canvasWidth;
+    this.canvas.style.width = `${(canvasWidth / ww) * 100}vw`
+    this.canvas.style.left = `${this.xOffset}px`
+
+    this.canvas.height = canvasHeight;
+    this.canvas.style.height = `${(canvasHeight / wh) * 100}vh`
+    this.canvas.style.top = `${this.yOffset}px`
+
+    // this.leftEdge = xOffset;
+    // this.topEdge = yOffset;
+    // this.rightEdge = this.canvas.width + xOffset;
+    // this.bottomEdge = this.canvas.height + yOffset;
+    this.leftEdge = 0;
+    this.topEdge = 0;
     this.rightEdge = this.canvas.width;
     this.bottomEdge = this.canvas.height;
   }
@@ -245,8 +278,8 @@ export default class extends Controller {
 
   updateMousePos(event, newTouch=false) {
     const rect = this.canvas.getBoundingClientRect();
-    this.x = event.clientX - rect.left;
-    this.y = event.clientY - rect.top;
+    this.x = event.clientX - this.xOffset;
+    this.y = event.clientY - this.yOffset;
     if (newTouch) {
       this.prevX = this.x;
       this.prevY = this.y;
@@ -254,12 +287,13 @@ export default class extends Controller {
   }
 
   updateTouchPos(event, newTouch=false) {
+    console.log("touch");
     // Example touch event:
     // Touch { identifier: 1815, target: canvas#canvas.full-screen, screenX: 880, screenY: 174, clientX: 712, clientY: 133, pageX: 712, pageY: 133, radiusX: 1, radiusY: 1 }
     if (event.touches[0] === undefined) { return; }
     const rect = this.canvas.getBoundingClientRect();
-    this.x = event.touches[0].clientX - rect.left;
-    this.y = event.touches[0].clientY - rect.top;
+    this.x = event.touches[0].clientX - this.xOffset;
+    this.y = event.touches[0].clientY - this.yOffset;
     if (newTouch) {
       this.prevX = this.x;
       this.prevY = this.y;
@@ -393,6 +427,12 @@ export default class extends Controller {
     window.onbeforeunload = function() {
       window.history.forward();
     };
+
+    // Code to handle resize event
+    // window.addEventListener('resize', function(event) {
+    //   this.updateCanvasDimensions();
+    //   this.renderImage();
+    // });
 
   }
 
