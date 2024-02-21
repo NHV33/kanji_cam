@@ -15,6 +15,7 @@
       <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
     </div>
     <% @cards.each do |card| %>
+      <%# card_kanji = KanjiData.new(card.kanji.id) %>
       <div class="temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1 pt-1 px-2">
         <%= link_to card_path(card), style: "text-decoration: none;" do %>
             <div class="position-relative">
@@ -23,7 +24,8 @@
             </div>
             <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1 font-color">
               <span class="text-center fs-1"><%= card.kanji.character %></span>
-              <span class="text-center"><%= card.kanji.meaning_list.first %></span>
+              <span class="text-center"><%= card.kanji.meanings.first %></span>
+              <!-- <span class="text-center"><%= card.kanji.kun_readings.first %></span> -->
             </div>
         <% end %>
       </div>

@@ -63,13 +63,13 @@
 
     <div>
       <p class="mb-0">Meanings (意味): </p>
-      <h2><%= @card.kanji.meaning_list %></h2>
+      <h2><%= @card.kanji.meanings.join(", ") %></h2>
     </div>
 
     <!-- Do we need to show the first meaning in a separate place?
     <div>
       <p class="mb-0">1st meaning: </p>
-      <h2><%= @card.kanji.meaning_list[0] %></h2>
+      <h2><%= @card.kanji.meanings[0] %></h2>
     </div>
     -->
 
@@ -86,12 +86,12 @@
 
         <h3 class="mb-0 ms-2">
 
-          <% if @card.kanji.on_reading_list.blank? %>
+          <% if @card.kanji.on_readings.blank? %>
             <p class="mb-0"><%= "No commonly used on reading." %></p>
             <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
           <% else %>
             <%# Loop through each on reading and create a div tag with a clickable sound icon %>
-            <% @card.kanji.on_reading_list.each do |reading| %>
+            <% @card.kanji.on_readings.each do |reading| %>
               <div class="reading" >
                 <%= reading %>
                 <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
@@ -108,12 +108,12 @@
 
         <h3 class="mb-0 ms-2">
 
-          <% if @card.kanji.kun_reading_list.blank? %>
+          <% if @card.kanji.kun_readings.blank? %>
             <p class="mb-0 fs-4"><%= "No commonly used kun reading." %></p>
             <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
           <% else %>
             <%# Loop through each kun reading and create a div tag with a clickable sound icon %>
-            <% @card.kanji.kun_reading_list.each do |reading| %>
+            <% @card.kanji.kun_readings.each do |reading| %>
               <div class="reading" >
                 <%= reading %>
                 <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
