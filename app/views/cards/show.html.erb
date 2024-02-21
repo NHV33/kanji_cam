@@ -22,14 +22,14 @@
       <div class="col-3"><span>JLPT: </span>
         <% rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
         <h3>
-          N<%= @card_kanji.jlpt %><%= " #{rank_emoji[@card_kanji.jlpt]}" %>
+          N<%= @card.kanji.jlpt %><%= " #{rank_emoji[@card.kanji.jlpt]}" %>
         </h3>
       </div>
 
       <div class="col-6">
         <div class="text-center">
           <h1 style="font-size: 140px;">
-            <%= @card_kanji.character %>
+            <%= @card.kanji.character %>
           </h1>
         </div>
       </div>
@@ -39,17 +39,17 @@
           <div class="col-sm-6 col-md-6 mx-auto">
 
             <p class="mb-0 text-left fs-5">
-              <strong><%= @card_kanji.strokes %></strong> strokes
+              <strong><%= @card.kanji.strokes %></strong> strokes
             </p>
 
-            <% if @card_kanji.grade <= 6 %>
-              <p class="mb-0 fs-5">taught in grade <%= @card_kanji.grade %></p>
-            <% elsif @card_kanji.grade == 7 %>
+            <% if @card.kanji.grade <= 6 %>
+              <p class="mb-0 fs-5">taught in grade <%= @card.kanji.grade %></p>
+            <% elsif @card.kanji.grade == 7 %>
               <p class="mb-0 fs-5">taught in junior high</p>
             <% end %>
 
             <p class="mb-0 fs-5">
-              Radical: <strong><%= @card_kanji.radical %></strong>
+              Radical: <strong><%= @card.kanji.radical %></strong>
             </p>
 
           </div>
@@ -63,18 +63,18 @@
 
     <div>
       <p class="mb-0">Meanings (意味): </p>
-      <h2><%= @card_kanji.meaning_list.join(", ") %></h2>
+      <h2><%= @card.kanji.meanings.join(", ") %></h2>
     </div>
 
     <!-- Do we need to show the first meaning in a separate place?
     <div>
       <p class="mb-0">1st meaning: </p>
-      <h2><%= @card_kanji.meaning_list[0] %></h2>
+      <h2><%= @card.kanji.meanings[0] %></h2>
     </div>
     -->
 
     <%# External Link to Advanced Readings %>
-    <% kanji_to_search = @card_kanji.character %>
+    <% kanji_to_search = @card.kanji.character %>
     <% encoded_kanji = URI.encode_www_form_component(kanji_to_search) %>
     <% advanced_url = "https://jisho.org/search/#{encoded_kanji}%20%23kanji" %>
 
@@ -86,12 +86,12 @@
 
         <h3 class="mb-0 ms-2">
 
-          <% if @card_kanji.on_reading_list.blank? %>
+          <% if @card.kanji.on_readings.blank? %>
             <p class="mb-0"><%= "No commonly used on reading." %></p>
             <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
           <% else %>
             <%# Loop through each on reading and create a div tag with a clickable sound icon %>
-            <% @card_kanji.on_reading_list.each do |reading| %>
+            <% @card.kanji.on_readings.each do |reading| %>
               <div class="reading" >
                 <%= reading %>
                 <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
@@ -108,12 +108,12 @@
 
         <h3 class="mb-0 ms-2">
 
-          <% if @card_kanji.kun_reading_list.blank? %>
+          <% if @card.kanji.kun_readings.blank? %>
             <p class="mb-0 fs-4"><%= "No commonly used kun reading." %></p>
             <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
           <% else %>
             <%# Loop through each kun reading and create a div tag with a clickable sound icon %>
-            <% @card_kanji.kun_reading_list.each do |reading| %>
+            <% @card.kanji.kun_readings.each do |reading| %>
               <div class="reading" >
                 <%= reading %>
                 <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>

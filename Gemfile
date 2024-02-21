@@ -52,7 +52,7 @@ gem "sassc-rails"
 
 # Manually Added:
 gem "devise"
-gem 'acts-as-taggable-on'
+# Acts as taggable <== good riddance
 gem "chartkick"
 
 
