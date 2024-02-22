@@ -1,8 +1,8 @@
 <%= render 'partials/card_show_title' %>
 
-<div class="container">
+<div class="container d-flex flex-column align-items-center">
 
-  <div class="default-card col-sm-12 mt-4 position-relative">
+  <div class="default-card col-12 mt-4 position-relative">
     <%= link_to edit_card_path(@card) do %>
       <%= image_tag 'ui_icons/edit_icon.svg', style: "position: absolute; top: 10px; right: 10px; width: 27px; height: 27px;" %>
     <% end %>
