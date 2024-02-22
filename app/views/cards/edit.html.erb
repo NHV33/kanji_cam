@@ -1,0 +1,15 @@
+<%= render 'partials/card_show_title' %>
+
+<div class="container">
+
+  <div class="w-75 mt-3">
+    <%= simple_form_for [@card] do |f| %>
+      <%# TODO: Add image upload. %>
+      <%= f.input :comment %>
+      <%= f.submit class: "rounded-pill btn btn-primary text-shadow text-white w-100" %>
+    <% end %>
+  </div>
+
+  <%= render 'partials/kanji_info' %>
+
+</div>

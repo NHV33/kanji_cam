@@ -1,0 +1,2 @@
+<% nth_kanji = (current_user.cards.index(@card) + 1).ordinalize %>
+<%= render 'partials/title_bar', title: "My #{nth_kanji} Kanji | #{@card.kanji.character} (#{@card.kanji.meanings.first})" %>
