@@ -159,7 +159,6 @@ const extractText = async () => {
 
   await worker.terminate();
 };
-<<<<<<< HEAD
 
 const modal = document.querySelector("dialog");
 const kanjiSelectionBox = document.getElementById("kanji-selection-box")
@@ -174,6 +173,15 @@ cancelButton.addEventListener('click', () => {
 const imageField = document.getElementById('image-data');
 const kanjiField = document.getElementById('kanji-data');
 
+// custom event to fire confetti
+const confettiAnimationCompleteEvent = new Event('confettiAnimationComplete');
+
+function launchConfetti() {
+setTimeout(() => {
+  document.dispatchEvent(confettiAnimationCompleteEvent);
+}, 8 * 1000);
+}
+
 confirmButton.addEventListener('click', () => {
   console.log("capture button pressed");
 
@@ -184,54 +192,8 @@ confirmButton.addEventListener('click', () => {
   kanjiField.value = kanjiText;
   console.log("kanjiField: ", kanjiField);
 
-  // display "You just captured xxth kanji!" with confetti
-  const element = document.getElementById('e0DQ82qcIov1');
-  element.svgatorPlayer.ready(function() {
-    // this refers to the player object
-    const player = element ? element.svgatorPlayer : {};
-    if (player.play) {
-      player.play();
-    }
-
-  });
-
-  // confetti
-  var duration = 8 * 1000;
-
-  var startTime = Date.now();
-
-  var formSubmitted = false;
-
-(function frame() {
-  // launch a few confetti from the left edge
-  confetti({
-    particleCount: 7,
-    angle: 60,
-    spread: 55,
-    origin: { x: 0 }
-  });
-  // and launch a few from the right edge
-  confetti({
-    particleCount: 7,
-    angle: 120,
-    spread: 55,
-    origin: { x: 1 }
-  });
-
-  // submit the form after confetti duration has passed
-  if (Date.now() - startTime < duration) {
-    requestAnimationFrame(frame);
-  } else {
-    if (!formSubmitted) {
-      document.getElementById('kanji-form').submit();
-      formSubmitted = true;
-    }
-  }
-}());
+  launchConfetti();
 });
-=======
-// MIGRATED
->>>>>>> origin
 
 function displayKanji(kanjiList) {
   updateAlertText("Select a kanji.")
@@ -436,21 +398,21 @@ cancelButton.addEventListener('click', () => {
 // MIGRATED
 
 
-confirmButton.addEventListener('click', () => {
+// confirmButton.addEventListener('click', () => {
 
-  const kanjiText = document.querySelector('.selected').innerText;
-  console.log("kanjiText: ", kanjiText);
-  // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
-  // imageField.value = newDataURL;
-  kanjiField.value = kanjiText;
-  console.log("kanjiField: ", kanjiField);
+//   const kanjiText = document.querySelector('.selected').innerText;
+//   console.log("kanjiText: ", kanjiText);
+//   // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
+//   // imageField.value = newDataURL;
+//   kanjiField.value = kanjiText;
+//   console.log("kanjiField: ", kanjiField);
 
-  // submitFormWithImageData();
-  if (kanjiField !== "") {
-    document.getElementById('kanji-form').submit();
-    // document.getElementById("submit-button").click();
-  }
-});
+//   // submitFormWithImageData();
+//   if (kanjiField !== "") {
+//     document.getElementById('kanji-form').submit();
+//     // document.getElementById("submit-button").click();
+//   }
+// });
 // MIGRATED
 
 canvas.addEventListener('mousedown',  (event) => { updateMousePos(event, newTouch=true); startTouchCanvas(); });
