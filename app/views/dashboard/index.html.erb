@@ -1,15 +1,7 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <div class="container-fluid">
-    <%= link_to dashboard_path, class: "navbar-brand" do %>
-      <i class="fa-solid me-2"></i>
-    <% end %>
-    <div class="mx-auto custom-collection-position">
-      <span class="navbar-text text-white">Dashboard</span>
-    </div>
-  </div>
-</nav>
+<%= render 'partials/title_bar', title: "Dashboard" %>
+
 <div class="container">
   <h1>Dashboard</h1>
   <br>
