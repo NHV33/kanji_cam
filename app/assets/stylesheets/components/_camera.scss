@@ -66,35 +66,48 @@
 }
 
 .full-screen {
-  position: fixed;
+  // position: fixed;
   /* background-color: aquamarine; */
-  height: 100vh;
-  width: 100vw;
+  // height: 100vh;
+  // width: 100vw;
   /* position: fixed; */
-  left: 0;
-  top: 0;
-  /* display: flex;
+  // left: 0;
+  // top: 0;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  flex-wrap: nowrap; */
+  flex-wrap: nowrap;
+}
+
+#video-canvas-container {
+  position: fixed;
+  // background-color: aquamarine;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
 }
 
 #camera-feed {
-  /* position: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: blueviolet; */
+  // background-color: blueviolet;
   z-index: -10;
 }
 
 #canvas {
-  /* position: fixed;
-  width: 100%;
-  height: 100%; */
-  /* background-color: aquamarine; */
-  /* border: 10px solid purple; */
-  /* visibility: hidden; */
+  // background-color:blue;
+  position: fixed;
   z-index: -5;
 }
 

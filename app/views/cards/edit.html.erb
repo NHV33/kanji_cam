@@ -1,0 +1,28 @@
+<%= render 'partials/card_show_title' %>
+
+<div class="container d-flex flex-column align-items-center">
+
+  <!-- Display a special message / animation for new kanji-->
+  <% if @card.created_at >= 5.seconds.ago %>
+
+    <script src="/kanji-rain/kanji-rain.js"></script>
+
+    <div class="col-12 d-flex justify-content-center">
+      <div class="badge bg-success fs-1 text-white">
+        Wow, you found a new kanji!
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class="w-75 mt-3">
+    <%= simple_form_for [@card] do |f| %>
+      <%# TODO: Add image upload. %>
+      <%= f.input :comment, label: "Note:" %>
+      <%= f.button :submit, "Update", class: "rounded-pill btn btn-primary text-shadow text-white w-100" %>
+    <% end %>
+  </div>
+
+  <%= render 'partials/kanji_info' %>
+
+</div>

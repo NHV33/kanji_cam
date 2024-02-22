@@ -1,21 +1,18 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
+<%= render 'partials/title_bar', title: "Dashboard" %>
 
 <div class="container">
-  <div class="text-center">
-    <h1>Dashboard</h1>
+  <h1>Dashboard</h1>
+  <br>
+  <h3>Captured Kanji/Total Kanji</h3>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
   </div>
   <br>
-  <div class="custom-card">
-    <h3>Captured Kanji/Total Kanji</h3>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
-    </div>
-    <br>
-    <h3>Learned Kanji/Captured Kanji</h3>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
-    </div>
+  <h3>Learned Kanji/Captured Kanji</h3>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
   </div>
   <br>
   <div class="custom-card">
