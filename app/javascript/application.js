@@ -5,6 +5,3 @@ import "@popperjs/core"
 import "bootstrap"
 import "chartkick"
 import "Chart.bundle"
-
-import ConfettiController from './controllers/confetti_controller.js'
-Stimulus.register('confetti', ConfettiController)

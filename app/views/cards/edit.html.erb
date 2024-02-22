@@ -5,7 +5,7 @@
   <!-- Display a special message / animation for new kanji-->
   <% if @card.created_at >= 5.seconds.ago %>
 
-    <%# <script src="/kanji-rain/kanji-rain.js"></script> %>
+    <script src="/kanji-rain/kanji-rain.js"></script>
 
     <div class="col-12 d-flex justify-content-center" data-controller="confetti">
       <div class="badge bg-success fs-1 text-white">
