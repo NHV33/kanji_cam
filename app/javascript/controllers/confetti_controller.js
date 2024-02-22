@@ -10,20 +10,42 @@ export default class extends Controller {
   }
 
   confirm() {
+    const kanjiSymbol = document.getElementById("kanji-symbol")
+    const scalar = 2;
+    // const starScalar = 2;
+    // const circleScalar = 2;
+    // const squareScalar = 2;
+    const kanji = confetti.shapeFromText({ text: kanjiSymbol.innerText, scalar });
+
     // confetti
     // launch a few confetti from the left edge
     confetti({
-      particleCount: 100,
+      particleCount: 50,
+      startVelocity: 30,
+      shapes: [kanji, 'square', 'square', 'circle', 'star'],
+      // scalar: [scalar, squareScalar, circleScalar, starScalar],
+      scalar,
       angle: 60,
       spread: 55,
       origin: { x: 0 }
-    });
-    // and launch a few from the right edge
-    confetti({
-      particleCount: 100,
+  });
+
+  confetti({
+      particleCount: 50,
+      startVelocity: 30,
+      shapes: [kanji, 'square', 'square', 'circle', 'star'],
+      // scalar: [scalar, squareScalar, circleScalar, starScalar],
+      scalar,
+
+      // writing as an object doesn't work
+        // { shape: kanji, scalar, particleCount: 5 }, // Kanji particles
+        // { shape: starShape, scalar: starScalar, particleCount: 20 }, // star particles
+        // { shape: circleShape, scalar: circleScalar, particleCount: 20 }, // star particles
+        // { shape: squareShape, scalar: squareScalar, particleCount: 20 } // Square particles
+      // ],
       angle: 120,
       spread: 55,
       origin: { x: 1 }
-    });
+  });
   }
 };

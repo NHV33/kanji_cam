@@ -173,17 +173,8 @@ cancelButton.addEventListener('click', () => {
 const imageField = document.getElementById('image-data');
 const kanjiField = document.getElementById('kanji-data');
 
-// custom event to fire confetti
-const confettiAnimationCompleteEvent = new Event('confettiAnimationComplete');
-
-function launchConfetti() {
-setTimeout(() => {
-  document.dispatchEvent(confettiAnimationCompleteEvent);
-}, 8 * 1000);
-}
 
 confirmButton.addEventListener('click', () => {
-  console.log("capture button pressed");
 
   const kanjiText = document.querySelector('.selected').innerText;
   console.log("kanjiText: ", kanjiText);
