@@ -47,6 +47,7 @@
 </div>
 
 <%= form_with(path: capture_path, method: :post, id: 'kanji-form') do |form| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <%# form.hidden_field :image_data, id: 'image-data' %>
   <%= form.hidden_field :kanji_data, id: 'kanji-data' %>
   <%= form.submit 'Submit', id: 'submit-button', style: "visibility: hidden;" %>
@@ -57,6 +58,7 @@
   <input type="hidden" name="kanji_data" id="kanji-data">
   <button type="submit" id="submit-button">Submit</button>
 </form> -->
+
 
 
 
