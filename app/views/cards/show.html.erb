@@ -1,8 +1,14 @@
 <%= render 'partials/card_show_title' %>
 
 <div class="container d-flex flex-column align-items-center">
+  <div class="container text-center mt-3">
+    <%= link_to card_path(@card),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+      <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+  </div>
 
-  <div class="default-card col-12 mt-4 position-relative">
+  <div class="custom-card col-12 mt-4 position-relative">
     <%= link_to edit_card_path(@card) do %>
       <%= image_tag 'ui_icons/edit_icon.svg', style: "position: absolute; top: 10px; right: 10px; width: 27px; height: 27px;" %>
     <% end %>
@@ -13,10 +19,4 @@
   </div>
 
   <%= render 'partials/kanji_info' %>
-</div>
-
-<div class="container text-center mt-3">
-  <%= link_to "Delete this card",
-    card_path(@card),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-primary' %>
 </div>

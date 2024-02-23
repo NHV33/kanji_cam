@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-color: #d9fae9; position: relative;">
+  <body style="background-image: url(<%= asset_path 'cool-background.png' %>); position: relative;">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
@@ -20,7 +20,9 @@
 
     <%= yield %>
 
-    <%= render 'partials/navbar' %>
+    <% unless current_page?(root_path) %>
+      <%= render 'partials/navbar' %>
+    <% end %>
     <%# <script src="/kanji-rain/kanji-rain.js"></script> %>
   </body>
 </html>
