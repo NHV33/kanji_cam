@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'maps/index'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,5 +18,6 @@ Rails.application.routes.draw do
 
   get "capture" => 'cards#capture', as: :capture
   post "capture" => 'cards#new_capture', as: :new_capture
+  # maybe we don't need the line below?
   post "/new_capture", to: "cards#new_capture"
 end

@@ -1,0 +1,16 @@
+<h1>Maps#index</h1>
+<p>Find me in app/views/maps/index.html.erb</p>
+
+
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+<% @cards.each do |card| %>
+<div>
+<h1><%= card.kanji.character %></h1>
+<h2><%= card.latitude %></h2>
+<h2><%= card.longitude %></h2>
+</div>
+<% end %>
