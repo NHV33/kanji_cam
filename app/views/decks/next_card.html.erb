@@ -8,4 +8,5 @@
   </div>
 </div>
 
-<%= link_to 'Next Card', next_card_deck_path(@deck), method: :get, remote: true, class: 'btn btn-primary' %>
+<%# link_to 'Next Card', next_card_deck_path(@deck), method: :get, remote: true, class: 'btn btn-primary' %>
+<%= button_to 'Next Card', next_card_deck_path(@deck), class: 'btn btn-primary' %>

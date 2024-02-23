@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: [ :next_card]
+  before_action :set_deck, only: [:show, :next_card]
 
   def index
     # @kanji_data = KanjiData.new("胃")
@@ -25,16 +25,18 @@ class DecksController < ApplicationController
 
   def show
     @cards = @deck.entries.where(card: :kanji)
+    redirect_to next_card_deck_path(@deck)
   end
 
   def next_card
     unlearned_cards = @deck.cards.where(learned: false)
     @card = unlearned_cards.order(Arel.sql('RANDOM()')).first
-    if @card
-      redirect_to "next_card"
+
+    # if @card
+    #   render "flashcard"
     # else
     #   redirect_to deck_path(@deck), notice: "Good work!!"
-    end
+    # end
   end
 
 
