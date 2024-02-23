@@ -25,6 +25,9 @@ class CardsController < ApplicationController
     @card.user_id = current_user.id
     @card.kanji_id = Kanji.find_by(character: new_kanji).id
 
+    @card.latitude = params[:latitude_data]
+    @card.longitude = params[:longitude_data]
+
     if @card.save!
       redirect_to edit_card_path(@card), notice: 'New card was successfully saved to your colletion!.'
     else
@@ -48,7 +51,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:comment)
+    params.require(:card).permit(:comment, :latitude, :longitude)
   end
 
   def match_kanji(string, pattern)

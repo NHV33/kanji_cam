@@ -17,5 +17,5 @@ Rails.application.routes.draw do
 
   get "capture" => 'cards#capture', as: :capture
   post "capture" => 'cards#new_capture', as: :new_capture
-
+  post "/new_capture", to: "cards#new_capture"
 end
