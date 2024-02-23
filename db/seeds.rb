@@ -65,7 +65,8 @@ if Card.all.empty?
 end
 
 # Deck seeds
-Deck.destroy_all
+Deck.destroy_all #to clear out decks with names including "un-learned"
+
 if Deck.all.empty?
   user = User.find_by(email: "test@me.com")
 
