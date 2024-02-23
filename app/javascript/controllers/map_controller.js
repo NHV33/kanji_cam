@@ -30,15 +30,23 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
+      const markerContainer = document.createElement('div');
+      markerContainer.className = 'marker-container';
+
       const el = document.createElement('div');
       el.className = 'marker';
+      markerContainer.appendChild(el);
 
       const text = document.createElement('div');
       text.textContent = marker.kanji;
       text.className = 'marker-text';
       el.appendChild(text);
 
-      new mapboxgl.Marker(el)
+      // new mapboxgl.Marker(el)
+      //   .setLngLat([marker.lng, marker.lat])
+      //   .addTo(this.map);
+
+        new mapboxgl.Marker(markerContainer)
         .setLngLat([marker.lng, marker.lat])
         .addTo(this.map);
     });
