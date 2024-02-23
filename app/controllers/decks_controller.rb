@@ -24,21 +24,16 @@ class DecksController < ApplicationController
 
 
   def show
-    @cards = @deck.entries.includes(card: :kanji)
+    @cards = @deck.entries.where(card: :kanji)
   end
 
   def next_card
     unlearned_cards = @deck.cards.where(learned: false)
     @card = unlearned_cards.order(Arel.sql('RANDOM()')).first
-    respond_to do |format|
-      format.html do
-        if @card
-          render 'flashcard'
-        else
-          redirect_to deck_path(@deck), notice: "Good work!!"
-        end
-      end
-      format.js
+    if @card
+      redirect_to "next_card"
+    # else
+    #   redirect_to deck_path(@deck), notice: "Good work!!"
     end
   end
 
