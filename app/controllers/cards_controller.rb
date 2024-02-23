@@ -20,13 +20,15 @@ class CardsController < ApplicationController
   end
 
   def new_capture
-    new_kanji = params[:kanji_data]
+    new_kanji = match_kanji(params[:kanji_data], /[一-龯]/)
     @card = Card.new
     @card.user_id = current_user.id
     @card.kanji_id = Kanji.find_by(character: new_kanji).id
 
     if @card.save!
       redirect_to edit_card_path(@card), notice: 'New card was successfully saved to your colletion!.'
+    else
+      redirect_to dashboard_url
     end
   end
 
@@ -47,5 +49,10 @@ class CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:comment)
+  end
+
+  def match_kanji(string, pattern)
+    match = string.match(pattern)
+    match ? match[0] : nil
   end
 end

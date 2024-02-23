@@ -159,7 +159,32 @@ const extractText = async () => {
 
   await worker.terminate();
 };
-// MIGRATED
+
+const modal = document.querySelector("dialog");
+const kanjiSelectionBox = document.getElementById("kanji-selection-box")
+
+const confirmButton = document.getElementById("confirm-button");
+const cancelButton = document.getElementById("cancel-button");
+
+cancelButton.addEventListener('click', () => {
+  modal.close();
+});
+
+const imageField = document.getElementById('image-data');
+const kanjiField = document.getElementById('kanji-data');
+
+
+confirmButton.addEventListener('click', () => {
+
+  const kanjiText = document.querySelector('.selected').innerText;
+  console.log("kanjiText: ", kanjiText);
+  // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
+  // imageField.value = newDataURL;
+  kanjiField.value = kanjiText;
+  console.log("kanjiField: ", kanjiField);
+
+  launchConfetti();
+});
 
 function displayKanji(kanjiList) {
   updateAlertText("Select a kanji.")
@@ -364,21 +389,21 @@ cancelButton.addEventListener('click', () => {
 // MIGRATED
 
 
-confirmButton.addEventListener('click', () => {
+// confirmButton.addEventListener('click', () => {
 
-  const kanjiText = document.querySelector('.selected').innerText;
-  console.log("kanjiText: ", kanjiText);
-  // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
-  // imageField.value = newDataURL;
-  kanjiField.value = kanjiText;
-  console.log("kanjiField: ", kanjiField);
+//   const kanjiText = document.querySelector('.selected').innerText;
+//   console.log("kanjiText: ", kanjiText);
+//   // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
+//   // imageField.value = newDataURL;
+//   kanjiField.value = kanjiText;
+//   console.log("kanjiField: ", kanjiField);
 
-  // submitFormWithImageData();
-  if (kanjiField !== "") {
-    document.getElementById('kanji-form').submit();
-    // document.getElementById("submit-button").click();
-  }
-});
+//   // submitFormWithImageData();
+//   if (kanjiField !== "") {
+//     document.getElementById('kanji-form').submit();
+//     // document.getElementById("submit-button").click();
+//   }
+// });
 // MIGRATED
 
 canvas.addEventListener('mousedown',  (event) => { updateMousePos(event, newTouch=true); startTouchCanvas(); });
