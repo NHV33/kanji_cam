@@ -3,37 +3,53 @@
 <%= render 'partials/title_bar', title: "Dashboard" %>
 
 <div class="container">
-  <h1>Dashboard</h1>
-  <br>
-  <h3>Captured Kanji/Total Kanji</h3>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
+
+  <div class="default-card mt-3">
+    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 btn btn-primary' %>
   </div>
-  <br>
-  <h3>Learned Kanji/Captured Kanji</h3>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
+
+  <div class="default-card mt-3">
+
+    <h3>Kanji Collected</h3>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
+    </div>
+
+    <br>
+
+    <h3>Learned Kanji</h3>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
+    </div>
+
   </div>
+
   <br>
-  <h3>JLPT Kanji Proficiency Distribution</h3>
-  <%= pie_chart @learned_kanji_by_jlpt,
-              id: "jlpt_kanji_distribution",
-              height: "250px",
-              library: {
-                legend: { position: 'top' },
-                tooltip: { enabled: true },
-                plotOptions: {
-                  pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                      enabled: true,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+
+  <div class="default-card">
+    <h3>My Kanji by JLTP Level</h3>
+    <%= pie_chart @learned_kanji_by_jlpt,
+                id: "jlpt_kanji_distribution",
+                height: "250px",
+                library: {
+                  legend: { position: 'top' },
+                  tooltip: { enabled: true },
+                  plotOptions: {
+                    pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                      }
                     }
                   }
-                }
-              } %>
+                } %>
+  </div>
+
 </div>
+
+<!--
 <div class="container mt-4">
   <div class="row">
     <% if @decks.present? %>
@@ -51,5 +67,5 @@
       <p>No decks found.</p>
     <% end %>
   </div>
-  <%= link_to 'View All Decks', decks_path, class: 'btn btn-primary' %>
 </div>
+-->
