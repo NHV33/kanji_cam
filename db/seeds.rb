@@ -65,20 +65,24 @@ if Card.all.empty?
 end
 
 # Deck seeds
+Deck.destroy_all #to clear out decks with names including "un-learned"
+
 if Deck.all.empty?
   user = User.find_by(email: "test@me.com")
 
   beginner_deck = Deck.new(
     user_id: user.id,
     title: "Beginner Kanji Deck",
-    comment: "A deck containing basic Kanji characters for beginners."
+    comment: "A deck containing basic Kanji characters for beginners.",
+    custom_deck: true
   )
   beginner_deck.save!
 
   intermediate_deck = Deck.new(
     user_id: user.id,
     title: "Intermediate Kanji Deck",
-    comment: "A deck containing intermediate level Kanji characters."
+    comment: "A deck containing intermediate level Kanji characters.",
+    custom_deck: true
   )
   intermediate_deck.save!
   puts "Decks saved."
