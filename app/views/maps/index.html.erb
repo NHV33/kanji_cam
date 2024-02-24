@@ -1,11 +1,11 @@
 <%= render 'partials/title_bar', title: "Your Conquest Chart" %>
 
 <div class="container">
-<h4>You have captured xx kanjis so far!</h4>
-<div class="map mt-3 mx-auto"
+<h5 class="text-center mt-2">You have captured <%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> so far!</h5>
+<div class="map mx-auto"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
-<a href="">Check other people's activity</a>
+<%= link_to "Check other people's activity", all_kanji_map_path, class: 'btn btn-primary mt-2' %>
 </div>

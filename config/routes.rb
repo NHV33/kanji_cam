@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'maps/index'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,6 +14,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get 'dashboard', to: 'dashboard#index', as: :dashboard
+
+  get 'maps', to: 'maps#index', as: :maps
+  get 'maps/all_kanji_map', to: 'maps#all_kanji_map', as: :all_kanji_map
 
   get "capture" => 'cards#capture', as: :capture
   post "capture" => 'cards#new_capture', as: :new_capture

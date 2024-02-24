@@ -42,6 +42,15 @@ export default class extends Controller {
       text.className = 'marker-text';
       el.appendChild(text);
 
+      el.addEventListener('click', () => {
+        // When marker is clicked, zoom in as needed
+        this.map.flyTo({
+            center: [marker.lng, marker.lat], // set marker in the center
+            zoom: 14, // zoom level
+            essential: true // animation: true
+        });
+    });
+
       // new mapboxgl.Marker(el)
       //   .setLngLat([marker.lng, marker.lat])
       //   .addTo(this.map);

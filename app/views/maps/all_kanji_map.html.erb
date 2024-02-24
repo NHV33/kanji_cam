@@ -1,0 +1,13 @@
+<%= render 'partials/title_bar', title: "All User's Collection" %>
+
+<div class="container">
+<!-- to be precise, the following is not the exact total kanji number. doesn't consider duplication -->
+<h5 class="text-center mt-2"><%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> have been collected on our app</h5>
+<div class="map mx-auto"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
+<!-- Please advise me good wording... the following will redirect to all user's kanji map -->
+<%= link_to "Go back to your chart", maps_path, class: 'btn btn-primary mt-2' %>
+</div>
