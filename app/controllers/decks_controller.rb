@@ -41,6 +41,7 @@ class DecksController < ApplicationController
     if @card.nil?
       @done_message = "Done with all flashcards!"
     end
+    
 
     # if @card
     #   when 'easy'
