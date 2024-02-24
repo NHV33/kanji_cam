@@ -1,14 +1,15 @@
-.kanji-character {
-  font-size: 3em; /* Adjust the size as needed */
-}
-
 .card {
   height: 100%;
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #f0f0f0;
+}
+
+.kanji-character {
+  font-size: 3em;
 }
 
 .card-container {
@@ -16,6 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .flashcard {
@@ -40,11 +42,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card-front {
+.card-front, .card-back {
   background-color: white;
 }
 
 .card-back {
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,10 +55,10 @@
   padding: 10px;
 }
 
-
 .card-container:active .flashcard {
   transform: rotateY(180deg);
 }
+
 .content-wrapper {
   display: flex;
   flex-direction: column;
@@ -63,11 +66,6 @@
   justify-content: center;
 }
 
-.card-container {
-  perspective: 1000px;
-  margin-bottom: 20px;
-}
-
 .btn-margin-right {
-  margin-right: 10px; /* Adjust the margin as needed */
+  margin-right: 10px;
 }
