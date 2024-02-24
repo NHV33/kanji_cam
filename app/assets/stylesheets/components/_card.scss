@@ -1,24 +1,29 @@
+.box {
+  border-radius: 10px;
+  border: none;
+  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #dde1e7;
+  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+}
+
 .custom-card {
   border-radius: 10px;
   border: none;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset;
+  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
   padding: 20px;
-  background-color: rgba(100, 200, 255, 0.2);
-  background-image: linear-gradient(to bottom, #eeaeca, #94bbe9);
-  &:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  // background-image: linear-gradient(to bottom, #eeaeca, #94bbe9);
+  &:active {
     transition-property: box-shadow;
     transition: ease;
     transition-duration: 300ms;
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
+    // box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
+    // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px 0px 0px 0px inset;
+    box-shadow: inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3);
   }
-}
-
-.default-card {
-  border-radius: 10px;
-  border: none;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  background-color: white;
 }
 
 .card-img-top {
@@ -34,7 +39,6 @@
   background-color: #2B2A4C;
   opacity: 0.8;
 }
-
 
 .font-color {
   color: black;
