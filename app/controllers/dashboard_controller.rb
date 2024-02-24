@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
     @total_learned_kanji = total_learned_kanji
     @total_kanji = Kanji.count
-    @total_captured_kanji = Card.count
+    @total_captured_kanji = current_user.cards.count
     @decks = current_user.decks.limit(2)
     @learned_kanji_by_jlpt = learned_kanji_by_jlpt.sort.to_h.transform_keys { |key| "JLPT#{key}" }
   end

@@ -1,0 +1,39 @@
+<%= render 'partials/title_bar', title: "Flashcard" %>
+<br>
+<div class="content-wrapper">
+  <div class="card-container">
+    <div class="flashcard">
+      <div class="card-front card-side">
+        <h1 class="kanji-character"><%= @card.kanji.character %></h1>
+      </div>
+      <div class="card-back card-side">
+        <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
+        <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+      </div>
+    </div>
+  </div>
+  <div class="progress" style="width: 260px; margin-top: 20px;">
+    <div class="progress-bar" role="progressbar" style="width: <%= session[:progress] || 0 %>%;" aria-valuenow="<%= session[:progress] || 0 %>" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <br>
+<div class="btn-group" role="group" aria-label="Recall Level Buttons">
+  <div class="btn-margin-right">
+    <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'btn btn-success', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
+      Easy
+    <% end %>
+  </div>
+  <div class="btn-margin-right">
+    <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'btn btn-warning', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
+      Remembered
+    <% end %>
+  </div>
+  <div>
+    <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'btn btn-danger', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
+      Forgot
+    <% end %>
+  </div>
+</div>
+
+
+
+</div>
