@@ -7,7 +7,7 @@
     </div>
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
-      <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" %>
+      <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1 frame" %>
 
       <%= link_to card_path(card), class: button_styles, style: "text-decoration: none;" do %>
 

@@ -52,6 +52,7 @@ gem "sassc-rails"
 
 # Manually Added:
 gem "devise"
+gem 'inline_svg'
 # Acts as taggable <== good riddance
 gem "chartkick"
 
