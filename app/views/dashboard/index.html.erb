@@ -3,18 +3,20 @@
 <%= render 'partials/title_bar', title: "Dashboard" %>
 
 <div class="container">
-  <h1>Dashboard</h1>
   <br>
-  <h3>Captured Kanji/Total Kanji</h3>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
+  <div class="box">
+    <h3>Captured Kanji/Total Kanji</h3>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_captured_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_kanji %>"><%= @total_captured_kanji %> / <%= @total_kanji %></div>
+    </div>
+    <br>
+    <h3>Learned Kanji/Captured Kanji</h3>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
+    </div>
   </div>
   <br>
-  <h3>Learned Kanji/Captured Kanji</h3>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;" aria-valuenow="<%= @total_learned_kanji %>" aria-valuemin="0" aria-valuemax="<%= @total_captured_kanji %>"><%= @total_learned_kanji %> / <%= @total_captured_kanji %></div>
-  </div>
-  <br>
+  <div class="box">
   <h3>JLPT Kanji Proficiency Distribution</h3>
   <%= pie_chart @learned_kanji_by_jlpt,
               id: "jlpt_kanji_distribution",
@@ -33,13 +35,14 @@
                   }
                 }
               } %>
+  </div>
 </div>
 <div class="container mt-4">
   <div class="row">
     <% if @decks.present? %>
       <% @decks.each do |deck| %>
         <%= link_to deck_path(deck), class: "col-md-4 mb-4 d-block text-decoration-none" do %>
-          <div class="card p-3 custom-card">
+          <div class="card p-3 box">
             <div class="card-body">
               <h5 class="card-title"><%= deck.title %></h5>
               <p class="card-text"><%= deck.comment.presence || "No description available" %></p>
@@ -51,5 +54,5 @@
       <p>No decks found.</p>
     <% end %>
   </div>
-  <%= link_to 'View All Decks', decks_path, class: 'btn btn-primary' %>
+  <%= link_to 'View All Decks', decks_path, class: 'btn3d btn-primary text-white' %>
 </div>
