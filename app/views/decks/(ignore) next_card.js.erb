@@ -1,0 +1,14 @@
+<% if @card.present? %>
+  $(".flashcard").html(`
+    <div class="card-front">
+      <h1><%= @card.kanji.character %></h1>
+    </div>
+    <div class="card-back">
+      <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
+      <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+    </div>
+  `);
+<% else %>
+  alert("Good work!!");
+  window.location.href = "<%= deck_path(@deck) %>";
+<% end %>
