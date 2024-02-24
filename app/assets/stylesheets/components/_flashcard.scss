@@ -1,3 +1,7 @@
+.kanji-character {
+  font-size: 3em; /* Adjust the size as needed */
+}
+
 .card {
   height: 100%;
   margin: 0;
@@ -15,6 +19,7 @@
 }
 
 .flashcard {
+  user-select: none;
   width: 260px;
   height: 390px;
   position: relative;
@@ -48,7 +53,7 @@
 }
 
 
-.card-container:hover .flashcard {
+.card-container:active .flashcard {
   transform: rotateY(180deg);
 }
 .content-wrapper {
