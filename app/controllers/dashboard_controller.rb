@@ -17,6 +17,6 @@ class DashboardController < ApplicationController
   end
 
   def total_learned_kanji
-    Card.where(learned: true).joins(:kanji).distinct.count
+    current_user.cards.where(learned: true).joins(:kanji).distinct.count
   end
 end

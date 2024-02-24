@@ -1,7 +1,68 @@
 <%= render 'partials/title_bar', title: "My Flashcard Decks" %>
+
+<div class="container mt-3">
+
+  <% unlearned_kanji = current_user.cards.count - current_user.cards.where(learned: true).joins(:kanji).distinct.count %>
+
+  <div class="badge bg-danger col-12">
+    You have <%= unlearned_kanji %> unlearned kanji.
+  </div>
+
+  <div class="default-card my-3">
+    <%= link_to 'Study All Unlearned Kanji', deck_path(@master_deck), class: 'col-12 fs-6 btn btn-primary' %>
+  </div>
+
+</div>
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Study by JLPT Level
+      </button>
+
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+
+        <% @jlpt_decks.each do |jlpt_deck| %>
+          <% button_label = "#{jlpt_deck.title} Kanji" %>
+          <%= link_to button_label, deck_path(jlpt_deck), class: 'col-12 my-1 p-2 btn btn-primary text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+        <% end %>
+
+      </div>    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        My Custom Decks
+      </button>
+
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+
+        <% @custom_decks.each do |custom_deck| %>
+          <% button_label = "#{custom_deck.title} | #{custom_deck.comment}" %>
+          <%= link_to button_label, deck_path(custom_deck), class: 'col-12 my-1 p-2 btn btn-primary text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--
 <div class="container">
+
   <div class="row">
-    <% @decks.each do |deck| %>
+    <% @custom_decks.each do |deck| %>
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
           <div class="card-body">
@@ -52,3 +113,5 @@
     </div>
   </div>
 </div>
+
+  -->
