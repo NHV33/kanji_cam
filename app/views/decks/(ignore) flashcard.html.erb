@@ -1,0 +1,12 @@
+<div class="flashcard">
+  <div class="card-front">
+    <h1><%= @card.kanji.character %></h1>
+  </div>
+  <div class="card-back">
+    <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
+    <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+  </div>
+</div>
+
+<%# link_to 'Next Card', next_card_deck_path(@deck), method: :get, remote: true, class: 'btn btn-primary' %>
+<%= link_to 'Next Card', next_card_deck_path(@deck), class: 'btn btn-primary' %>

@@ -1,0 +1,73 @@
+.kanji-character {
+  font-size: 3em; /* Adjust the size as needed */
+}
+
+.card {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.card-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flashcard {
+  user-select: none;
+  width: 260px;
+  height: 390px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+  background-color: white;
+}
+
+.card-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+
+.card-container:active .flashcard {
+  transform: rotateY(180deg);
+}
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-container {
+  perspective: 1000px;
+  margin-bottom: 20px;
+}
+
+.btn-margin-right {
+  margin-right: 10px; /* Adjust the margin as needed */
+}

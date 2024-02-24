@@ -1,3 +1,4 @@
+
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
@@ -13,7 +14,7 @@
 
 .navbar {
   background: rgb(23,23,23);
-  background: linear-gradient(0deg, rgb(100, 100, 100) 0%, rgba(200,200,200,1) 100%);
+  background: #d9fae9;
 }
 
 .navbar-icon {
@@ -23,3 +24,7 @@
 .navbar-icon:hover {
   filter: brightness(1.5);
 }
+// .active .navbar-icon {
+//   background-color: red;
+//   border-radius: 20px;
+// }

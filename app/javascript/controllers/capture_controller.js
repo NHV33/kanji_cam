@@ -353,6 +353,24 @@ export default class extends Controller {
     });
   }
 
+  getLocation(callback) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          // Call the callback function with latitude and longitude
+          callback(latitude, longitude);
+      },
+      error => {
+          console.error("Error occurred while getting geolocation:", error);
+          // Call the callback function with null values
+          callback(null, null);
+      });
+  } else {
+      // If geolocation is not supported, call the callback function with null values
+      callback(null, null);
+  }
+}
 
   // EVENT LISTENERS
 
@@ -379,7 +397,6 @@ export default class extends Controller {
           console.error("Error loading image:", error);
           this.captureImage = null;
         });
-
     });
 
     this.cancelButton.addEventListener('click', () => {
@@ -387,6 +404,12 @@ export default class extends Controller {
     });
 
     this.confirmButton.addEventListener('click', () => {
+
+      this.getLocation((latitude, longitude) => {
+        document.getElementById('latitude-data').value = latitude;
+        document.getElementById('longitude-data').value = longitude;
+        console.log(latitude, longitude);
+      });
 
       const kanjiText = document.querySelector('.selected').innerText;
       console.log("kanjiText: ", kanjiText);

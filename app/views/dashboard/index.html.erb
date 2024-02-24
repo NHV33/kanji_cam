@@ -55,7 +55,7 @@
     <% if @decks.present? %>
       <% @decks.each do |deck| %>
         <%= link_to deck_path(deck), class: "col-md-4 mb-4 d-block text-decoration-none" do %>
-          <div class="card p-3 custom-card">
+          <div class="card p-3 box">
             <div class="card-body">
               <h5 class="card-title"><%= deck.title %></h5>
               <p class="card-text"><%= deck.comment.presence || "No description available" %></p>

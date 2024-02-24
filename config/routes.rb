@@ -10,12 +10,22 @@ Rails.application.routes.draw do
   resources :cards
 
   resources :kanjis, only: [:index, :show]
-  resources :decks
+  resources :decks do
+    member do
+      get 'next_card'
+      patch 'learn_card' 
+    end
+  end
+# adding custom routes to the resources? https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
   # Defines the root path route ("/")
   # root "posts#index"
   get 'dashboard', to: 'dashboard#index', as: :dashboard
 
+  get 'maps', to: 'maps#index', as: :maps
+  get 'maps/all_kanji_map', to: 'maps#all_kanji_map', as: :all_kanji_map
+
   get "capture" => 'cards#capture', as: :capture
   post "capture" => 'cards#new_capture', as: :new_capture
-
+  # maybe we don't need the line below?
+  post "/new_capture", to: "cards#new_capture"
 end

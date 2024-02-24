@@ -1,4 +1,6 @@
 class DecksController < ApplicationController
+  before_action :set_deck, only: [:show, :next_card]
+
   def index
     # excluded_titles = ["Master Deck"] + (1..5).map { |level| "JLPT N#{level}" }
     # @decks = current_user.decks.where.not(title: excluded_titles)
@@ -14,7 +16,6 @@ class DecksController < ApplicationController
           .each do |card|
             Entry.find_or_create_by(card_id: card.id, deck_id: jlpt_deck.id)
           end
-
       jlpt_deck
     end
 
@@ -23,5 +24,44 @@ class DecksController < ApplicationController
       # Do entires ever get deleted from a deck?
       Entry.find_or_create_by(card_id: card.id, deck_id: @master_deck.id)
     end
+  end
+
+
+  def show
+    session[:progress] = 0
+    @cards = @deck.entries.where(card: :kanji)
+    redirect_to next_card_deck_path(@deck)
+  end
+
+  def next_card
+    session[:progress] = session[:progress].to_i + 10
+    session[:progress] = 0 if session[:progress] > 100
+    unlearned_cards = @deck.cards.where(learned: false)
+    @card = unlearned_cards.order(Arel.sql('RANDOM()')).first
+
+    learned_cards = @deck.cards.where(learned: true)
+    total_cards = @deck.cards.count
+    # @progress_percentage = (learned_cards.count.to_f / total_cards * 100).round(2)
+    if @card.nil?
+      @done_message = "Done with all flashcards!"
+    end
+
+
+    # if @card
+    #   when 'easy'
+    #     # aaaa
+    #   when 'medium'
+    #     # aaaa
+    #   when 'hard'
+    #     # aaaa
+    #   end
+    # end
+  end
+
+
+  private
+
+  def set_deck
+    @deck = current_user.decks.find_by(id: params[:id])
   end
 end
