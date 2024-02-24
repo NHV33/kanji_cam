@@ -12,7 +12,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-color: #cccccc; position: relative;">
+  <body style="background-color: #dde1e7; position: relative;">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
@@ -22,7 +22,13 @@
 
     <%= yield %>
 
-    <%= render 'partials/navbar' %>
+    <% unless current_page?(root_path) %>
+      <%= render 'partials/navbar' %>
+    <% end %>
     <%# <script src="/kanji-rain/kanji-rain.js"></script> %>
   </body>
 </html>
+
+<%# Tiger's memo: haven't finalized the background yet %>
+<%# style="background-image: url('#'); position: relative;" %>
+<%# "background-image: linear-gradient(to bottom, #eeaeca, #94bbe9); position: relative;" %>
