@@ -46,6 +46,10 @@ export default class extends Controller {
   connect() {
     console.log("I'm connected");
 
+    this.getLocation((latitude, longitude) => {
+      document.getElementById('latitude-data').value = latitude;
+      document.getElementById('longitude-data').value = longitude;
+      console.log(latitude, longitude, "location from connect");
     this.videoElement = document.getElementById('camera-feed');
     this.canvas = document.getElementById('canvas');
     this.context = canvas.getContext('2d');
@@ -53,6 +57,8 @@ export default class extends Controller {
     this.updateAlertText(this.captureInstruction);
     this.initializeCamera(this.videoElement);
     this.addEventListeners();
+    });
+
   }
 
   setPageStyle() {
@@ -365,6 +371,7 @@ export default class extends Controller {
           console.error("Error occurred while getting geolocation:", error);
           // Call the callback function with null values
           callback(null, null);
+          // update alert like..."enable location for more points"
       });
   } else {
       // If geolocation is not supported, call the callback function with null values
@@ -404,12 +411,6 @@ export default class extends Controller {
     });
 
     this.confirmButton.addEventListener('click', () => {
-
-      this.getLocation((latitude, longitude) => {
-        document.getElementById('latitude-data').value = latitude;
-        document.getElementById('longitude-data').value = longitude;
-        console.log(latitude, longitude);
-      });
 
       const kanjiText = document.querySelector('.selected').innerText;
       console.log("kanjiText: ", kanjiText);
