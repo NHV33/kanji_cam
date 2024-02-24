@@ -24,18 +24,32 @@ class DecksController < ApplicationController
 
 
   def show
+    session[:progress] = 0
     @cards = @deck.entries.where(card: :kanji)
     redirect_to next_card_deck_path(@deck)
   end
 
   def next_card
+    session[:progress] = session[:progress].to_i + 10
+    session[:progress] = 0 if session[:progress] > 100
     unlearned_cards = @deck.cards.where(learned: false)
     @card = unlearned_cards.order(Arel.sql('RANDOM()')).first
 
+    learned_cards = @deck.cards.where(learned: true)
+    total_cards = @deck.cards.count
+    # @progress_percentage = (learned_cards.count.to_f / total_cards * 100).round(2)
+    if @card.nil?
+      @done_message = "Done with all flashcards!"
+    end
+
     # if @card
-    #   render "flashcard"
-    # else
-    #   redirect_to deck_path(@deck), notice: "Good work!!"
+    #   when 'easy'
+    #     # aaaa
+    #   when 'medium'
+    #     # aaaa
+    #   when 'hard'
+    #     # aaaa
+    #   end
     # end
   end
 
