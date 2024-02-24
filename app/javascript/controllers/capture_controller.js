@@ -371,6 +371,7 @@ export default class extends Controller {
           console.error("Error occurred while getting geolocation:", error);
           // Call the callback function with null values
           callback(null, null);
+          // update alert like..."enable location for more points"
       });
   } else {
       // If geolocation is not supported, call the callback function with null values
