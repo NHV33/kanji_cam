@@ -55,6 +55,8 @@
 
 .temp-fix {
   height: 30vmin;
+}
+
 .card {
   height: 100%;
   margin: 0;
@@ -102,6 +104,6 @@
   transform: rotateY(180deg);
 }
 
-.card-container:hover .flashcard {
-  transform: rotateY(180deg);
-}
+// .card-container:hover .flashcard {
+//   transform: rotateY(180deg);
+// }
