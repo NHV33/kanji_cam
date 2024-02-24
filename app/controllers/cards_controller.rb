@@ -20,7 +20,7 @@ class CardsController < ApplicationController
   end
 
   def new_capture
-    new_kanji = match_kanji(params[:kanji_data], /[一-龯]/)
+    new_kanji = params[:kanji_data].strip
     @card = Card.new
     @card.user_id = current_user.id
     @card.kanji_id = Kanji.find_by(character: new_kanji).id
