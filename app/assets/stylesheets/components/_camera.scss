@@ -11,6 +11,27 @@
   align-items: center;
 }
 
+.camera-modal-button {
+  color: white;
+  padding: 5px 15px 5px 15px;
+  // font-size: 4vmin;
+  margin: 5px;
+  text-shadow: 1px 1px 1px black;
+  border-radius: 100px;
+  width: 100%;
+  outline: none;
+  background-color: $primary;
+  border: none;
+}
+
+.camera-modal-button:hover {
+  scale: 1.025;
+}
+
+.camera-modal-button:active {
+  filter: brightness(0.9);
+}
+
 #kanji-selection-box {
   display: flex;
   // max-height: 40vh;
