@@ -15,12 +15,27 @@
 
   <% end %>
 
-  <div class="w-75 mt-3">
-    <%= simple_form_for [@card] do |f| %>
-      <%# TODO: Add image upload. %>
-      <%= f.input :comment, label: "Note:" %>
-      <%= f.button :submit, "Update", class: "rounded-pill btn btn-primary text-shadow text-white w-100" %>
-    <% end %>
+  <div class="post-it-note col-12 mt-4 mb-2">
+
+    <div class="d-flex">
+      <h3 class="fs-5">Notes:</h3>
+    <!--
+      <%= link_to edit_card_path(@card) do %>
+        <%= image_tag 'ui_icons/edit_icon.svg', style: "position: absolute; top: 10px; right: 10px; width: 27px; height: 27px;" %>
+      <% end %>
+    -->
+    </div>
+    <div class="mx-5 fs-4">
+      <%= simple_form_for [@card] do |f| %>
+        <%# TODO: Add image upload. %>
+        <%= f.input :comment, label: false %>
+        <div class="d-flex justify-content-around">
+          <%= f.button :submit, "Update", class: "rounded-pill btn btn-primary text-shadow text-white col-4" %>
+          <%= link_to 'Cancel', card_path(@card), class: "rounded-pill btn btn-danger text-shadow text-white col-4"%>
+        </div>
+      <% end %>
+      <%# @card.comment %>
+    </div>
   </div>
 
   <%= render 'partials/kanji_info' %>
