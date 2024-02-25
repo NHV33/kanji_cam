@@ -17,26 +17,14 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-  //   this.map.addControl(
-  //     new mapboxgl.GeolocateControl({
-  //       positionOptions: {
-  //         enableHighAccuracy: true
-  //     },
-  //     trackUserLocation: true,
-  //     showUserLocation: true
-  // }));
-
-//   this.mapboxgl-user-location-dot {
-//     background-color: blue;
-//     border-radius: 50%;
-//     width: 10px;
-//     height: 10px;
-// }
-
   navigator.geolocation.getCurrentPosition(position => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     console.log(latitude, longitude, "user's position");
+
+    const userMarker = new mapboxgl.Marker()
+      .setLngLat([longitude, latitude])
+      .addTo(this.map);
 
     // adjust map showing range to user's location
     this.map.flyTo({
@@ -50,7 +38,19 @@ export default class extends Controller {
 
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
-    this.#addUserMarkertoMap()
+
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+      },
+      trackUserLocation: true,
+      showUserLocation: true
+  }));
+
+  this.map.on('geolocate', function (e) {
+    marker.setLngLat([e.coords.longitude, e.coords.latitude]);
+  });
   }
 
   #fitMapToMarkers() {
@@ -63,19 +63,20 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
+      console.log("kanji marker's");
       const markerContainer = document.createElement('div');
       markerContainer.className = 'marker-container';
 
-      const el = document.createElement('div');
-      el.className = 'marker';
-      markerContainer.appendChild(el);
+      const element = document.createElement('div');
+      element.className = 'marker';
+      markerContainer.appendChild(element);
 
       const text = document.createElement('div');
       text.textContent = marker.kanji;
       text.className = 'marker-text';
-      el.appendChild(text);
+      element.appendChild(text);
 
-      el.addEventListener('click', () => {
+      element.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
         this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center
@@ -85,27 +86,4 @@ export default class extends Controller {
     });
   }
 )}
-
-    #addUserMarkertoMap() {
-      const userMarker = new.Map
-
-      this.map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true
-        },
-        trackUserLocation: true,
-        showUserLocation: true
-    }));
-    }
-
-      // new mapboxgl.Marker(el)
-      //   .setLngLat([marker.lng, marker.lat])
-      //   .addTo(this.map);
-
-        new mapboxgl.Marker(markerContainer)
-        .setLngLat([marker.lng, marker.lat])
-        .addTo(this.map);
-    });
-  }
 }
