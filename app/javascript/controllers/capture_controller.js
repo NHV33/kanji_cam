@@ -132,17 +132,20 @@ export default class extends Controller {
     this.newInfoModal(
       "Enable Camera",
       "You must enable your camera to scan kanji.<br>Please press \"allow\" when prompted.",
-      [{label: "Enable Camera", classes: `camera-modal-button`, action: () => {
-        this.initializeCamera();
-        this.handleDevicePermissions();
-      }}]
+      [
+        {label: "Enable Camera", classes: `camera-modal-button`, action: () => {
+          this.initializeCamera();
+          this.handleDevicePermissions();
+        }},
+        {label: "Cancel", classes: `camera-modal-button bg-danger`, action: () => {this.infoModal.close();}}
+      ]
     );
   }
 
   requestLocation() {
     this.newInfoModal(
       "Enable Location Data",
-      "Enable location data to view your kanji on a map.<br>Please press allow when prompted.<br><i class='fa-solid fa-triangle-exclamation'></i> Note <i class='fa-solid fa-triangle-exclamation'></i><br>Location data cannot be added to a kanji after it is captured.",
+      "Enable location data to view your kanji on a map.<br>Please press \"allow\" when prompted.<br><i class='fa-solid fa-triangle-exclamation'></i> Note <i class='fa-solid fa-triangle-exclamation'></i><br>Location data cannot be added to a kanji after it is captured.",
       [
         {label: "Enable Location Data", classes: `camera-modal-button bg-primary`,
           action: () => {
