@@ -2,16 +2,28 @@
 
 <div class="container d-flex flex-column align-items-center">
 
-  <div class="post-it-note col-12 mt-4 mb-2">
-    <div class="d-flex">
-      <h3 class="fs-5">Notes:</h3>
-      <%= link_to edit_card_path(@card) do %>
-        <%= image_tag 'ui_icons/edit_icon.svg', style: "position: absolute; top: 10px; right: 10px; width: 27px; height: 27px;" %>
-      <% end %>
-    </div>
-    <div class="mx-5 fs-4">
-      <%= @card.comment %>
-    </div>
+  <%# Hide note if absent. %>
+  <div id="note-section" class="mt-3 col-12">
+
+    <% unless @card.comment.nil? || @card.comment == "" %>
+
+      <div class="post-it-note col-12 mb-2">
+        <div class="d-flex">
+          <h3 class="fs-5">Notes:</h3>
+          <%= link_to edit_card_path(@card) do %>
+            <%= image_tag 'ui_icons/edit_icon.svg', style: "position: absolute; top: 10px; right: 10px; width: 27px; height: 27px;" %>
+          <% end %>
+        </div>
+        <div class="mx-5 fs-4">
+          <%= @card.comment %>
+        </div>
+      </div>
+
+    <%# Add Note button if note is hidden. %>
+    <% else %>
+      <%= link_to 'Add Note', edit_card_path(@card), class: "rounded-pill btn btn-primary text-shadow text-white w-100" %>
+    <% end %>
+
   </div>
 
   <%= render 'partials/kanji_info' %>
