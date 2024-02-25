@@ -121,10 +121,7 @@ export default class extends Controller {
     this.newInfoModal(
       "Welcome to Kanji Cam",
       "<ul><li>Hold the camera steady and level when taking a picture.</li><li>The scanner works best on standard, non-cursive font types.</li></ul><center>(<a href='/dashboard'>Learn More</a>)</center>",
-      [
-        {label: "Continue", classes: `camera-modal-button`, action: () => {this.handleDevicePermissions()} },
-        // {label: "Learn More", classes: `camera-modal-button bg-primary`, action: () => {window.location.href = "/cards";}}
-      ]
+      [{label: "Continue", classes: `camera-modal-button`, action: () => {this.handleDevicePermissions()} }]
     );
   }
 
@@ -153,7 +150,7 @@ export default class extends Controller {
             this.infoModal.close();
         }},
         {label: "Continue Without Location Data", classes: `camera-modal-button bg-danger`, action: () => {this.infoModal.close()}},
-        {label: "Learn More", classes: `camera-modal-button bg-secondary`, action: () => {window.location.href = "/cards";}}
+        {label: "Learn More", classes: `camera-modal-button bg-secondary`, action: () => {window.location.href = "/dashboard";}}
       ]
     );
   }
