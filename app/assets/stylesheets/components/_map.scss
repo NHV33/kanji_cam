@@ -4,10 +4,26 @@
 }
 
 .marker-container {
+  width: 60px;
+  height: 80px;
   position: relative;
   left: -24px;
   top: 10px;
   transform-origin: right bottom;
+
+  &:hover {
+    .marker {
+    transition: transform 1s ease;
+    background-color: white;
+    border-color: #f083e3;
+    animation: swing 0.1s ease-in-out alternate; // defines quickness of animation
+    animation-fill-mode: forwards;
+  }
+    // style of marker-text when marker is hovered
+    .marker-text {
+      color: #f083e3;
+    }
+  }
 }
 
 .marker {
@@ -25,20 +41,6 @@
   transform-origin: right bottom;
   width: 48px;
   height: 48px;
-
-  &:hover {
-    // transform: rotate(45deg) scale(1.3);
-    transition: transform 1s ease;
-    background-color: white;
-    border-color: #f083e3;
-    animation: swing 0.1s ease-in-out alternate; // defines quickness of animation
-    animation-fill-mode: forwards;
-
-    // style of marker-text when marker is hovered
-    .marker-text {
-      color: #f083e3;
-    }
-  }
 }
 
 .marker-text {
@@ -51,12 +53,16 @@
 
 @keyframes swing {
   0% {
-    transform: rotate(20deg) scale(1.3);
+    transform: rotate(20deg);
   }
   50% {
-    transform: rotate(70deg) scale(1.3);
+    transform: rotate(70deg);
   }
   100% {
-    transform: rotate(45deg) scale(1.3);
+    transform: rotate(45deg);
   }
 }
+
+.mapboxgl-popup {
+  max-width: 400px;
+  }

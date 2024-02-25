@@ -6,7 +6,10 @@ class MapsController < ApplicationController
       {
         lat: card.latitude,
         lng: card.longitude,
-        kanji: card.kanji.character
+        kanji: card.kanji.character,
+        comment: card.comment,
+        kanji_id: card.kanji_id
+        # link to go show page of the kanji
       }
     end
   end

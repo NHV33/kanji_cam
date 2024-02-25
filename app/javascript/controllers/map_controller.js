@@ -81,7 +81,17 @@ export default class extends Controller {
 
       const newMarker = new mapboxgl.Marker({ element: markerContainer })
             .setLngLat([marker.lng, marker.lat])
-            .addTo(this.map);
+            .addTo(this.map);([marker])
+
+      element.addEventListener('mouseenter', () => {
+        const commentText = marker.comment ? `<p>Note: ${marker.comment}</p>` : `<p>Note: N/A</p>`;
+        const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
+        new mapboxgl.Popup()
+        .setLngLat([marker.lng, marker.lat])
+        .setHTML(commentText + linkText)
+        .addTo(this.map);
+        console.log(marker);
+      })
 
       element.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
