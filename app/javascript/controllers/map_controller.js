@@ -17,6 +17,7 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
+  // get user's location and display the pin there
   navigator.geolocation.getCurrentPosition(position => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
@@ -30,7 +31,8 @@ export default class extends Controller {
     this.map.flyTo({
         center: [longitude, latitude], // set user's location to the center
         zoom: 12,
-        essential: true
+        essential: true,
+        duration: 1000
     });
 }, error => {
     console.error("Error occurred while getting geolocation:", error);
@@ -48,8 +50,9 @@ export default class extends Controller {
       showUserLocation: true
   }));
 
+  // update userMarker when user location changes
   this.map.on('geolocate', function (e) {
-    marker.setLngLat([e.coords.longitude, e.coords.latitude]);
+    userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
   });
   }
 
@@ -76,12 +79,17 @@ export default class extends Controller {
       text.className = 'marker-text';
       element.appendChild(text);
 
+      const newMarker = new mapboxgl.Marker({ element: markerContainer })
+            .setLngLat([marker.lng, marker.lat])
+            .addTo(this.map);
+
       element.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
         this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center
             zoom: 14, // zoom level
-            essential: true // animation: true
+            essential: true, // animation: true
+            duration: 1000
         });
     });
   }
