@@ -9,6 +9,7 @@ export default class extends Controller {
 
 
   connect() {
+
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
@@ -16,8 +17,40 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
+  //   this.map.addControl(
+  //     new mapboxgl.GeolocateControl({
+  //       positionOptions: {
+  //         enableHighAccuracy: true
+  //     },
+  //     trackUserLocation: true,
+  //     showUserLocation: true
+  // }));
+
+//   this.mapboxgl-user-location-dot {
+//     background-color: blue;
+//     border-radius: 50%;
+//     width: 10px;
+//     height: 10px;
+// }
+
+  navigator.geolocation.getCurrentPosition(position => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log(latitude, longitude, "user's position");
+
+    // adjust map showing range to user's location
+    this.map.flyTo({
+        center: [longitude, latitude], // set user's location to the center
+        zoom: 12,
+        essential: true
+    });
+}, error => {
+    console.error("Error occurred while getting geolocation:", error);
+});
+
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
+    this.#addUserMarkertoMap()
   }
 
   #fitMapToMarkers() {
@@ -50,6 +83,21 @@ export default class extends Controller {
             essential: true // animation: true
         });
     });
+  }
+)}
+
+    #addUserMarkertoMap() {
+      const userMarker = new.Map
+
+      this.map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserLocation: true
+    }));
+    }
 
       // new mapboxgl.Marker(el)
       //   .setLngLat([marker.lng, marker.lat])

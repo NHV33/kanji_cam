@@ -1,11 +1,20 @@
 <%= render 'partials/title_bar', title: "Your Conquest Chart" %>
 <div class="container">
-  <h5 class="text-center mt-2">You have captured <%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> so far!</h5>
-  <p class="text-center">(<%= @cards.select { |card| card.longitude.blank? || card.latitude.blank? }.count %> <%= 'kanji'.pluralize(@cards.select { |card| card.longitude.blank? || card.latitude.blank? }.count) %> without location info)</p>
+  <%# if user found 0 kanji %>
+  <%# "Go find some kanji!"" %>
+  <h5 class="text-center mt-2"><% if @cards.count == 0 %><%= "Go get some kanji!" %>
+  <%# if user found some kanji, but no location is available %>
+  <%# "No location available" %>
+    <% elsif @cards.select { |card| card.longitude.present? && card.latitude.present? }.count == 0 %>
+    <%= "No location is available" %>
+    <%# if user found some kanji, but some cards' location are missing %>
+    <%# xx positions are available %>
+    <% else %><%= @cards.select { |card| card.longitude.present? && card.latitude.present? }.count %> <%= "positions are available" %>
+    <% end %></h5>
   <div class="map mx-auto"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
+  <%# Please advise me good wording... the following will redirect to all user's kanji map %>
   <%= link_to "Check other people's activity", all_kanji_map_path, class: 'btn3d btn-primary text-white mt-2' %>
 </div>

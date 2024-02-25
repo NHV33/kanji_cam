@@ -50,6 +50,8 @@ export default class extends Controller {
       document.getElementById('latitude-data').value = latitude;
       document.getElementById('longitude-data').value = longitude;
       console.log(latitude, longitude, "location from connect");
+    });
+
     this.videoElement = document.getElementById('camera-feed');
     this.canvas = document.getElementById('canvas');
     this.context = canvas.getContext('2d');
@@ -57,8 +59,6 @@ export default class extends Controller {
     this.updateAlertText(this.captureInstruction);
     this.initializeCamera(this.videoElement);
     this.addEventListeners();
-    });
-
   }
 
   setPageStyle() {
@@ -153,6 +153,7 @@ export default class extends Controller {
       .catch(function(error) {
           // Error callback: handle errors when accessing the camera
           console.error('Error accessing the camera:', error);
+
       });
     } else {
       // Browser does not support getUserMedia
@@ -360,23 +361,49 @@ export default class extends Controller {
   }
 
   getLocation(callback) {
+    console.log(navigator.geolocation);
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          // Call the callback function with latitude and longitude
-          callback(latitude, longitude);
-      },
-      error => {
-          console.error("Error occurred while getting geolocation:", error);
-          // Call the callback function with null values
+      navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+        console.log(permissionStatus);
+        if (permissionStatus.state === 'granted') {
+          console.log("granted");
+          // user disable location share from enabled, will not send position parameter
+          permissionStatus.onchange = () => {
+          this.updateAlertText("Ok, we will not save your location info. Take a pic!");
           callback(null, null);
+          }
+          this.getCurrentPosition(callback)
+        } else {
+          // If geolocation is not supported, call the callback function with null values
           // update alert like..."enable location for more points"
-      });
-  } else {
-      // If geolocation is not supported, call the callback function with null values
-      callback(null, null);
+          console.log("permission is not granted");
+          this.updateAlertText("Enable location and get additional points");
+          callback(null, null);
+
+          permissionStatus.onchange = () => {
+            console.log("state changed to granted");
+            if (permissionStatus.state === 'granted') {
+              this.updateAlertText(this.captureInstruction);
+              this.getCurrentPosition(callback);
+            }
+          };
+        }
+      })
+    }
   }
+
+getCurrentPosition(callback) {
+  navigator.geolocation.getCurrentPosition(position => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    // Call the callback function with latitude and longitude
+    callback(latitude, longitude);
+},
+error => {
+  console.error("Error occurred while getting geolocation:", error);
+  // Call the callback function with null values
+  callback(null, null);
+});
 }
 
   // EVENT LISTENERS
