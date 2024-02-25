@@ -13,6 +13,7 @@ export default class extends Controller {
   retakeButton = document.getElementById('retake-button');
 
   alertText = document.getElementById('alert-text');
+  errorText = document.getElementById('error-text');
 
   infoModal = document.getElementById('info-modal');
 
@@ -59,6 +60,7 @@ export default class extends Controller {
     this.setPageStyle();
 
     this.updateAlertText("");
+    this.updateErrorText("");
 
     this.addEventListeners();
 
@@ -211,6 +213,26 @@ export default class extends Controller {
     }
   }
 
+  updateErrorText(message) {
+    if (message === "") {
+      this.turnElement("error-text", "off");
+    } else {
+      this.turnElement("error-text", "on");
+      // this.errorText.innerHTML = `<i class='fa-solid fa-triangle-exclamation'></i><span>${message}</span>`;
+      this.errorText.innerHTML = `⚠ ${message}`;
+    }
+  }
+
+  onCameraFail() {
+    this.cameraAvailable = false;
+    this.updateErrorText("Camera Unavailable");
+  }
+
+  onLocationFail() {
+    this.locationAvailable = false;
+    this.updateErrorText("Location Data Unavailable");
+  }
+
   initializeCamera() {
 
     // Check if the browser supports the MediaDevices API
@@ -245,13 +267,13 @@ export default class extends Controller {
       .catch((error) => {
           // Error callback: handle errors when accessing the camera
           console.error('Error accessing the camera:', error);
-          this.cameraAvailable = false;
+          this.onCameraFail();
           this.handleDevicePermissions();
       });
     } else {
       // Browser does not support getUserMedia
       console.error('getUserMedia not supported in this browser');
-      this.cameraAvailable = false;
+      this.onCameraFail();
     }
   }
 
@@ -490,10 +512,10 @@ export default class extends Controller {
         },
         error => {
           console.error("Error occurred while getting geolocation:", error);
-          this.locationAvailable = false;
+          this.onLocationFail();
       });
     } else {
-      this.locationAvailable = false;
+      this.onLocationFail();
     }
   }
 

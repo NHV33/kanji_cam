@@ -54,7 +54,11 @@
 </div>
 
 <div id="alert-bar">
-  <span id="alert-text">Take a picture of some kanji.</span>
+  <span id="alert-text"></span>
+</div>
+
+<div id="error-bar">
+  <div id="error-text" class="d-flex flex-nowrap inline"></div>
 </div>
 
 <%= form_with(path: capture_path, method: :post, id: 'kanji-form') do |form| %>
