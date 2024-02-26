@@ -506,8 +506,8 @@ export default class extends Controller {
     getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-          this.latField = position.coords.latitude;
-          this.lonField = position.coords.longitude;
+          this.latField.value = position.coords.latitude;
+          this.lonField.value = position.coords.longitude;
           this.locationAvailable = true;
         },
         error => {

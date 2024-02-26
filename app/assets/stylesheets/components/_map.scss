@@ -1,47 +1,55 @@
+$icon-width: 48px;
+$light-color: white;
+$dark-color: $primary;
+
 .map {
   border-radius: 20px;
   height: 70vh;
 }
 
-.marker-container {
-  position: relative;
-  left: -24px;
-  top: 10px;
-  transform-origin: right bottom;
-}
+/*Not necessary because relative elements
+have no position properties like (left, right, etc.)
+also, this div is just a point with no width or height */
+// .marker-pin-point {
+//   position: relative;
+//   left: -24px;
+//   top: 10px;
+//   transform-origin: right bottom;
+// }
 
-.marker {
-  background-color: #f083e3;
-  border-color: white;
+.marker-icon {
+  background-color: $dark-color;
+  border-color: $light-color;
   border-style: solid;
   border-radius: 100% 100% 0 100%;
   border-width: 1px;
-  box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
-  color: white;
+  // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
+  color: $light-color;
   position: absolute;
-  left: -24px;
-  top: 10px;
+
+  /* POSITION FIX */
+  right: 0px;
+  bottom: 0px;
   transform: rotate(45deg);
   transform-origin: right bottom;
   width: 48px;
   height: 48px;
+}
 
-  &:hover {
-    // transform: rotate(45deg) scale(1.3);
-    transition: transform 1s ease;
-    background-color: white;
-    border-color: #f083e3;
-    animation: swing 0.1s ease-in-out alternate; // defines quickness of animation
-    animation-fill-mode: forwards;
-
-    // style of marker-text when marker is hovered
-    .marker-text {
-      color: #f083e3;
-    }
+.animate-icon {
+  // transform: rotate(45deg) scale(1.3);
+  transition: transform 1s ease;
+  background-color: $light-color;
+  border-color: $dark-color;
+  animation: swing 0.1s ease-in-out alternate; // defines quickness of animation
+  animation-fill-mode: forwards;
+  .marker-text {
+    color: $dark-color;
   }
 }
 
 .marker-text {
+  color: $light-color;
   font-size: 20px;
   position: absolute;
   top: 16px;
