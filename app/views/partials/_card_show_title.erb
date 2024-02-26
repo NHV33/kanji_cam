@@ -1,2 +1,3 @@
-<% nth_kanji = (current_user.cards.index(@card) + 1).ordinalize %>
+<!-- Card instances are sorted by creation date and then the index is shown to the user. -->
+<% nth_kanji = (current_user.cards.order(created_at: :asc).index(@card) + 1).ordinalize %>
 <%= render 'partials/title_bar', destination: cards_url, title: "My #{nth_kanji} Kanji | #{@card.kanji.character} (#{@card.kanji.meanings.first})" %>
