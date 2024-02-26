@@ -1,6 +1,8 @@
-<%= render 'partials/title_bar', title: "Flashcard" %>
-<br>
-<div class="content-wrapper">
+<%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
+<% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
+<%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
+
+<div class="content-wrapper mt-3">
   <div class="card-container">
     <div class="flashcard">
       <div class="card-front card-side">
