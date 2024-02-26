@@ -1,4 +1,4 @@
-<%= render 'partials/title_bar', title: "Your Conquest Chart" %>
+<%= render 'partials/title_bar', destination: dashboard_url, title: "Your Conquest Chart" %>
 <div class="container">
   <h5 class="text-center mt-2">You have captured <%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> so far!</h5>
   <p class="text-center">(<%= @cards.select { |card| card.longitude.blank? || card.latitude.blank? }.count %> <%= 'kanji'.pluralize(@cards.select { |card| card.longitude.blank? || card.latitude.blank? }.count) %> without location info)</p>

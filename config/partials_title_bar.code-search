@@ -1,0 +1,33 @@
+# Query: partials/title_bar
+# ContextLines: 1
+
+7 results - 7 files
+
+app/views/cards/index.html.erb:
+  1: <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Collection" %>
+  2  
+
+app/views/dashboard/index.html.erb:
+  2  <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
+  3: <%= render 'partials/title_bar', destination: :root, title: "Dashboard" %>
+  4  
+
+app/views/decks/index.html.erb:
+  1: <%= render 'partials/title_bar', destination: dashboard_url, title: "My Flashcard Decks" %>
+  2  
+
+app/views/decks/next_card.html.erb:
+  1: <%= render 'partials/title_bar', destination: decks_url, title: "Flashcard" %>
+  2  <br>
+
+app/views/maps/all_kanji_map.html.erb:
+  1: <%= render 'partials/title_bar', destination: dashboard_url, title: "All User's Collection" %>
+  2  
+
+app/views/maps/index.html.erb:
+  1: <%= render 'partials/title_bar', destination: dashboard_url, title: "Your Conquest Chart" %>
+  2  <div class="container">
+
+app/views/partials/_card_show_title.erb:
+  1  <% nth_kanji = (current_user.cards.index(@card) + 1).ordinalize %>
+  2: <%= render 'partials/title_bar', destination: cards_url, title: "My #{nth_kanji} Kanji | #{@card.kanji.character} (#{@card.kanji.meanings.first})" %>
