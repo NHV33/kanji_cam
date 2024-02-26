@@ -1,0 +1,20 @@
+$titlebar-color: rgb(33,33,33);
+$titlebar-height: 50px;
+
+.titlebar {
+  height: $titlebar-height;
+  background-color: $titlebar-color;
+  margin: 0px;
+}
+
+.titlebar-button {
+  text-decoration: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: $titlebar-height;
+  width: $titlebar-height;
+  background: $titlebar-color;
+  background: linear-gradient(to right, rgba($titlebar-color ,1) 0%,rgba($titlebar-color ,1) 75%,rgba($titlebar-color ,0) 100%);
+
+}
