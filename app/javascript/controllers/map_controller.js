@@ -83,31 +83,14 @@ export default class extends Controller {
             .setLngLat([marker.lng, marker.lat])
             .addTo(this.map);([marker])
 
-      const popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-        });
-
-        element.addEventListener('mouseenter', (event) => {
-          // event.stopPropagation();
-
-        const meaningText = marker.meaning ? `<p>Note: ${marker.meaning}</p>` : `<p>Note: N/A</p>`;
-        const linkText = `<a href="/cards/${marker.kanji_id}">Check details</a></p>`
-
-        popup.setLngLat([marker.lng, marker.lat])
-        .setHTML(meaningText + linkText)
-        .setOffset([0, -30]) // adjust popup position to 20px up
+      element.addEventListener('mouseenter', () => {
+        const commentText = marker.comment ? `<p>Note: ${marker.comment}</p>` : `<p>Note: N/A</p>`;
+        const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
+        new mapboxgl.Popup()
+        .setLngLat([marker.lng, marker.lat])
+        .setHTML(commentText + linkText)
         .addTo(this.map);
-
-        // element.addEventListener('mouseleave', (event) => {
-
-        // closwe popup when mouse leaves
-        element.addEventListener('mouseleave', (event) => {
-          // event.stopPropagation();
-          popup.remove();
-      });
         console.log(marker);
-        console.log(marker.meaning);
       })
 
       element.addEventListener('click', () => {
