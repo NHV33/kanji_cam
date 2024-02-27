@@ -30,32 +30,46 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const markerContainer = document.createElement('div');
-      markerContainer.className = 'marker-container';
+      const markerPinPoint = document.createElement('div');
+      markerPinPoint.className = 'marker-pin-point';
 
-      const el = document.createElement('div');
-      el.className = 'marker';
-      markerContainer.appendChild(el);
+      const markerIcon = document.createElement('div');
+      markerIcon.className = 'marker-icon';
+      markerPinPoint.appendChild(markerIcon);
 
-      const text = document.createElement('div');
-      text.textContent = marker.kanji;
-      text.className = 'marker-text';
-      el.appendChild(text);
+      const markerText = document.createElement('div');
+      markerText.textContent = marker.kanji;
+      markerText.className = 'marker-text';
+      markerIcon.appendChild(markerText);
 
-      el.addEventListener('click', () => {
+      markerIcon.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
         this.map.flyTo({
-            center: [marker.lng, marker.lat], // set marker in the center
-            zoom: 14, // zoom level
-            essential: true // animation: true
+          center: [marker.lng, marker.lat], // set marker in the center
+          zoom: 14, // zoom level
+          essential: true // animation: true
         });
-    });
+      });
+
+      /*ANIMATION FIX*/
+      // Instead of triggering the animation with CSS, use Javascript
+      markerIcon.addEventListener('mouseenter', () => {
+
+        // When the user hovers ('mouseenter' event), add the CSS class with animation
+        markerIcon.classList.add("animate-icon");
+
+        // Use setTimeout() to remove the animate-icon class after 1000ms (1 second)
+        setTimeout(() => {
+          markerIcon.classList.remove("animate-icon");
+        }, 1000);
+        // After one second, the animation can trigger again, because the class was removed.
+      });
 
       // new mapboxgl.Marker(el)
       //   .setLngLat([marker.lng, marker.lat])
       //   .addTo(this.map);
 
-        new mapboxgl.Marker(markerContainer)
+        new mapboxgl.Marker(markerPinPoint)
         .setLngLat([marker.lng, marker.lat])
         .addTo(this.map);
     });

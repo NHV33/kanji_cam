@@ -1,16 +1,40 @@
-  <div class="d-flex flex-column justify-content-center align-items-center" style="height: 60vh;">
-    <div class="text-white app-title" style="font-size: 8vmin; text-shadow: 2px 2px 2px black;">Kanji Cam</div>
-    <%# <div class="mt-3 mx-5 container d-flex justify-content-center align-items-center bg-white"> %>
-      <div class="row mx-auto p-3 caption">
-        <h1 class="fs-2"><strong>Snap Your Way to Kanji Mastery!</strong></h1>
-        <%# <p class="fs-7">Kanji.cam transforms every snapshot into a learning opportunity, making Kanji mastery not just a goal but a journey filled with fun and discovery. </p> %>
+  <div style="height: 95vh;" class="container d-flex flex-column justify-content-center align-items-center">
+    <div class="py-5 col-sm-12 col-lg-6 d-flex flex-column justify-content-center align-items-center box bg-secondary opacity-75">
+      <!--
+      <div class="text-white app-title" style="font-size: 8vmin; text-shadow: 2px 2px 2px black;">Kanji Cam</div>
+      -->
+      <%# <div class="mt-3 mx-5 container d-flex justify-content-center align-items-center bg-white"> %>
+
+        <%= image_tag 'kanji_cam_logo.svg', class: "mb-4 svg-shadow", style: "width: 100%; max-height: 40vmin;" %>
+
+        <div class="row mx-auto caption col-sm-12 col-md-10 col-lg-11" style="text-shadow: 2px 2px 2px black;">
+          <h1 class="fs-2 text-white" style="white-space: nowrap;">
+            <center>
+              <strong>Master Kanji in a Flash!</strong>
+            </center>
+          </h1>
+          <div class="text-white mt-1">
+            <h3 class="fs-5" style="white-space: nowrap;">
+              <strong>
+                Snap Your Way to Kanji Mastery
+              </strong>
+            </h3>
+            <p class="fs-6">
+              Transform every snapshot into a learning opportunity. With Kanji Cam, Japanese study becomes a journey filled with fun and discovery. Tap below to capture your first kanji.
+            </p>
+          </div>
+        </div>
+
+        <%= link_to capture_path, class: "text-white", style: "text-decoration: none;" do %>
+          <div class="btn btn-primary btn-lg btn3d">
+            <span class="fs-3">
+              Get started
+            </span>
+          </div>
+        <% end %>
+
       </div>
-      <div class="btn btn-primary btn-lg btn3d">
-        <%= link_to 'Get started', capture_path, class: "text-white", style: "text-decoration: none;" %>
-      </div>
-      <%# </div> %>
     </div>
-  </div>
 
 
-<%# <script src="/kanji-rain/kanji-rain.js"></script> %>
+<script src="/kanji-rain/kanji-rain.js" defer></script>

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :decks do
     member do
       get 'next_card'
-      patch 'learn_card' 
+      patch 'learn_card'
     end
   end
 # adding custom routes to the resources? https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
@@ -26,6 +26,6 @@ Rails.application.routes.draw do
 
   get "capture" => 'cards#capture', as: :capture
   post "capture" => 'cards#new_capture', as: :new_capture
-  # maybe we don't need the line below?
-  post "/new_capture", to: "cards#new_capture"
+
+  get "reset_learned" => "decks#reset_learned", as: :reset_learned
 end
