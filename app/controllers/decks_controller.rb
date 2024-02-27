@@ -36,8 +36,8 @@ class DecksController < ApplicationController
   def next_card
     session[:progress] = session[:progress].to_i + 10
     session[:progress] = 0 if session[:progress] > 100
-    unlearned_cards = @deck.cards.where(learned: false)
-    @card = unlearned_cards.order(Arel.sql('RANDOM()')).first
+    @unlearned_cards = @deck.cards.where(learned: false)
+    @card = @unlearned_cards.order(Arel.sql('RANDOM()')).first
 
     learned_cards = @deck.cards.where(learned: true)
     total_cards = @deck.cards.count
@@ -58,6 +58,22 @@ class DecksController < ApplicationController
     # end
   end
 
+  def learn_card
+    @deck = Deck.find(params[:id])
+    @card = Card.find(params[:current_card_id])
+    @card.learned = true
+    if @card.save!
+      redirect_to next_card_deck_path(@deck)
+    end
+  end
+
+  def reset_learned
+    current_user.cards.all.each do |user_card|
+      user_card.learned = false
+      user_card.save!
+    end
+    redirect_to decks_url, notice: "Reset Flashcards"
+  end
 
   private
 
