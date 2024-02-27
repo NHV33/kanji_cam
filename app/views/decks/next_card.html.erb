@@ -36,19 +36,15 @@
       </div>
     </div>
 
-<!-- TODO Controller needs to keep track of how many cards have been studied.
-    Maybe use a "learned_count" param.
-
-    <div class="progress" style="width: 260px; margin-top: 20px;">
-      <div  class="progress-bar"
-            role="progressbar"
-            style="width: <%= session[:progress] || 0 %>%;"
-            aria-valuenow="<%= session[:progress] || 0 %>"
-            aria-valuemin="0" aria-valuemax="100">
-
-      </div>
-    </div>
--->
+<div class="progress" style="width: 260px; margin-top: 20px;">
+  <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
+  <div  class="progress-bar"
+        role="progressbar"
+        style="width: <%= progress_percentage %>%;"
+        aria-valuenow="<%= progress_percentage %>"
+        aria-valuemin="0" aria-valuemax="100">
+  </div>
+</div>
     <br>
 
     <div class="btn-group mt-3" role="group" aria-label="Recall Level Buttons">

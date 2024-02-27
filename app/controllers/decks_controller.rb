@@ -29,7 +29,10 @@ class DecksController < ApplicationController
 
   def show
     session[:progress] = 0
-    @cards = @deck.entries.where(card: :kanji)
+    # @cards = @deck.entries.where(card: :kanji)
+    @cards = @deck.cards
+    session[:total_cards] = @cards.count
+    session[:learned_cards] = @cards.where(learned: true).count
     redirect_to next_card_deck_path(@deck)
   end
 
@@ -46,7 +49,6 @@ class DecksController < ApplicationController
       @done_message = "Done with all flashcards!"
     end
 
-
     # if @card
     #   when 'easy'
     #     # aaaa
@@ -60,12 +62,18 @@ class DecksController < ApplicationController
 
   def learn_card
     @deck = Deck.find(params[:id])
-    @card = Card.find(params[:current_card_id])
-    @card.learned = true
-    if @card.save!
-      redirect_to next_card_deck_path(@deck)
+    @card = Card.find_by(id: params[:current_card_id])
+    if @card.present?
+      @card.learned = true
+      if @card.save
+        session[:learned_cards] = session[:learned_cards].to_i + 1
+        redirect_to next_card_deck_path(@deck), notice: 'Card marked as learned.'
+      end
+    else
+      redirect_to next_card_deck_path(@deck), alert: 'Card not found.'
     end
   end
+
 
   def reset_learned
     current_user.cards.all.each do |user_card|
