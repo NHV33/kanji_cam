@@ -5,25 +5,30 @@ export default class extends Controller {
 
   navBar = document.getElementById("navbar");
 
-  videoElement;
-  canvas;
-  context;
+  videoElement = document.getElementById('camera-feed');
+  canvas = document.getElementById('canvas');
+  context = this.canvas.getContext('2d');
 
   captureButton = document.getElementById('capture-button');
   retakeButton = document.getElementById('retake-button');
 
   alertText = document.getElementById('alert-text');
+  errorText = document.getElementById('error-text');
 
-  modal = document.querySelector("dialog");
+  infoModal = document.getElementById('info-modal');
+
+  kanjiSelectionModal = document.getElementById('kanji-selection-modal');
   kanjiSelectionBox = document.getElementById("kanji-selection-box")
   confirmButton = document.getElementById("confirm-button");
   cancelButton = document.getElementById("cancel-button");
 
   imageField = document.getElementById('image-data');
   kanjiField = document.getElementById('kanji-data');
+  latField = document.getElementById('latitude-data');
+  lonField = document.getElementById('longitude-data');
 
-  captureInstruction = "Take a picture of some kanji."
-  selectionInstruction = "Drag to select kanji."
+  captureInstruction = "Take a picture of some kanji.";
+  selectionInstruction = "Drag to select kanji.";
 
   topEdge;
   leftEdge;
@@ -43,27 +48,111 @@ export default class extends Controller {
 
   captureImage = null;
 
+  isNewUser = document.getElementById("new-user").dataset.newUser === "true";
+  cameraAvailable = false;
+  locationAvailable = false;
+
+  modalButtonStyle = "camera-modal-button btn btn-primary text-white w-100 rounded-pill shadow-sm m-1";
+
   connect() {
     console.log("I'm connected");
 
-    this.getLocation((latitude, longitude) => {
-      document.getElementById('latitude-data').value = latitude;
-      document.getElementById('longitude-data').value = longitude;
-      console.log(latitude, longitude, "location from connect");
-    });
-
-    this.videoElement = document.getElementById('camera-feed');
-    this.canvas = document.getElementById('canvas');
-    this.context = canvas.getContext('2d');
     this.setPageStyle();
-    this.updateAlertText(this.captureInstruction);
-    this.initializeCamera(this.videoElement);
+
+    this.updateAlertText("");
+    this.updateErrorText("");
+
     this.addEventListeners();
+
+    if (this.isNewUser) {
+      this.welcomeNewUser();
+    } else {
+      this.initializeCamera();
+      this.getLocation();
+    }
+
+  }
+
+  handleDevicePermissions() {
+    if (this.cameraAvailable && this.locationAvailable) {
+      this.infoModal.close();
+      return;
+    }
+
+    if (!this.cameraAvailable) {
+      this.requestCamera();
+    } else if (!this.locationAvailable && this.isNewUser) {
+      this.requestLocation();
+    } else if (!this.locationAvailable) {
+      this.getLocation();
+    }
   }
 
   setPageStyle() {
     document.body.style.backgroundColor = "black";
     this.navBar.style.visibility = "hidden";
+  }
+
+  // buttons param should include {label: , classes: , action: }
+  newInfoModal(heading, body, buttons) {
+    const infoHeading = document.getElementById("info-heading");
+    const infoBody = document.getElementById("info-body");
+    const infoButtons = document.getElementById("info-buttons");
+
+    infoHeading.innerText = heading;
+    infoBody.innerHTML = body;
+    infoButtons.textContent = "";
+
+    buttons.forEach(button => {
+      let newButton = document.createElement("button");
+      newButton.innerText = button.label;
+      if (button.classes !== undefined) {
+        const list = (typeof button.classes === "string") ? button.classes.split(" ") : button.classes ;
+        newButton.classList.add(...list);
+      }
+      newButton.addEventListener('click', button.action);
+      infoButtons.append(newButton)
+    });
+
+    this.infoModal.showModal();
+  }
+
+  welcomeNewUser() {
+    this.newInfoModal(
+      "Welcome to Kanji Cam",
+      "<ul><li>Hold the camera steady and level when taking a picture.</li><li>The scanner works best on standard, non-cursive font types.</li></ul><center>(<a href='/dashboard'>Learn More</a>)</center>",
+      [{label: "Continue", classes: `camera-modal-button`, action: () => {this.handleDevicePermissions()} }]
+    );
+  }
+
+  requestCamera() {
+    this.newInfoModal(
+      "Enable Camera",
+      "You must enable your camera to scan kanji.<br>Please press \"allow\" when prompted.",
+      [
+        {label: "Enable Camera", classes: `camera-modal-button`, action: () => {
+          this.initializeCamera();
+          this.handleDevicePermissions();
+        }},
+        {label: "Cancel", classes: `camera-modal-button bg-danger`, action: () => {this.infoModal.close();}}
+      ]
+    );
+  }
+
+  requestLocation() {
+    this.newInfoModal(
+      "Enable Location Data",
+      "Enable location data to view your kanji on a map.<br>Please press \"allow\" when prompted.<br><i class='fa-solid fa-triangle-exclamation'></i> Note <i class='fa-solid fa-triangle-exclamation'></i><br>Location data cannot be added to a kanji after it is captured.",
+      [
+        {label: "Enable Location Data", classes: `camera-modal-button bg-primary`,
+          action: () => {
+            this.getLocation();
+            this.infoModal.close();
+        }},
+        {label: "Continue Without Location Data", classes: `camera-modal-button bg-danger`, action: () => {this.infoModal.close()}},
+        {label: "Learn More", classes: `camera-modal-button bg-secondary`, action: () => {window.location.href = "/dashboard";}}
+      ]
+    );
   }
 
   updateCanvasDimensions() {
@@ -124,7 +213,27 @@ export default class extends Controller {
     }
   }
 
-  initializeCamera(videoElement) {
+  updateErrorText(message) {
+    if (message === "") {
+      this.turnElement("error-text", "off");
+    } else {
+      this.turnElement("error-text", "on");
+      // this.errorText.innerHTML = `<i class='fa-solid fa-triangle-exclamation'></i><span>${message}</span>`;
+      this.errorText.innerHTML = `⚠ ${message}`;
+    }
+  }
+
+  onCameraFail() {
+    this.cameraAvailable = false;
+    this.updateErrorText("Camera Unavailable");
+  }
+
+  onLocationFail() {
+    this.locationAvailable = false;
+    this.updateErrorText("Location Data Unavailable");
+  }
+
+  initializeCamera() {
 
     // Check if the browser supports the MediaDevices API
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -137,11 +246,11 @@ export default class extends Controller {
 
       // Request access to the camera with the specified constraints
       navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(stream) {
+      .then((stream) => {
         // Success callback: stream contains the media stream from the camera
         // You can assign this stream to a <video> element to display the camera feed
-        videoElement.srcObject = stream;
-        videoElement.play();
+        this.videoElement.srcObject = stream;
+        this.videoElement.play();
 
         // Get information about the tracks in the stream
         stream.getVideoTracks().forEach(function(track) {
@@ -149,16 +258,27 @@ export default class extends Controller {
             const facingMode = track.getSettings().facingMode;
             // console.log('Camera used:', facingMode);
         });
+
+        this.cameraAvailable = true;
+        this.updateAlertText(this.captureInstruction);
+        this.handleDevicePermissions();
+
       })
-      .catch(function(error) {
+      .catch((error) => {
           // Error callback: handle errors when accessing the camera
           console.error('Error accessing the camera:', error);
-
+          this.onCameraFail();
+          this.handleDevicePermissions();
       });
     } else {
       // Browser does not support getUserMedia
       console.error('getUserMedia not supported in this browser');
+      this.onCameraFail();
     }
+  }
+
+  stopCamera() {
+    this.videoElement.srcObject = null;
   }
 
   // +++ Segmentation Modes +++
@@ -236,7 +356,7 @@ export default class extends Controller {
       });
     });
 
-    this.modal.showModal();
+    this.kanjiSelectionModal.showModal();
   }
 
   calcBounds(x1, y1, x2, y2) {
@@ -360,51 +480,44 @@ export default class extends Controller {
     });
   }
 
-  getLocation(callback) {
-    console.log(navigator.geolocation);
+  // getLocation(callback) {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //         const latitude = position.coords.latitude;
+  //         const longitude = position.coords.longitude;
+  //         this.locationAvailable = true;
+  //         this.handleDevicePermissions();
+  //         // Call the callback function with latitude and longitude
+  //         callback(latitude, longitude);
+  //     },
+  //     error => {
+  //         console.error("Error occurred while getting geolocation:", error);
+  //         this.locationAvailable = false;
+  //         // Call the callback function with null values
+  //         callback(null, null);
+  //         // update alert like..."enable location for more points"
+  //     });
+  //   } else {
+  //     this.locationAvailable = false;
+  //     // If geolocation is not supported, call the callback function with null values
+  //       callback(null, null);
+  //   }
+  // }
+    getLocation() {
     if (navigator.geolocation) {
-      navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
-        console.log(permissionStatus);
-        if (permissionStatus.state === 'granted') {
-          console.log("granted");
-          // user disable location share from enabled, will not send position parameter
-          permissionStatus.onchange = () => {
-          this.updateAlertText("Ok, we will not save your location info. Take a pic!");
-          callback(null, null);
-          }
-          this.getCurrentPosition(callback)
-        } else {
-          // If geolocation is not supported, call the callback function with null values
-          // update alert like..."enable location for more points"
-          console.log("permission is not granted");
-          this.updateAlertText("Enable location and get additional points");
-          callback(null, null);
-
-          permissionStatus.onchange = () => {
-            console.log("state changed to granted");
-            if (permissionStatus.state === 'granted') {
-              this.updateAlertText(this.captureInstruction);
-              this.getCurrentPosition(callback);
-            }
-          };
-        }
-      })
+      navigator.geolocation.getCurrentPosition(position => {
+          this.latField.value = position.coords.latitude;
+          this.lonField.value = position.coords.longitude;
+          this.locationAvailable = true;
+        },
+        error => {
+          console.error("Error occurred while getting geolocation:", error);
+          this.onLocationFail();
+      });
+    } else {
+      this.onLocationFail();
     }
   }
-
-getCurrentPosition(callback) {
-  navigator.geolocation.getCurrentPosition(position => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    // Call the callback function with latitude and longitude
-    callback(latitude, longitude);
-},
-error => {
-  console.error("Error occurred while getting geolocation:", error);
-  // Call the callback function with null values
-  callback(null, null);
-});
-}
 
   // EVENT LISTENERS
 
@@ -434,10 +547,12 @@ error => {
     });
 
     this.cancelButton.addEventListener('click', () => {
-      this.modal.close();
+      this.kanjiSelectionModal.close();
     });
 
     this.confirmButton.addEventListener('click', () => {
+
+      this.stopCamera();
 
       const kanjiText = document.querySelector('.selected').innerText;
       console.log("kanjiText: ", kanjiText);

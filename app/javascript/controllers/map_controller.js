@@ -67,34 +67,32 @@ export default class extends Controller {
   #addMarkersToMap() {
     let popup = null; // set the variable
     this.markersValue.forEach((marker) => {
-      console.log("kanji marker's");
+      const markerPinPoint = document.createElement('div');
+      markerPinPoint.className = 'marker-pin-point';
 
-      const markerContainer = document.createElement('div');
-      markerContainer.className = 'marker-container';
+      const markerIcon = document.createElement('div');
+      markerIcon.className = 'marker-icon';
+      markerPinPoint.appendChild(markerIcon);
 
-      const element = document.createElement('div');
-      element.className = 'marker';
-      markerContainer.appendChild(element);
+      const markerText = document.createElement('div');
+      markerText.textContent = marker.kanji;
+      markerText.className = 'marker-text';
+      markerIcon.appendChild(markerText);
 
-      const text = document.createElement('div');
-      text.textContent = marker.kanji;
-      text.className = 'marker-text';
-      element.appendChild(text);
-
-      const newMarker = new mapboxgl.Marker({ element: markerContainer })
+      const newMarker = new mapboxgl.Marker({ element: markerIcon })
             .setLngLat([marker.lng, marker.lat])
             .addTo(this.map);
 
-      element.addEventListener('click', () => {
-        const markers = document.getElementsByClassName("active");
+      markerIcon.addEventListener('click', () => {
+        const activeMarkers = document.getElementsByClassName("active");
         if (popup) {
           popup.remove();
-          for (let i = 0; i < markers.length; i++) {
-            markers[i].classList.remove("active");
+          for (let i = 0; i < activeMarkers.length; i++) {
+            activeMarkers[i].classList.remove("active");
             console.log(document.getElementsByClassName("active"));
           }
         }
-        element.classList.add("active");
+        markerIcon.classList.add("active");
         console.log(document.getElementsByClassName("active"));
         const meaningText = marker.meaning ? `<p>Meaning: ${marker.meaning}</p>` : `<p>Note: N/A</p>`;
         const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
@@ -109,7 +107,7 @@ export default class extends Controller {
         .addTo(this.map);
       })
 
-      element.addEventListener('click', () => {
+      markerIcon.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
         this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center

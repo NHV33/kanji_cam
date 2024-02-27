@@ -11,9 +11,18 @@
 
     <div class="col-6">
       <div class="text-center">
+
         <h1 id="kanji-symbol" style="font-size: 140px;">
-          <%= @card.kanji.character %>
+          <!-- Displays character saved on Card instance -->
+          <%= @card.character %>
         </h1>
+
+        <% if @card.character == @card.kanji.old_form %>
+          <span class="fs-4" style="white-space: nowrap;">
+            <%= "(old form of #{@card.kanji.character})" %>
+          </span>
+        <% end %>
+
       </div>
     </div>
 
@@ -61,8 +70,12 @@
   <% encoded_kanji = URI.encode_www_form_component(kanji_to_search) %>
   <% advanced_url = "https://jisho.org/search/#{encoded_kanji}%20%23kanji" %>
 
-  <%# On & Kun Readings Section -- Includes TTS functionality %>
-  <div class="mt-4" data-controller="tts">
+
+  <div data-controller="tts" class="tts-controller">
+  <div data-controller="furigana" class="furigana-controller">
+
+  <%# On & Kun Readings Section + Example Sentences -- Includes TTS and romaji functionality %>
+  <div class="mt-4">
 
     <div class="d-flex mb-2">
       <span class="badge bg-warning" style="font-size: 16px; width: 50px; border-radius: 4px">On</span>
@@ -118,10 +131,18 @@
   <% unless @jpn_sentences.empty? %>
     <% @jpn_sentences.zip(@eng_sentences)[0..2].each_with_index do |(japanese, english), index| %>
       <div class="bg-info-subtle p-2 mb-3">
-        <p class="mb-0 fs-6"> <%= japanese.html_safe %> </p>
+
+        <p class="mb-0 fs-6">
+          <%= japanese.html_safe %>
+          <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
+        </p>
+
         <p class="mb-0"><%= english.html_safe %></p>
       </div>
     <% end %>
   <% end %>
+
+  </div> <!-- furigana-controller div -->
+  </div> <!-- TTS-controller div -->
 
 </div>

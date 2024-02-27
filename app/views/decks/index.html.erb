@@ -1,4 +1,4 @@
-<%= render 'partials/title_bar', title: "My Flashcard Decks" %>
+<%= render 'partials/title_bar', destination: dashboard_url, title: "My Flashcard Decks" %>
 
 <div class="container mt-3">
 
@@ -8,7 +8,7 @@
     You have <%= unlearned_kanji %> unlearned kanji.
   </div>
 
-  <div class="default-card my-3">
+  <div class="box my-3">
     <%= link_to 'Study All Unlearned Kanji', deck_path(@master_deck), class: 'col-12 fs-6 btn btn-primary' %>
   </div>
 
@@ -57,7 +57,9 @@
 
 </div>
 
-
+<div class="box">
+  <%= link_to 'Reset Flashcards', reset_learned_url %>
+</div>
 <!--
 <div class="container">
 

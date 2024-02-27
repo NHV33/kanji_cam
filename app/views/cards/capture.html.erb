@@ -6,10 +6,21 @@
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js' async defer></script>
-<div data-controller="capture">
 
+<div data-controller="capture">
+  <% new_user = (current_user.cards.count == 0) ? "true" : "false" %>
+  <div id="new-user" data-new-user="<%= new_user %>"></div>
 </div>
-<dialog>
+
+<dialog id="info-modal" class="box">
+  <div class="">
+    <div id="info-heading" class="fs-2"></div>
+    <div id="info-body" class="my-3"></div>
+    <div id="info-buttons" class="d-flex flex-column flex-nowrap align-items-center"></div>
+  </div>
+</dialog>
+
+<dialog id="kanji-selection-modal" class="box">
   <div class="d-flex flex-column align-items-center">
     <div id="kanji-selection-box">
     </div>
@@ -43,7 +54,11 @@
 </div>
 
 <div id="alert-bar">
-  <span id="alert-text">Take a picture of some kanji.</span>
+  <span id="alert-text"></span>
+</div>
+
+<div id="error-bar">
+  <div id="error-text" class="d-flex flex-nowrap inline"></div>
 </div>
 
 <%= form_with(path: capture_path, method: :post, id: 'kanji-form') do |form| %>

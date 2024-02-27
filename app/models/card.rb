@@ -4,6 +4,8 @@ class Card < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :decks, through: :entries
 
+  validates :character, presence: true, uniqueness: true
+
   # disable for now
   # geocoded_by :latitude, :longitude
 

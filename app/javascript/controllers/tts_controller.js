@@ -27,12 +27,27 @@ export default class extends Controller {
     return array[randomIndex];
   }
 
+  getTextOfMatches(str, regex) {
+    // Ensure the regex has the global flag set
+    const regexWithGlobal = new RegExp(regex, 'g');
+    const matches = [];
+    let matchObj;
+    while ((matchObj = regexWithGlobal.exec(str)) !== null) {
+      const matchObjLastIndex = matchObj.length - 1;
+      const matchString = matchObj[matchObjLastIndex];
+      matches.push(matchString);
+    }
+
+    return matches.join("");
+  }
 
   // Handle click on dynamically created "reading" elements
   handleClick(event) {
     if (event.target.matches(".sound-icon")) {
       const parentElement = event.target.parentNode;
-      const readingText = parentElement.textContent.trim().replace("-", "");
+
+      // const readingText = parentElement.textContent.trim().replace("-", "");
+      const readingText = this.getTextOfMatches(parentElement.textContent, /[ぁ-ゖァ-ヺ]{1}/g);
 
       let msg = new SpeechSynthesisUtterance();
       msg.text = readingText;

@@ -22,12 +22,17 @@ end
 # Kanji seeds
 csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
 
+puts "Destroying all Kanji..."
+Kanji.destroy_all
+puts "Recreating Kanji:"
+
 CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
   # break if index > 100
 
   if Kanji.where(character: row['kanji']).empty?
     kanji = Kanji.new(
     character: row["kanji"],
+    old_form: row["kanji_old"],
     radical: row["radical"],
     jlpt: row["jlpt"].nil? || row["jlpt"].empty? ? 0 : row["jlpt"].to_i,
     grade: row["grade"] == "S" ? 7 : row["grade"].to_i,
@@ -58,14 +63,26 @@ if Card.all.empty?
       longitude: rand(139.70...139.75),
       favorite: false,
       comment: nil,
+      character: kanji.character
     )
     card.save!
     puts "Saved Card: # #{kanji.id}"
   end
 end
 
+# Add character data to user cards without it.
+Card.all.each do |user_card|
+  if user_card.character.nil?
+    user_card.character = Kanji.find(user_card.kanji_id).character
+    puts "Added character data (#{user_card.character}) to card ##{user_card.id}"
+  end
+  user_card.save!
+end
+
 # Deck seeds
+puts "Destroying all Decks..."
 Deck.destroy_all #to clear out decks with names including "un-learned"
+puts "Recreating Decks:"
 
 if Deck.all.empty?
   user = User.find_by(email: "test@me.com")
