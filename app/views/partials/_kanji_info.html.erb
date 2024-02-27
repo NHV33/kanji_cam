@@ -11,9 +11,18 @@
 
     <div class="col-6">
       <div class="text-center">
+
         <h1 id="kanji-symbol" style="font-size: 140px;">
-          <%= @card.kanji.character %>
+          <!-- Displays character saved on Card instance -->
+          <%= @card.character %>
         </h1>
+
+        <% if @card.character == @card.kanji.old_form %>
+          <span class="fs-4" style="white-space: nowrap;">
+            <%= "(old form of #{@card.kanji.character})" %>
+          </span>
+        <% end %>
+
       </div>
     </div>
 

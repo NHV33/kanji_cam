@@ -17,7 +17,9 @@
         </div>
 
         <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1 font-color">
-          <span class="text-center fs-1"><%= card.kanji.character %></span>
+
+          <!-- Checks the character saved on the card instance -->
+          <span class="text-center fs-1"><%= card.character %></span>
           <span class="text-center"><%= card.kanji.meanings.first %></span>
         </div>
 

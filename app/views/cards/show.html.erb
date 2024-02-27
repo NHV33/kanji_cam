@@ -2,9 +2,18 @@
 
 <div class="container d-flex flex-column align-items-center">
 
-  <%# Hide note if absent. %>
-  <div id="note-section" class="mt-3 col-12">
+  <!-- Code to handle duplicate Card -->
+  <% if params[:duplicate] == "true" %>
+    <div class="mt-3 col-12 d-flex justify-content-center">
+      <div class="text-center rounded-4 bg-info fs-4 text-white col-12 py-2">
+        You've already found this kanji.
+      </div>
+    </div>
+  <% end %>
 
+
+  <div id="note-section" class="mt-3 col-12">
+    <!-- Hide note if absent. -->
     <% unless @card.comment.nil? || @card.comment == "" %>
 
       <div class="post-it-note col-12 mb-2">
