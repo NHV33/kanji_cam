@@ -1,65 +1,53 @@
 <%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
-
 <div class="content-wrapper mt-3">
-
   <% if @card.nil? %>
-
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
-
       <div class="badge fs-2 bg-success">
         All finished!
       </div>
-
       <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do%>
         See all decks
       <% end %>
-
     </div>
-
   <% else %>
-
     <div class="badge bg-info mb-3 fs-4">
       <%= "#{@unlearned_cards.count} Cards Remaining" %>
     </div>
-
     <div class="card-container">
       <div class="flashcard">
         <div class="card-front card-side">
-          <h1 class="kanji-character"><%= @card.kanji.character %></h1>
+          <h1 class="kanji-character"><%= @card.character %></h1>
         </div>
         <div class="card-back card-side">
           <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
-          <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+          <p>On Reading: <%= (@card.kanji.on_readings).join(', ') %></p>
+          <p>Kun Reading: <%= (@card.kanji.kun_readings).join(', ') %></p>
         </div>
       </div>
     </div>
-
-<div class="progress" style="width: 260px; margin-top: 20px;">
-  <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
-  <div  class="progress-bar"
+    <div class="progress" style="width: 260px; margin-top: 20px;">
+      <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
+      <div  class="progress-bar"
         role="progressbar"
         style="width: <%= progress_percentage %>%;"
         aria-valuenow="<%= progress_percentage %>"
         aria-valuemin="0" aria-valuemax="100">
-  </div>
-</div>
+      </div>
+    </div>
     <br>
-
     <div class="btn-group mt-3" role="group" aria-label="Recall Level Buttons">
       <div class="btn-margin-right">
         <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn btn-success', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
           Easy
         <% end %>
       </div>
-
       <div class="btn-margin-right">
         <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn btn-warning', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
           Remembered
         <% end %>
       </div>
-
       <div>
         <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn btn-danger', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
           Forgot
@@ -67,9 +55,4 @@
       </div>
     </div>
   <% end %>
-
-
-
-
-
 </div>
