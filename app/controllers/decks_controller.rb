@@ -68,11 +68,6 @@ class DecksController < ApplicationController
       if @card.save
         session[:learned_cards] = session[:learned_cards].to_i + 1
         redirect_to next_card_deck_path(@deck), notice: 'Card marked as learned.'
-      else
-        redirect_to next_card_deck_path(@deck), alert: 'Could not mark the card as learned.'
-      end
-    else
-      redirect_to next_card_deck_path(@deck), alert: 'Card not found.'
     end
   end
 
