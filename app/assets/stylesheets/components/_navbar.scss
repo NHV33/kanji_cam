@@ -15,20 +15,20 @@
 .navbar {
   background: rgb(23,23,23);
   background: #d9fae9;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .navbar-icon {
   height: 5rem;
   width: 5rem;
+  fill: url(#default-gradient) #454545;
 }
 
 // .navbar-icon:hover {
 //   filter: brightness(1.5);
 // }
 
-.active .navbar-icon {
-  fill: red;
+.navbar-icon-active .navbar-icon {
+  // fill: url(#my-cool-gradient) $success;
+  fill: $primary;
 }

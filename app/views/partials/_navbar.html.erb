@@ -1,20 +1,20 @@
 <%# This prevents the navbar from overlapping and hiding the bottom of a page. %>
-<div style="height: 20vmin;"></div>
+<div style="height: 15vmin;"></div>
 
 <div id="navbar" class="navbar bg-white fixed-bottom d-flex flex-nowrap justify-content-around rounded">
-  <%= link_to dashboard_path, class: active_page?(dashboard_path) do %>
+  <%= link_to dashboard_path, class: active_page?([dashboard_path]) do %>
     <%= render partial: "partials/navbar_icons/nav_home", class: "navbar-icon"%>
   <% end %>
 
-  <%= link_to cards_path, class: active_page?(cards_path) do %>
+  <%= link_to cards_path, class: active_page?([cards_path, card_path(@card || 0)]) do %>
     <%= render partial: "partials/navbar_icons/nav_cards", class: "navbar-icon"%>
   <% end %>
 
-  <%= link_to capture_path, class: active_page?(capture_path) do %>
+  <%= link_to capture_path, class: active_page?([capture_path]) do %>
     <%= render partial: "partials/navbar_icons/nav_camera", class: "navbar-icon"%>
   <% end %>
 
-  <%= link_to maps_path, class: active_page?(maps_path) do %>
+  <%= link_to maps_path, class: active_page?([maps_path]) do %>
     <%= render partial: "partials/navbar_icons/nav_map", class: "navbar-icon"%>
   <% end %>
 
