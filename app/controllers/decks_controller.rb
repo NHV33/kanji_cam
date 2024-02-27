@@ -49,7 +49,6 @@ class DecksController < ApplicationController
       @done_message = "Done with all flashcards!"
     end
 
-
     # if @card
     #   when 'easy'
     #     # aaaa
