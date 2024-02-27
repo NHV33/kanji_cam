@@ -7,7 +7,6 @@ export default class extends Controller {
     markers: Array
    }
 
-
   connect() {
 
     mapboxgl.accessToken = this.apiKeyValue
@@ -28,12 +27,13 @@ export default class extends Controller {
       .addTo(this.map);
 
     // adjust map showing range to user's location
-    this.map.flyTo({
-        center: [longitude, latitude], // set user's location to the center
-        zoom: 12,
-        essential: true,
-        duration: 1000
-    });
+    // comment out as this animation can be annoying
+    // this.map.flyTo({
+    //     center: [longitude, latitude], // set user's location to the center
+    //     zoom: 12,
+    //     essential: true,
+    //     duration: 1000
+    // });
 }, error => {
     console.error("Error occurred while getting geolocation:", error);
 });
@@ -65,8 +65,10 @@ export default class extends Controller {
   }
 
   #addMarkersToMap() {
+    let popup = null; // set the variable
     this.markersValue.forEach((marker) => {
       console.log("kanji marker's");
+
       const markerContainer = document.createElement('div');
       markerContainer.className = 'marker-container';
 
@@ -81,23 +83,37 @@ export default class extends Controller {
 
       const newMarker = new mapboxgl.Marker({ element: markerContainer })
             .setLngLat([marker.lng, marker.lat])
-            .addTo(this.map);([marker])
+            .addTo(this.map);
 
-      element.addEventListener('mouseenter', () => {
-        const commentText = marker.comment ? `<p>Note: ${marker.comment}</p>` : `<p>Note: N/A</p>`;
+      element.addEventListener('click', () => {
+        const markers = document.getElementsByClassName("active");
+        if (popup) {
+          popup.remove();
+          for (let i = 0; i < markers.length; i++) {
+            markers[i].classList.remove("active");
+            console.log(document.getElementsByClassName("active"));
+          }
+        }
+        element.classList.add("active");
+        console.log(document.getElementsByClassName("active"));
+        const meaningText = marker.meaning ? `<p>Meaning: ${marker.meaning}</p>` : `<p>Note: N/A</p>`;
         const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
-        new mapboxgl.Popup()
+
+        popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false
+          })
         .setLngLat([marker.lng, marker.lat])
-        .setHTML(commentText + linkText)
+        .setHTML(meaningText + linkText)
+        .setOffset([0, -30])
         .addTo(this.map);
-        console.log(marker);
       })
 
       element.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
         this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center
-            zoom: 14, // zoom level
+            zoom: 12, // zoom level
             essential: true, // animation: true
             duration: 1000
         });
