@@ -46,7 +46,7 @@ class CardsController < ApplicationController
     else
       # Redirect to show page if a Card for the Kanji already exists.
       if @card.errors[:character].present?
-        duplicate_card_id = Card.find_by(character: capture_result)
+        duplicate_card_id = current_user.cards.find_by(character: capture_result)
         redirect_to card_path(id: duplicate_card_id, duplicate: true)
       else
         redirect_to dashboard_url #TODO should redirect to error page
