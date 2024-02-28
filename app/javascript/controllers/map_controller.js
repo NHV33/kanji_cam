@@ -93,8 +93,7 @@ export default class extends Controller {
           }
         }
         markerIcon.classList.add("active");
-        console.log(document.getElementsByClassName("active"));
-        const meaningText = marker.meaning ? `<p>Meaning: ${marker.meaning}</p>` : `<p>Note: N/A</p>`;
+        const meaningText = `<p>Meaning: ${marker.meaning}</p>`;
         const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
 
         popup = new mapboxgl.Popup({

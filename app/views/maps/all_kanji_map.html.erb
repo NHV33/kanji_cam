@@ -2,7 +2,7 @@
 
 <div class="container">
 <!-- to be precise, the following is not the exact total kanji number. doesn't consider duplication -->
-<h5 class="text-center mt-2"><%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> collected on our app</h5>
+<p class="text-center mt-4 mb-1"><%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> collected on our app</p>
 <div class="map mx-auto mb-4"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"

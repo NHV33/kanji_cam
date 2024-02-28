@@ -2,7 +2,7 @@
 <div class="container">
   <%# if user found 0 kanji %>
   <%# "Go find some kanji!"" %>
-  <h5 class="text-center mt-2"><% if @cards.count == 0 %><%= "Go get some kanji!" %>
+  <p class="text-center mt-4 mb-1"><% if @cards.count == 0 %><%= "Go get some kanji!" %>
   <%# if user found some kanji, but no location is available %>
   <%# "No location available" %>
     <% elsif @cards.select { |card| card.longitude.present? && card.latitude.present? }.count == 0 %>
@@ -10,7 +10,7 @@
     <%# if user found some kanji, but some cards' location are missing %>
     <%# xx positions are available %>
     <% else %><%= @cards.select { |card| card.longitude.present? && card.latitude.present? }.count %> <%= "positions are available" %>
-    <% end %></h5>
+    <% end %></p>
   <div class="map mx-auto mb-4"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
