@@ -79,7 +79,7 @@ export default class extends Controller {
       markerText.className = 'marker-text';
       markerIcon.appendChild(markerText);
 
-      const newMarker = new mapboxgl.Marker({ element: markerIcon })
+      const newMarker = new mapboxgl.Marker(markerPinPoint)
             .setLngLat([marker.lng, marker.lat])
             .addTo(this.map);
 
@@ -103,12 +103,13 @@ export default class extends Controller {
           })
         .setLngLat([marker.lng, marker.lat])
         .setHTML(meaningText + linkText)
-        .setOffset([0, -30])
+        .setOffset([0, -50])
         .addTo(this.map);
       })
 
       markerIcon.addEventListener('click', () => {
         // When marker is clicked, zoom in as needed
+        console.log("fly to marker");
         this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center
             zoom: 12, // zoom level

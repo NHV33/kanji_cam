@@ -5,6 +5,8 @@ $dark-color: $primary;
 .map {
   border-radius: 20px;
   height: 65vh;
+  position: relative;
+  z-index: 0;
 }
 
 /*Not necessary because relative elements
@@ -26,6 +28,7 @@ also, this div is just a point with no width or height */
   // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
   color: $light-color;
   position: absolute;
+  z-index: 1;
 
   /* POSITION FIX */
   right: 0px;
@@ -35,12 +38,12 @@ also, this div is just a point with no width or height */
   width: 48px;
   height: 48px;
 
+  // style of marker-icon and marker-text when marker-icon has active class
   &.active {
-    transition: transform 1s ease;
     background-color: $light-color;
     border-color: $dark-color;
     z-index: 9999;
-    // style of marker-text when marker is hovered
+
     .marker-text {
       color: $dark-color;
     }
