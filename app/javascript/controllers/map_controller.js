@@ -84,15 +84,17 @@ export default class extends Controller {
             .addTo(this.map);
 
       markerIcon.addEventListener('click', () => {
-        const activeMarkers = document.getElementsByClassName("active");
+        const activeMarkers = document.getElementsByClassName("pinpoint-active");
         if (popup) {
           popup.remove();
           for (let i = 0; i < activeMarkers.length; i++) {
-            activeMarkers[i].classList.remove("active");
-            console.log(document.getElementsByClassName("active"));
+            activeMarkers[i].classList.remove("pinpoint-active");
+            // console.log(document.getElementsByClassName("pinpoint-active"));
           }
         }
-        markerIcon.classList.add("active");
+        // markerIcon.classList.add("pinpoint-active");
+        markerPinPoint.classList.add("pinpoint-active");
+        // markerPinPoint.style.zIndex = 9999;
         const meaningText = `<p>Meaning: ${marker.meaning}</p>`;
         const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
 

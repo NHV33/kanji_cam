@@ -19,6 +19,13 @@ also, this div is just a point with no width or height */
 //   transform-origin: right bottom;
 // }
 
+// .marker-pin-point {
+//   position: relative;
+//   left: -24px;
+//   top: 10px;
+//   transform-origin: right bottom;
+// }
+
 .marker-icon {
   background-color: $dark-color;
   border-color: $light-color;
@@ -28,7 +35,7 @@ also, this div is just a point with no width or height */
   // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
   color: $light-color;
   position: absolute;
-  z-index: 1;
+  // z-index: 1;
 
   /* POSITION FIX */
   right: 0px;
@@ -39,16 +46,20 @@ also, this div is just a point with no width or height */
   height: 48px;
 
   // style of marker-icon and marker-text when marker-icon has active class
-  &.active {
+}
+
+.pinpoint-active {
+  z-index: 9999;
+  .marker-icon {
     background-color: $light-color;
     border-color: $dark-color;
     z-index: 9999;
-
     .marker-text {
       color: $dark-color;
     }
   }
 }
+
 
 .marker-text {
   color: $light-color;
@@ -60,5 +71,9 @@ also, this div is just a point with no width or height */
 }
 
 .mapboxgl-popup {
+  z-index: 99999;
   max-width: 400px;
-  }
+  // border: solid 2px $dark-color;
+}
+
+// .mapboxgl-popup
