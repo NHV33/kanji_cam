@@ -57,7 +57,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     if @card.update(card_params)
-     redirect_to @card, notice: "Information updated!"
+      redirect_to @card, notice: "Information updated!"
     else
       render :edit
     end

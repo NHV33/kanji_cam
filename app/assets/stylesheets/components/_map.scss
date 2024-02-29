@@ -4,7 +4,9 @@ $dark-color: $primary;
 
 .map {
   border-radius: 20px;
-  height: 70vh;
+  height: 65vh;
+  position: relative;
+  z-index: 0;
 }
 
 /*Not necessary because relative elements
@@ -26,6 +28,7 @@ also, this div is just a point with no width or height */
   // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
   color: $light-color;
   position: absolute;
+  z-index: 1;
 
   /* POSITION FIX */
   right: 0px;
@@ -34,17 +37,16 @@ also, this div is just a point with no width or height */
   transform-origin: right bottom;
   width: 48px;
   height: 48px;
-}
 
-.animate-icon {
-  // transform: rotate(45deg) scale(1.3);
-  transition: transform 1s ease;
-  background-color: $light-color;
-  border-color: $dark-color;
-  animation: swing 0.1s ease-in-out alternate; // defines quickness of animation
-  animation-fill-mode: forwards;
-  .marker-text {
-    color: $dark-color;
+  // style of marker-icon and marker-text when marker-icon has active class
+  &.active {
+    background-color: $light-color;
+    border-color: $dark-color;
+    z-index: 9999;
+
+    .marker-text {
+      color: $dark-color;
+    }
   }
 }
 
@@ -57,14 +59,6 @@ also, this div is just a point with no width or height */
   transform: translateX(-50%) rotate(-45deg);
 }
 
-@keyframes swing {
-  0% {
-    transform: rotate(20deg) scale(1.3);
+.mapboxgl-popup {
+  max-width: 400px;
   }
-  50% {
-    transform: rotate(70deg) scale(1.3);
-  }
-  100% {
-    transform: rotate(45deg) scale(1.3);
-  }
-}
