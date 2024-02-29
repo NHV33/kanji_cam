@@ -1,6 +1,7 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Flashcard Decks" %>
 
 <div class="container mt-3">
+  
 
   <% unlearned_kanji = current_user.cards.count - current_user.cards.where(learned: true).joins(:kanji).distinct.count %>
 

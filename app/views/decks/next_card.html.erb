@@ -1,11 +1,14 @@
-<%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
+<br>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
 <div class="content-wrapper mt-3">
   <% if @card.nil? %>
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
       <div class="badge fs-2 bg-success">
         All finished!
+      </div>
+      <div class="badge fs-2 text-wrap text-break">
+        <%= "you earned #{session[:session_points]} points on this flashcard!" %>
       </div>
       <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do%>
         See all decks
@@ -20,10 +23,17 @@
         <div class="card-front card-side">
           <h1 class="kanji-character"><%= @card.character %></h1>
         </div>
-        <div class="card-back card-side">
-          <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
-          <p>On Reading: <%= (@card.kanji.on_readings).join(', ') %></p>
-          <p>Kun Reading: <%= (@card.kanji.kun_readings).join(', ') %></p>
+        <div class="card-back card-side d-flex justify-content-center align-items-center" style="height: 100%;">
+          <div class="card bg-light container-fluid mb-3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Meanings</h5>
+              <p class="card-text"><%= @card.kanji.meanings.join(', ') %></p>
+              <h5 class="card-title">On Reading</h5>
+              <p class="card-text"><%= @card.kanji.on_readings.join(', ') %></p>
+              <h5 class="card-title">Kun Reading</h5>
+              <p class="card-text"><%= @card.kanji.kun_readings.join(', ') %></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

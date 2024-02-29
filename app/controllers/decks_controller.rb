@@ -29,6 +29,7 @@ class DecksController < ApplicationController
 
   def show
     session[:progress] = 0
+    session[:session_points] = 0
     # @cards = @deck.entries.where(card: :kanji)
     @cards = @deck.cards
     session[:total_cards] = @cards.count
@@ -63,11 +64,17 @@ class DecksController < ApplicationController
   def learn_card
     @deck = Deck.find(params[:id])
     @card = Card.find_by(id: params[:current_card_id])
+    @user = current_user
     if @card.present?
       @card.learned = true
       if @card.save
         session[:learned_cards] = session[:learned_cards].to_i + 1
+        session[:session_points] = session[:session_points].to_i + 10
         redirect_to next_card_deck_path(@deck), notice: 'Card marked as learned.'
+        @user.points += 10
+        if @user.save!
+          p "points: #{@user.points}"
+        end
       end
     else
       redirect_to next_card_deck_path(@deck), alert: 'Card not found.'
