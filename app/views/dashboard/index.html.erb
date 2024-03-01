@@ -4,47 +4,43 @@
 
 <div class="container">
 
-  <div class="box mt-3">
-    <h3>Point system</h3>
-  </div>
+    <div class="box mt-3">
 
-  <div class="box mt-3">
+      <% captured_fraction = " (#{@total_captured_kanji} / #{@total_kanji})" %>
 
-    <% captured_fraction = " (#{@total_captured_kanji} / #{@total_kanji})" %>
+      <h3>Kanji Collected<%= captured_fraction %></h3>
+      <div class="progress my-progress-bar">
 
-    <h3>Kanji Collected<%= captured_fraction %></h3>
-    <div class="progress my-progress-bar">
+        <div  class="progress-bar my-progress-bar-value"
+              role="progressbar"
+              style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;"
+              aria-valuenow="<%= @total_captured_kanji %>"
+              aria-valuemin="0" aria-valuemax="<%= @total_kanji %>">
+              <!--
+              <%= @total_captured_kanji %> / <%= @total_kanji %>
+              -->
 
-      <div  class="progress-bar my-progress-bar-value"
-            role="progressbar"
-            style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;"
-            aria-valuenow="<%= @total_captured_kanji %>"
-            aria-valuemin="0" aria-valuemax="<%= @total_kanji %>">
-            <!--
-            <%= @total_captured_kanji %> / <%= @total_kanji %>
-            -->
+        </div>
+
+      </div>
+
+
+      <% learned_fraction = " (#{@total_learned_kanji} / #{@total_captured_kanji})" %>
+      <h3>Kanji Learned<%= learned_fraction %></h3>
+      <div class="progress my-progress-bar">
+
+        <div  class="progress-bar my-progress-bar-value"
+              role="progressbar"
+              style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;"
+              aria-valuenow="<%= @total_learned_kanji %>"
+              aria-valuemin="0"
+              aria-valuemax="<%= @total_captured_kanji %>">
+
+        </div>
 
       </div>
 
     </div>
-
-
-    <% learned_fraction = " (#{@total_learned_kanji} / #{@total_captured_kanji})" %>
-    <h3>Kanji Learned<%= learned_fraction %></h3>
-    <div class="progress my-progress-bar">
-
-      <div  class="progress-bar my-progress-bar-value"
-            role="progressbar"
-            style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;"
-            aria-valuenow="<%= @total_learned_kanji %>"
-            aria-valuemin="0"
-            aria-valuemax="<%= @total_captured_kanji %>">
-
-      </div>
-
-    </div>
-
-  </div>
 
   <div class="box mt-3">
     <h3>Kanji Collected by JLPT Level</h3>
@@ -67,8 +63,14 @@
                 } %>
   </div>
 
-  <div class="mt-3">
+  <div class="d-flex justify-content-between gap-3">
+  <div class="box mt-3 col">
+      <h3>Point system</h3>
+    </div>
+
+  <div class="mt-3 col-6">
     <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 btn' %>
+  </div>
   </div>
 
 </div>

@@ -50,3 +50,23 @@
 //   }
 
 // }
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 14px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: $font-color;
+  text-shadow: 0 1px #fff;
+
+  &:active {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+  }
+}
