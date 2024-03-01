@@ -30,7 +30,11 @@
 
     <%# Add Note button if note is hidden. %>
     <% else %>
-      <%= link_to 'Add Note', edit_card_path(@card), class: "rounded-pill text-shadow text-white w-100 button" %>
+      <div class="d-flex justify-content-end">
+      <%= link_to edit_card_path(@card), class: "icon-btn" do %>
+       <i class="fa-regular fa-note-sticky"></i>
+      <% end %>
+      </div>
     <% end %>
 
   </div>
