@@ -1,0 +1,11 @@
+.my-progress-bar {
+  border-radius: 42px;
+  background: #f2f1f4;
+  box-shadow: inset 5px 5px 10px #919192, inset -5px -5px 10px #ffffff;
+}
+
+.my-progress-bar-value {
+  border-radius: 42px;
+  background: $primary;
+  box-shadow:  5px 5px 10px #919192, -5px -5px 10px #ffffff;
+}
