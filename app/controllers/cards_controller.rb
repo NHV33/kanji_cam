@@ -39,6 +39,10 @@ class CardsController < ApplicationController
       # If Kanji instance is not found, set ID to 1 (special hidden kanji)
       database_kanji_id = (database_kanji) ? database_kanji.id : 1;
       @card.kanji_id = database_kanji_id
+      @points = current_user.points
+      @points += 100
+      current_user.points = @points
+      current_user.save
     end
 
     if @card.save
