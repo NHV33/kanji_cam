@@ -3,7 +3,7 @@
 <div class="container d-flex flex-column">
   <div class="row justify-content-center mt-3">
     <div>
-      <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
+      <h2 class="dented-box"><strong><%= @cards.length %></strong> <small>collected</small></h2>
     </div>
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
@@ -16,7 +16,7 @@
           <%# image_tag "kanji_image.png", class: "card-img-top py-1 justify-content-center"%>
         </div>
 
-        <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1 font-color">
+        <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1">
 
           <!-- Checks the character saved on the card instance -->
           <span class="text-center fs-1"><%= card.character %></span>

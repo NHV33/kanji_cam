@@ -36,9 +36,9 @@
       </div>
     </div>
 
-<div class="progress" style="width: 260px; margin-top: 20px;">
+<div class="progress my-progress-bar" style="width: 260px; margin-top: 20px;">
   <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
-  <div  class="progress-bar"
+  <div  class="progress-bar my-progress-bar-value"
         role="progressbar"
         style="width: <%= progress_percentage %>%;"
         aria-valuenow="<%= progress_percentage %>"

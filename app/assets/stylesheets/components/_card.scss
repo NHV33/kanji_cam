@@ -7,21 +7,19 @@
 }
 
 .custom-card {
-  border-radius: 10px;
-  border: none;
-  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset;
-  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
-  // background-image: linear-gradient(to bottom, #eeaeca, #94bbe9);
+  border-radius: 18px;
+  background: $custom-color;
+  box-shadow:  5px 5px 10px #c4c3c6, -5px -5px 10px #ffffff;
+  color: $font-color;
+
   &:active {
     transition-property: box-shadow;
     transition: ease;
     transition-duration: 300ms;
-    // box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
-    // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px 0px 0px 0px inset;
-    box-shadow: inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3);
+    border-radius: 18px;
+    background: $custom-color;
+    box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
   }
 }
 
