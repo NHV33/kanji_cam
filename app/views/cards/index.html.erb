@@ -1,15 +1,36 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Collection" %>
 
+<%# based on amazon jlpt texts
+$jlpt0: #F4F4F4;
+$jlpt1: #90cf85;
+$jlpt2: #f08e9a;
+$jlpt3: #5eaecb;
+$jlpt4: #f0ad71;
+$jlpt5: #8276c0; %>
+
 <div class="container d-flex flex-column">
   <div class="row justify-content-center mt-3">
     <div>
       <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
     </div>
+    <div class="d-flex justify-content-center align-items-center">
+    <div class="p-1 m-1" style="background-color: #F4F4F4;"><p class="mb-0" style="font-size: 10px">non-JLPT</p></div>
+    <div class="p-1 m-1" style="background-color: #90cf85;"><p class="mb-0" style="font-size: 10px">JLPT 1</p></div>
+    <div class="p-1 m-1" style="background-color: #f08e9a;"><p class="mb-0" style="font-size: 10px">JLPT 2</p></div>
+    <div class="p-1 m-1" style="background-color: #5eaecb;"><p class="mb-0" style="font-size: 10px">JLPT 3</p></div>
+    <div class="p-1 m-1" style="background-color: #f0ad71;"><p class="mb-0" style="font-size: 10px">JLPT 4</p></div>
+    <div class="p-1 m-1" style="background-color: #8276c0;"><p class="mb-0" style="font-size: 10px">JLPT 5</p></div>
+    </div>
+
+    <%# if one of the above button is clicked, display only certain JLPT type kanji %>
+
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
+      <% bg_color_jlpt = ["#F4F4F4", "#90cf85", "#f08e9a", "#5eaecb", "#f0ad71", "#8276c0"] %>
+      <%# <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" style="background-color: #{bg_color_jlpt[card.kanji.jlpt]};" %>
       <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" %>
 
-      <%= link_to card_path(card), class: button_styles, style: "text-decoration: none;" do %>
+      <%= link_to card_path(card), class: button_styles, style: "text-decoration: none; background-color: #{bg_color_jlpt[card.kanji.jlpt]};" do %>
 
         <div class="position-relative">
           <!-- <div class="big-kanji"><%= card.kanji.character %></div> -->
@@ -25,5 +46,6 @@
 
       <% end %>
     <% end %>
+  </div>
   </div>
 </div>
