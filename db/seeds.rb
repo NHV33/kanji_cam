@@ -14,8 +14,7 @@ require "csv"
 if User.all.empty?
   user = User.new(
     email: "test@me.com",
-    password: "Kanji-ga-daisuki!",
-    points: 100 * 64
+    password: "Kanji-ga-daisuki!"
   )
   user.save!
 end
