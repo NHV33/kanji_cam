@@ -95,15 +95,28 @@ export default class extends Controller {
         // markerIcon.classList.add("pinpoint-active");
         markerPinPoint.classList.add("pinpoint-active");
         // markerPinPoint.style.zIndex = 9999;
-        const meaningText = `<p>Meaning: ${marker.meaning}</p>`;
-        const linkText = `<a href="/cards/${marker.kanji_id}">Check meaning</a></p>`
+        const meaningText = `<p class="m-0">Meaning: ${marker.meaning}</p>`;
+
+        // let currentPath = window.location.pathname;
+
+        // if (currentPath === )
+        // on my map, use card_id and show collected date
+        // const linkText = `<a href="/cards/${marker.card_id}">Check details</a>`;
+        // on global map, use kanji_id and doesn't use colected date
+        const linkText = `<a href="/kanjis/${marker.kanji_id}">Check details</a>`;
+
+        const onText = `<p class="m-0">on reaning: ${marker.on_reading}</p>`;
+        const kunText = `<p class="m-0">kun reaning: ${marker.kun_reading}</p>`;
+        const formattedDate = new Date(marker.captured_date).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})
+        const dateText = `<p class="m-0">Added on: ${formattedDate}</p>`;
+        console.log(formattedDate, "formatted date");
 
         popup = new mapboxgl.Popup({
           closeButton: false,
           closeOnClick: false
           })
         .setLngLat([marker.lng, marker.lat])
-        .setHTML(meaningText + linkText)
+        .setHTML(meaningText + onText + kunText + linkText + dateText )
         .setOffset([0, -50])
         .addTo(this.map);
       })

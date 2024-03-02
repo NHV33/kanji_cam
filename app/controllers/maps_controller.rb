@@ -8,7 +8,11 @@ class MapsController < ApplicationController
         lng: card.longitude,
         kanji: card.character,
         meaning: card.kanji.meanings[0],
-        kanji_id: card.kanji_id
+        on_reading: card.kanji.on_readings[0],
+        kun_reading: card.kanji.kun_readings[0],
+        card_id: card.id,
+        kanji_id: card.kanji.id,
+        captured_date: card.created_at
         # link to go show page of the kanji
       }
     end
@@ -22,7 +26,10 @@ class MapsController < ApplicationController
         lng: card.longitude,
         kanji: card.character,
         meaning: card.kanji.meanings[0],
-        kanji_id: card.kanji_id
+        on_reading: card.kanji.on_readings[0],
+        kun_reading: card.kanji.kun_readings[0],
+        kanji_id: card.kanji.id,
+        captured_date: card.created_at
       }
     end
   end
