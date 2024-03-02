@@ -1,7 +1,7 @@
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <br>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
-<div class="content-wrapper mt-3">
+<div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
   <% if @card.nil? %>
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
       <div class="badge fs-2 bg-success">
@@ -23,6 +23,9 @@
       <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
         See all decks
       <% end %>
+      <br>
+      <br>
+      <br>
     </div>
   <% else %>
     <div class="badge bg-info mb-3 fs-4">
@@ -49,11 +52,11 @@
     </div>
     <div class="progress" style="width: 260px; margin-top: 20px;">
       <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
-      <div  class="progress-bar"
-            role="progressbar"
-            style="width: <%= progress_percentage %>%;"
-            aria-valuenow="<%= progress_percentage %>"
-            aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar"
+           role="progressbar"
+           style="width: <%= progress_percentage %>%;"
+           aria-valuenow="<%= progress_percentage %>"
+           aria-valuemin="0" aria-valuemax="100">
       </div>
     </div>
     <br>
@@ -74,5 +77,8 @@
         <% end %>
       </div>
     </div>
+    <br>
+    <br>
+    <br>
   <% end %>
 </div>
