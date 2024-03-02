@@ -1,0 +1,64 @@
+{
+  "master_picture": "app/assets/images/kanji_cam_icon.svg",
+  "favicon_design": {
+      "ios": {
+          "picture_aspect": "background_and_margin",
+          "background_color": "#777777",
+          "margin": "25%",
+          "assets": {
+              "ios6_and_prior_icons": false,
+              "ios7_and_later_icons": false,
+              "precomposed_icons": false,
+              "declare_only_default_icon": true
+          }
+      },
+      "desktop_browser": {
+          "design": "background",
+          "backgroundColor": "#777777",
+          "backgroundRadius": 0.5,
+          "imageScale": 0.7
+      },
+      "windows": {
+          "picture_aspect": "no_change",
+          "background_color": "#777777",
+          "on_conflict": "override",
+          "assets": {
+              "windows_80_ie_10_tile": false,
+              "windows_10_ie_11_edge_tiles": {
+                  "small": false,
+                  "medium": true,
+                  "big": false,
+                  "rectangle": false
+              }
+          }
+      },
+      "android_chrome": {
+          "picture_aspect": "background_and_margin",
+          "margin": "25%",
+          "background_color": "#777777",
+          "theme_color": "#777777",
+          "manifest": {
+              "name": "Kanji Cam",
+              "display": "standalone",
+              "orientation": "not_set",
+              "on_conflict": "override",
+              "declared": true
+          },
+          "assets": {
+              "legacy_icon": false,
+              "low_resolution_icons": false
+          }
+      },
+      "safari_pinned_tab": {
+          "picture_aspect": "silhouette",
+          "theme_color": "#777777"
+      }
+  },
+  "settings": {
+      "scaling_algorithm": "Mitchell",
+      "error_on_image_too_small": false,
+      "readme_file": true,
+      "html_code_file": true,
+      "use_path_as_is": false
+  }
+}
