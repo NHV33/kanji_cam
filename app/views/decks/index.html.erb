@@ -1,7 +1,7 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Flashcard Decks" %>
 
 <div class="container mt-3">
-  
+
 
   <% unlearned_kanji = current_user.cards.count - current_user.cards.where(learned: true).joins(:kanji).distinct.count %>
 
@@ -10,7 +10,7 @@
   </div>
 
   <div class="my-3">
-    <%= link_to 'Study All Unlearned Kanji', deck_path(@master_deck), class: 'col-12 fs-6 btn btn-primary' %>
+    <%= link_to 'Study All Unlearned Kanji', deck_path(@master_deck), class: 'col-12 fs-6 page-btn' %>
   </div>
 
 </div>
@@ -30,7 +30,7 @@
 
         <% @jlpt_decks.each do |jlpt_deck| %>
           <% button_label = "#{jlpt_deck.title} Kanji" %>
-          <%= link_to button_label, deck_path(jlpt_deck), class: 'col-12 my-1 p-2 btn btn-primary text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+          <%= link_to button_label, deck_path(jlpt_deck), class: 'col-12 my-1 p-2 page-btn text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
         <% end %>
 
       </div>    </div>
@@ -49,7 +49,7 @@
 
         <% @custom_decks.each do |custom_deck| %>
           <% button_label = "#{custom_deck.title} | #{custom_deck.comment}" %>
-          <%= link_to button_label, deck_path(custom_deck), class: 'col-12 my-1 p-2 btn btn-primary text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+          <%= link_to button_label, deck_path(custom_deck), class: 'col-12 my-1 p-2 page-btn text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
         <% end %>
 
       </div>

@@ -1,28 +1,6 @@
-// .btn {
-//   border: none;
-//   color: $font-color;
-//   padding: 20px 40px;
-//   font-size: 20px;
-//   cursor: pointer;
-//   // border-radius: 14px;
-//   // background: linear-gradient(145deg, $custom-color, #dad9dc);
-//   // box-shadow:  5px 5px 10px #919192, -5px -5px 10px #ffffff;
-//   background: linear-gradient(145deg, #fff, #c1c3c6);
-//   border-radius: 14px;
-//   box-shadow: 9.91px 9.91px 15px #d9dade, -9.91px -9.91px 15px #fff;
-
-//   &:active {
-//     // box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.7), -5px -5px 10px rgba(255, 255, 255, 0.4);
-//     // filter: brightness(1.05);
-//     border-radius: 14px;
-//     background: $custom-color;
-//     box-shadow: inset 5px 5px 10px #919192, inset -5px -5px 10px #ffffff;
-//   }
-// }
-
 
 /* CSS */
-.btn {
+.page-btn {
   background: linear-gradient(#42A1EC, #0070C9);
   box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
   border: 1px solid #0077CC;
@@ -38,6 +16,7 @@
   padding: 8px;
   text-align: center;
   user-select: none;
+  text-decoration: none;
   touch-action: manipulation;
   white-space: nowrap;
 
@@ -51,26 +30,8 @@
 
 }
 
-// .btn {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   outline: none;
-//   cursor: pointer;
-//   height: 50px;
-//   background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
-//   border-radius: 14px;
-//   border: 1px solid #8F9092;
-//   transition: all 0.2s ease;
-//   font-size: 14px;
-//   color: $font-color;
-//   text-shadow: 0 1px #fff;
 
-//   &:active {
-//     box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
-//   }
-// }
-
+// ICON Button
 
 .icon-btn {
     width: 50px;
@@ -95,4 +56,66 @@
       color: $primary;
     }
 
+  }
+
+  // 3D Button
+
+  .btn-3d {
+    position: relative;
+    top: -6px;
+    border: 0;
+    transition: all 40ms linear;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+
+    &:active {
+      top: 2px;
+    }
+  }
+
+  .btn-3d.btn-primary {
+    box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #4274D7;
+
+    &:active {
+      box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #4274D7;
+    }
+  }
+
+  .btn-3d.btn-success {
+    box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #78d739;
+
+    &:active {
+      box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #78d739;
+    }
+  }
+
+  .btn-3d.btn-warning {
+    box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #FEAF20;
+
+    &:active {
+      box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #FEAF20;
+    }
+  }
+
+
+  .btn-3d.btn-danger {
+    box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #D73814;
+
+    &:active {
+      box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #D73814;
+    }
   }
