@@ -1,10 +1,11 @@
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <br>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
-<div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
+<!-- style="height: calc(100vh - 2rem);" -->
+<div class="content-wrapper mt-2">
   <% if @card.nil? %>
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
-      <div class="badge fs-2 bg-success">
+      <div class="mb-3 badge fs-2 bg-success">
         All finished!
       </div>
       <br>
@@ -20,7 +21,7 @@
           <p>💰Total: <%= @user_points %>p</p>
         </div>
       </div>
-      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
+      <%= button_to decks_url, method: :get, class: "mt-3 btn btn-primary text-white" do %>
         See all decks
       <% end %>
       <br>
@@ -28,7 +29,7 @@
       <br>
     </div>
   <% else %>
-    <div class="badge bg-info mb-3 fs-4">
+    <div class="badge bg-info fs-4 mb-3">
       <%= "#{@unlearned_cards.count} Cards Remaining" %>
     </div>
     <div class="card-container">
@@ -37,7 +38,7 @@
           <h1 class="kanji-character"><%= @card.character %></h1>
         </div>
         <div class="card-back card-side d-flex justify-content-center align-items-center" style="height: 100%;">
-          <div class="card bg-light container-fluid mb-3">
+          <div class="card bg-light container-fluid">
             <div class="card-body text-center">
               <h5 class="card-title">Meanings</h5>
               <p class="card-text"><%= @card.kanji.meanings.join(', ') %></p>
@@ -50,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div class="progress" style="width: 260px; margin-top: 20px;">
+    <div class="progress" style="width: 260px;">
       <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
       <div class="progress-bar"
            role="progressbar"
@@ -59,7 +60,7 @@
            aria-valuemin="0" aria-valuemax="100">
       </div>
     </div>
-    <br>
+
     <div class="btn-group mt-3" role="group" aria-label="Recall Level Buttons">
       <div class="btn-margin-right">
         <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn btn-success', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
@@ -77,8 +78,5 @@
         <% end %>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
   <% end %>
 </div>
