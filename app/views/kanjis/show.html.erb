@@ -1,0 +1,23 @@
+<div class="container d-flex flex-column align-items-center">
+
+  <% if current_user.cards.where(character: @kanji.character).empty? %>
+    <div class="mt-3 col-12 d-flex justify-content-center">
+      <div class="text-center rounded-4 bg-info fs-4 text-white col-12 py-2 px-5">
+        You haven't found this kanji yet.
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="mt-3 col-12 d-flex justify-content-center">
+      <% user_card = current_user.cards.find_by(character: @kanji.character) %>
+      <%= button_to card_path(user_card), method: :get, class: 'text-white btn btn-danger', class: "text-center rounded-4 bg-success fs-4 text-white col-12 py-2 px-5" do %>
+        You have captured this kanji.
+      <% end %>
+    </div>
+
+  <% end %>
+
+  <%= render 'partials/kanji_info' %>
+
+</div>

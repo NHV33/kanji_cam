@@ -5,6 +5,7 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
+    @kanji = @card.kanji
     # Moved example-scraping code to partials/kanji_info view,
     # so we don't have to write it in each controller method.
   end
@@ -69,6 +70,7 @@ class CardsController < ApplicationController
 
   def edit
     @card = Card.find(params[:id])
+    @kanji = @card.kanji
   end
 
   private
