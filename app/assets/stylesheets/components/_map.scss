@@ -2,11 +2,19 @@ $icon-width: 48px;
 $light-color: white;
 $dark-color: $primary;
 
+.map-bg {
+  border-radius: 20px;
+}
+
 .map {
   border-radius: 20px;
   height: 65vh;
   position: relative;
   z-index: 0;
+}
+
+.btn3d:disabled, button[disabled] {
+  background-color: gray !important;
 }
 
 /*Not necessary because relative elements

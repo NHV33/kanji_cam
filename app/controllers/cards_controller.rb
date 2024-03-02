@@ -46,7 +46,7 @@ class CardsController < ApplicationController
     end
 
     if @card.save
-      redirect_to edit_card_path(@card), notice: 'New card was successfully saved to your colletion!.'
+      redirect_to edit_card_path(@card), notice: 'You got 100 points!'
     else
       # Redirect to show page if a Card for the Kanji already exists.
       if @card.errors[:character].present?
