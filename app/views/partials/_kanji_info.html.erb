@@ -5,7 +5,7 @@
     <div class="col-3"><span>JLPT: </span>
       <% rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
       <h3>
-        N<%= @card.kanji.jlpt %><%= " #{rank_emoji[@card.kanji.jlpt]}" %>
+        N<%= @kanji.jlpt %><%= " #{rank_emoji[@kanji.jlpt]}" %>
       </h3>
     </div>
 
@@ -14,12 +14,16 @@
 
         <h1 id="kanji-symbol" style="font-size: 140px;">
           <!-- Displays character saved on Card instance -->
-          <%= @card.character %>
+          <% if @card %>
+            <%= @card.character %>
+          <% else %>
+            <%= @kanji.character %>
+          <% end %>
         </h1>
 
-        <% if @card.character == @card.kanji.old_form %>
+        <% if @card && @card.character == @kanji.old_form %>
           <span class="fs-4" style="white-space: nowrap;">
-            <%= "(old form of #{@card.kanji.character})" %>
+            <%= "(old form of #{@kanji.character})" %>
           </span>
         <% end %>
 
@@ -31,17 +35,17 @@
         <div class="col-sm-6 col-md-6 mx-auto">
 
           <p class="mb-0 text-left fs-5">
-            <strong><%= @card.kanji.strokes %></strong> strokes
+            <strong><%= @kanji.strokes %></strong> strokes
           </p>
 
-          <% if @card.kanji.grade <= 6 %>
-            <p class="mb-0 fs-5">taught in grade <%= @card.kanji.grade %></p>
-          <% elsif @card.kanji.grade == 7 %>
+          <% if @kanji.grade <= 6 %>
+            <p class="mb-0 fs-5">taught in grade <%= @kanji.grade %></p>
+          <% elsif @kanji.grade == 7 %>
             <p class="mb-0 fs-5">taught in junior high</p>
           <% end %>
 
           <p class="mb-0 fs-5">
-            Radical: <strong><%= @card.kanji.radical %></strong>
+            Radical: <strong><%= @kanji.radical %></strong>
           </p>
 
         </div>
@@ -55,18 +59,18 @@
 
   <div>
     <p class="mb-0">Meanings (意味): </p>
-    <h2><%= @card.kanji.meanings.join(", ") %></h2>
+    <h2><%= @kanji.meanings.join(", ") %></h2>
   </div>
 
   <!-- Do we need to show the first meaning in a separate place?
   <div>
     <p class="mb-0">1st meaning: </p>
-    <h2><%= @card.kanji.meanings[0] %></h2>
+    <h2><%= @kanji.meanings[0] %></h2>
   </div>
   -->
 
   <%# External Link to Advanced Readings %>
-  <% kanji_to_search = @card.kanji.character %>
+  <% kanji_to_search = @kanji.character %>
   <% encoded_kanji = URI.encode_www_form_component(kanji_to_search) %>
   <% advanced_url = "https://jisho.org/search/#{encoded_kanji}%20%23kanji" %>
 
@@ -82,12 +86,12 @@
 
       <h3 class="mb-0 ms-2">
 
-        <% if @card.kanji.on_readings.blank? %>
+        <% if @kanji.on_readings.blank? %>
           <p class="mb-0"><%= "No commonly used on reading." %></p>
           <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
         <% else %>
           <%# Loop through each on reading and create a div tag with a clickable sound icon %>
-          <% @card.kanji.on_readings.each do |reading| %>
+          <% @kanji.on_readings.each do |reading| %>
             <div class="reading" >
               <%= reading %>
               <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
@@ -104,12 +108,12 @@
 
       <h3 class="mb-0 ms-2">
 
-        <% if @card.kanji.kun_readings.blank? %>
+        <% if @kanji.kun_readings.blank? %>
           <p class="mb-0 fs-4"><%= "No commonly used kun reading." %></p>
           <a class="fs-5" href="<%= advanced_url %>" target="_blank" rel="noopener noreferrer">See advanced readings</a>
         <% else %>
           <%# Loop through each kun reading and create a div tag with a clickable sound icon %>
-          <% @card.kanji.kun_readings.each do |reading| %>
+          <% @kanji.kun_readings.each do |reading| %>
             <div class="reading" >
               <%= reading %>
               <i class="sound-icon fa-solid fa-volume-high ms-2 icon-link icon-link-hover" ></i>
@@ -123,7 +127,7 @@
 
   </div>
 
-  <% kanji_to_search = @card.kanji.character %>
+  <% kanji_to_search = @kanji.character %>
   <% @jpn_sentences, @eng_sentences = Scraper.new(kanji_to_search).scrape %>
 
   <h2 class="mt-4">Example Sentences</h2>
