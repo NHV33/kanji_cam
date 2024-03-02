@@ -16,28 +16,7 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-  // get user's location and display the pin there
-  navigator.geolocation.getCurrentPosition(position => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log(latitude, longitude, "user's position");
-
-    const userMarker = new mapboxgl.Marker()
-      .setLngLat([longitude, latitude])
-      .addTo(this.map);
-
-    // adjust map showing range to user's location
-    // comment out as this animation can be annoying
-    // this.map.flyTo({
-    //     center: [longitude, latitude], // set user's location to the center
-    //     zoom: 12,
-    //     essential: true,
-    //     duration: 1000
-    // });
-}, error => {
-    console.error("Error occurred while getting geolocation:", error);
-});
-
+    this.addPulsingDot();
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
 
@@ -62,6 +41,125 @@ export default class extends Controller {
       bounds.extend([marker.lng, marker.lat])
     })
     this.map.fitBounds(bounds, {padding: 50, duration: 10})
+  }
+
+  addPulsingDot() {
+    const size = 200;
+    let longitude, latitude;
+
+    // get user's location and display the pin there
+  navigator.geolocation.getCurrentPosition(position => {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log(latitude, longitude, "user's position");
+
+    const userMarker = new mapboxgl.Marker()
+      .setLngLat([longitude, latitude])
+      .addTo(this.map);
+
+    // adjust map showing range to user's location
+    // comment out as this animation can be annoying
+    // this.map.flyTo({
+    //     center: [longitude, latitude], // set user's location to the center
+    //     zoom: 12,
+    //     essential: true,
+    //     duration: 1000
+    // });
+}, error => {
+    console.error("Error occurred while getting geolocation:", error);
+});
+
+    // Define the pulsing dot icon
+    const pulsingDot = {
+      width: size,
+      height: size,
+      data: new Uint8Array(size * size * 4),
+
+      // Function to render the pulsing dot
+      render: function () {
+        const duration = 1000; // Animation duration in milliseconds
+        const t = (performance.now() % duration) / duration; // Current animation progress
+
+        const radius = (size / 2) * 0.3;
+        const outerRadius = (size / 2) * 0.7 * t + radius;
+        const context = this.context;
+
+        // Clear the canvas
+        context.clearRect(0, 0, this.width, this.height);
+
+        // Draw the outer circle
+        context.beginPath();
+        context.arc(
+          this.width / 2,
+          this.height / 2,
+          outerRadius,
+          0,
+          Math.PI * 2
+        );
+        context.fillStyle = `rgba(255, 200, 200, ${1 - t})`; // Outer circle color
+        context.fill();
+
+        // Draw the inner circle
+        context.beginPath();
+        context.arc(
+          this.width / 2,
+          this.height / 2,
+          radius,
+          0,
+          Math.PI * 2
+        );
+        context.fillStyle = 'rgba(255, 100, 100, 1)'; // Inner circle color
+        context.strokeStyle = 'white'; // Inner circle stroke color
+        context.lineWidth = 2 + 4 * (1 - t); // Inner circle stroke width
+        context.fill();
+        context.stroke();
+
+        // Update the image data with data from the canvas
+        this.data = context.getImageData(
+          0,
+          0,
+          this.width,
+          this.height
+        ).data;
+
+        // Repaint the map to show the updated image
+        map.triggerRepaint();
+
+        // Return true to indicate that the image was updated
+        return true;
+      }
+    };
+
+    // Add the pulsing dot icon to the map
+    this.map.on('load', () => {
+      this.map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+      // Add a source and layer using the pulsing dot icon
+      this.map.addSource('dot-point', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': [
+            {
+              'type': 'Feature',
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [longitude, latitude] // Set the initial coordinates of the pulsing dot
+              }
+            }
+          ]
+        }
+      });
+
+      this.map.addLayer({
+        'id': 'layer-with-pulsing-dot',
+        'type': 'symbol',
+        'source': 'dot-point',
+        'layout': {
+          'icon-image': 'pulsing-dot'
+        }
+      });
+    });
   }
 
   #addMarkersToMap() {
