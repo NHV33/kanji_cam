@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   def index
+    @points = current_user.points
     @total_learned_kanji = total_learned_kanji
     @total_kanji = Kanji.count
     @total_captured_kanji = current_user.cards.count
