@@ -42,7 +42,7 @@ class DecksController < ApplicationController
     session[:progress] = 0 if session[:progress] > 100
     @unlearned_cards = @deck.cards.where(learned: false)
     @card = @unlearned_cards.order(Arel.sql('RANDOM()')).first
-
+    @user_points = current_user.points
     learned_cards = @deck.cards.where(learned: true)
     total_cards = @deck.cards.count
     # @progress_percentage = (learned_cards.count.to_f / total_cards * 100).round(2)

@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_103816) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_02_070805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
     t.bigint "kanji_id", null: false
     t.bigint "user_id", null: false
-    t.boolean "learned"
+    t.boolean "learned", default: false
     t.integer "practice_count"
     t.datetime "prev_practice_at"
     t.datetime "next_practice_at"

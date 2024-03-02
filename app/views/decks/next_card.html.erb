@@ -1,9 +1,13 @@
 <%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
+<<<<<<< HEAD
 
 <div class="content-wrapper mt-3">
 
+=======
+<div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
+>>>>>>> e812fc5aa9cd89af3163ef14640dd08b2ddf8d90
   <% if @card.nil? %>
 
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
@@ -11,11 +15,33 @@
       <div class="badge fs-2 bg-success">
         All finished!
       </div>
+<<<<<<< HEAD
 
       <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do%>
         See all decks
       <% end %>
 
+=======
+      <br>
+      <br>
+      <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+        <h2><%= @deck.title %></h2>
+        <br>
+        <br>
+        <div data-controller="flashcard">
+          <h2 data-flashcard-target="points" data-points="<%= session[:session_points] %>">+ 0p</h2>
+          <br>
+          <p>🎴You learned <%= session[:total_cards] %> Kanji</p>
+          <p>💰Total: <%= @user_points %>p</p>
+        </div>
+      </div>
+      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
+        See all decks
+      <% end %>
+      <br>
+      <br>
+      <br>
+>>>>>>> e812fc5aa9cd89af3163ef14640dd08b2ddf8d90
     </div>
 
   <% else %>
@@ -66,6 +92,9 @@
         <% end %>
       </div>
     </div>
+    <br>
+    <br>
+    <br>
   <% end %>
 
 

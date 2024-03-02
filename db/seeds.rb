@@ -22,9 +22,9 @@ end
 # Kanji seeds
 csv_file_path = Rails.root.join("lib", "seeds", "joyo.csv")
 
-puts "Destroying all Kanji..."
-Kanji.destroy_all
-puts "Recreating Kanji:"
+# puts "Destroying all Kanji..."
+# Kanji.destroy_all
+# puts "Recreating Kanji:"
 
 CSV.foreach(csv_file_path, headers: true).with_index(1) do |row, index|
   # break if index > 100
@@ -72,6 +72,25 @@ end
 
 # Add character data to user cards without it.
 Card.all.each do |user_card|
+
+  prev_id = user_card.kanji_id
+
+  # if user_card.character != Kanji.find(user_card.kanji_id)
+  if user_card.character
+    # puts "checking new_style of #{user_card.character}"
+    new_style = Kanji.where(character: user_card.character).first
+    # puts "checking old_style of #{user_card.character}"
+    old_style = Kanji.where(old_form: user_card.character).first
+    if new_style
+      user_card.kanji_id = Kanji.find_by(character: user_card.character).id
+    elsif old_style
+      user_card.kanji_id = Kanji.find_by(old_form: user_card.character).id
+    end
+    if prev_id != user_card.kanji_id
+      puts "updated kanji_id of #{user_card.character} from #{prev_id} to #{user_card.kanji_id}"
+    end
+  end
+
   if user_card.character.nil?
     user_card.character = Kanji.find(user_card.kanji_id).character
     puts "Added character data (#{user_card.character}) to card ##{user_card.id}"
