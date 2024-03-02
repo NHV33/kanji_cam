@@ -2,17 +2,14 @@
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
 
-<div class="content-wrapper mt-1">
+
+<div class="content-wrapper mt-3">
   <div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
     <% if @card.nil? %>
       <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
         <div class="badge fs-2 bg-success">
           All finished!
         </div>
-
-      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
-        See all decks
-      <% end %>
 
       <br>
           <br>
