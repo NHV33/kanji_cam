@@ -7,10 +7,20 @@
       <div class="badge fs-2 bg-success">
         All finished!
       </div>
-      <div class="badge fs-2 text-wrap text-break">
-        <%= "you earned #{session[:session_points]} points on this flashcard!" %>
+      <br>
+      <br>
+      <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+        <h2><%= @deck.title %></h2>
+        <br>
+        <br>
+        <div data-controller="flashcard">
+          <h2 data-flashcard-target="points" data-points="<%= session[:session_points] %>">+ 0p</h2>
+          <br>
+          <p>🎴You learned <%= session[:total_cards] %> Kanji</p>
+          <p>💰Total: <%= @user_points %>p</p>
+        </div>
       </div>
-      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do%>
+      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
         See all decks
       <% end %>
     </div>
@@ -40,10 +50,10 @@
     <div class="progress" style="width: 260px; margin-top: 20px;">
       <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
       <div  class="progress-bar"
-        role="progressbar"
-        style="width: <%= progress_percentage %>%;"
-        aria-valuenow="<%= progress_percentage %>"
-        aria-valuemin="0" aria-valuemax="100">
+            role="progressbar"
+            style="width: <%= progress_percentage %>%;"
+            aria-valuenow="<%= progress_percentage %>"
+            aria-valuemin="0" aria-valuemax="100">
       </div>
     </div>
     <br>
