@@ -1,104 +1,84 @@
 <%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
-<<<<<<< HEAD
 
-<div class="content-wrapper mt-3">
-
-=======
-<div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
->>>>>>> e812fc5aa9cd89af3163ef14640dd08b2ddf8d90
-  <% if @card.nil? %>
-
-    <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
-
-      <div class="badge fs-2 bg-success">
-        All finished!
-      </div>
-<<<<<<< HEAD
-
-      <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do%>
-        See all decks
-      <% end %>
-
-=======
-      <br>
-      <br>
-      <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
-        <h2><%= @deck.title %></h2>
-        <br>
-        <br>
-        <div data-controller="flashcard">
-          <h2 data-flashcard-target="points" data-points="<%= session[:session_points] %>">+ 0p</h2>
-          <br>
-          <p>🎴You learned <%= session[:total_cards] %> Kanji</p>
-          <p>💰Total: <%= @user_points %>p</p>
+<div class="content-wrapper mt-1">
+  <div class="content-wrapper mt-2" style="height: calc(100vh - 2rem);">
+    <% if @card.nil? %>
+      <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="badge fs-2 bg-success">
+          All finished!
         </div>
-      </div>
+
       <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
         See all decks
       <% end %>
-      <br>
-      <br>
-      <br>
->>>>>>> e812fc5aa9cd89af3163ef14640dd08b2ddf8d90
-    </div>
 
-  <% else %>
-
-    <div class="badge bg-info mb-3 fs-4">
-      <%= "#{@unlearned_cards.count} Cards Remaining" %>
-    </div>
-
-    <div class="card-container">
-      <div class="flashcard">
-        <div class="card-front card-side">
-          <h1 class="kanji-character"><%= @card.kanji.character %></h1>
+      <br>
+          <br>
+          <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+            <h2><%= @deck.title %></h2>
+            <br>
+            <br>
+            <div data-controller="flashcard">
+              <h2 data-flashcard-target="points" data-points="<%= session[:session_points] %>">+ 0p</h2>
+              <br>
+              <p>🎴You learned <%= session[:total_cards] %> Kanji</p>
+              <p>💰Total: <%= @user_points %>p</p>
+            </div>
+          </div>
+          <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
+            See all decks
+          <% end %>
+          <br>
+          <br>
+          <br>
+          >>>>>>> e812fc5aa9cd89af3163ef14640dd08b2ddf8d90
         </div>
-        <div class="card-back card-side">
-          <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
-          <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+      <% else %>
+        <div class="badge bg-info mb-3 fs-4">
+          <%= "#{@unlearned_cards.count} Cards Remaining" %>
         </div>
-      </div>
-    </div>
-
-<div class="progress my-progress-bar" style="width: 260px; margin-top: 20px;">
-  <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
-  <div  class="progress-bar my-progress-bar-value"
+        <div class="card-container">
+          <div class="flashcard">
+            <div class="card-front card-side">
+              <h1 class="kanji-character"><%= @card.kanji.character %></h1>
+            </div>
+            <div class="card-back card-side">
+              <p>Meanings: <%= @card.kanji.meanings.join(', ') %></p>
+              <p>Readings: <%= (@card.kanji.on_readings + @card.kanji.kun_readings).join(', ') %></p>
+            </div>
+          </div>
+        </div>
+        <div class="progress my-progress-bar" style="width: 260px; margin-top: 20px;">
+          <% progress_percentage = (session[:learned_cards].to_f / session[:total_cards] * 100).round(2) %>
+          <div  class="progress-bar my-progress-bar-value"
         role="progressbar"
         style="width: <%= progress_percentage %>%;"
         aria-valuenow="<%= progress_percentage %>"
         aria-valuemin="0" aria-valuemax="100">
-  </div>
-</div>
-    <br>
-
-    <div class="btn-group mt-2" role="group" aria-label="Recall Level Buttons">
-      <div class="btn-margin-right">
-        <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-success btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
-          Easy
-        <% end %>
-      </div>
-
-      <div class="btn-margin-right">
-        <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-warning btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
-          Remembered
-        <% end %>
-      </div>
-
-      <div>
-        <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-danger btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
-          Forgot
-        <% end %>
-      </div>
+          </div>
+        </div>
+        <br>
+        <div class="btn-group mt-2" role="group" aria-label="Recall Level Buttons">
+          <div class="btn-margin-right">
+            <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-success btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
+              Easy
+            <% end %>
+          </div>
+          <div class="btn-margin-right">
+            <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-warning btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
+              Remembered
+            <% end %>
+          </div>
+          <div>
+            <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-danger btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
+              Forgot
+            <% end %>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+      <% end %>
     </div>
-    <br>
-    <br>
-    <br>
-  <% end %>
-
-
-
-
-
-</div>

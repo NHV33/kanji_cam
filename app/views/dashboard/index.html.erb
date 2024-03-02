@@ -1,60 +1,43 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
 <%= render 'partials/title_bar', destination: root_url, title: "Dashboard" %>
-
 <div class="container">
-
   <div class="d-flex justify-content-between align-items-center mt-5 gap-2">
     <div class="col-8">
       <%= link_to 'Study Kanji Flashcards', decks_path, class: 'fs-5 page-btn' %>
     </div>
-    <div class="col">
-      <div class="bg-primary text-center text-white" style="border-radius: 10px; height: 48px;"><%= @points %> <i class="fa-solid fa-gem text-white"></i></div>
+    <div class="col fs-3">
+      <div class="text-center points-display" style="height: 48px;"><%= @points %> <i class="fa-solid fa-gem"></i></div>
     </div>
   </div>
-
   <div class="d-flex justify-content-between gap-3 mt-2">
-
     <div class="box mt-2 col-12">
-
       <% captured_fraction = " (#{@total_captured_kanji} / #{@total_kanji})" %>
-
       <h3>Kanji Collected<%= captured_fraction %></h3>
       <div class="progress my-progress-bar">
-
         <div  class="progress-bar my-progress-bar-value"
               role="progressbar"
               style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;"
               aria-valuenow="<%= @total_captured_kanji %>"
               aria-valuemin="0" aria-valuemax="<%= @total_kanji %>">
-              <!--
+          <!--
               <%= @total_captured_kanji %> / <%= @total_kanji %>
               -->
-
         </div>
-
       </div>
-
-
       <% learned_fraction = " (#{@total_learned_kanji} / #{@total_captured_kanji})" %>
       <h3>Kanji Learned<%= learned_fraction %></h3>
       <div class="progress my-progress-bar">
-
         <div  class="progress-bar my-progress-bar-value"
               role="progressbar"
               style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;"
               aria-valuenow="<%= @total_learned_kanji %>"
               aria-valuemin="0"
               aria-valuemax="<%= @total_captured_kanji %>">
-
         </div>
-
       </div>
-
     </div>
-
   </div>
-
   <div class="box mt-3">
     <h3>Kanji Collected by JLPT Level</h3>
     <%= pie_chart @learned_kanji_by_jlpt,
@@ -75,10 +58,7 @@
                   }
                 } %>
   </div>
-
-
 </div>
-
 <!--
 <div class="container mt-4">
   <div class="row">
