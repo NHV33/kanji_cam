@@ -1,13 +1,15 @@
-<%= render 'partials/title_bar', destination: dashboard_url, title: "All User's Collection" %>
-
+<%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
 <div class="container">
-<!-- to be precise, the following is not the exact total kanji number. doesn't consider duplication -->
-<p class="text-center mt-4 mb-1"><%= @cards.count %> <%= 'kanji'.pluralize(@cards.count) %> collected on our app</p>
-<div class="map mx-auto mb-4"
+  <div class="map-bg box p-2">
+    <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
+    <%= link_to "My Map", maps_path, class: 'btn-3d btn-primary text-white' %>
+    <button disabled class="btn-3d btn-primary text-white">Global Map</button>
+    <p class="text-center mb-1"><%= @cards.count %> kanji collected on our app</p>
+    <div class="map mx-auto mb-2"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
 <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
-<%= link_to "Go back to your chart", maps_path, class: 'btn-3d btn-primary text-white mt-4' %>
+  </div>
 </div>

@@ -5,3 +5,4 @@
 //= link popper.js
 //= link bootstrap.min.js
 //= link favicon/browserconfig.xml
+//= link favicon/site.webmanifest

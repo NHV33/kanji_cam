@@ -4,14 +4,18 @@
 
 <div class="container">
 
-  <div class="mt-5">
-    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 page-btn' %>
+  <div class="d-flex justify-content-between align-items-center mt-5 gap-2">
+    <div class="col-8">
+      <%= link_to 'Study Kanji Flashcards', decks_path, class: 'fs-5 page-btn' %>
+    </div>
+    <div class="col">
+      <div class="bg-primary text-center text-white" style="border-radius: 10px; height: 48px;"><%= @points %> <i class="fa-solid fa-gem text-white"></i></div>
+    </div>
   </div>
-
 
   <div class="d-flex justify-content-between gap-3 mt-2">
 
-    <div class="box mt-3 col-8">
+    <div class="box mt-2 col-12">
 
       <% captured_fraction = " (#{@total_captured_kanji} / #{@total_kanji})" %>
 
@@ -48,10 +52,6 @@
       </div>
 
     </div>
-
-  <div class="box mt-3 col">
-    <h3>Points</h3>
-  </div>
 
   </div>
 

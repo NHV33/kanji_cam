@@ -19,8 +19,10 @@
 }
 
 .navbar-icon {
-  height: 5rem;
-  width: 5rem;
+  height: 15vmin;
+  width: 15vmin;
+  max-height: 10vh;
+  max-width: 10vh;
   fill: url(#default-gradient) #454545;
 }
 

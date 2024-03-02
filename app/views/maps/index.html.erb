@@ -1,20 +1,25 @@
-<%= render 'partials/title_bar', destination: dashboard_url, title: "Your Conquest Chart" %>
+<%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Map" %>
 <div class="container">
+
+  <div class="map-bg box justify-content-center p-2">
+    <button disabled class="btn-3d btn-primary text-white">My Map</button>
+    <%= link_to "Global Map", all_kanji_map_path, class: 'btn-3d btn-primary text-white' %>
   <%# if user found 0 kanji %>
   <%# "Go find some kanji!"" %>
-  <p class="text-center mt-4 mb-1"><% if @cards.count == 0 %><%= "Go get some kanji!" %>
-  <%# if user found some kanji, but no location is available %>
-  <%# "No location available" %>
+  <p class="text-center mb-1"><% if @cards.count == 0 %><%= "No kanji to show" %>
+      <%# if user found some kanji, but no location is available %>
+      <%# "No location available" %>
     <% elsif @cards.select { |card| card.longitude.present? && card.latitude.present? }.count == 0 %>
-    <%= "No location is available" %>
-    <%# if user found some kanji, but some cards' location are missing %>
-    <%# xx positions are available %>
-    <% else %><%= @cards.select { |card| card.longitude.present? && card.latitude.present? }.count %> <%= "positions are available" %>
+      <%= "No location data is available" %>
+      <%# if user found some kanji, but some cards' location are missing %>
+      <%# xx positions are available %>
+    <% else %><%= "Displaying" %> <%= @cards.count %> of <%= @cards.select { |card| card.longitude.present? && card.latitude.present? }.count %> <%= "kanji" %>
     <% end %></p>
-  <div class="map mx-auto mb-4"
+    <%# Please advise me good wording... the following will redirect to all user's kanji map %>
+    <div class="map mx-auto mb-2"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   <%# Please advise me good wording... the following will redirect to all user's kanji map %>
-  <%= link_to "Check other people's activity", all_kanji_map_path, class: 'btn-3d btn-primary text-white mt-4' %>
+  </div>
 </div>
