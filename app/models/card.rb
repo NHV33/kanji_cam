@@ -4,7 +4,7 @@ class Card < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :decks, through: :entries
 
-  validates :character, presence: true, uniqueness: true
+  validates :character, presence: true, uniqueness: {scope: :user_id, message: "User has already collected this Kanji."}
 
   # disable for now
   # geocoded_by :latitude, :longitude
