@@ -12,19 +12,27 @@
   </div>
 
   <div class="box mt-3">
+    <!-- Adjusted due to "special" hidden kanji -->
+    <% total_kanji = @total_kanji - 1 %>
 
-    <% captured_fraction = " (#{@total_captured_kanji} / #{@total_kanji})" %>
+    <% captured_fraction = " (#{@total_captured_kanji} / #{total_kanji})" %>
+    <h3>
+      Kanji Collected
+      <span class="fs-5">
+        <%= captured_fraction %>
+      </span>
+      <%= render 'partials/qa_button', topic: "standard_kanji" %>
+    </h3>
 
-    <h3>Kanji Collected<%= captured_fraction %></h3>
     <div class="progress">
 
       <div  class="progress-bar"
             role="progressbar"
-            style="width: <%= (@total_captured_kanji.to_f / @total_kanji * 100).round(2) %>%;"
+            style="width: <%= (@total_captured_kanji.to_f / total_kanji * 100).round(2) %>%;"
             aria-valuenow="<%= @total_captured_kanji %>"
-            aria-valuemin="0" aria-valuemax="<%= @total_kanji %>">
+            aria-valuemin="0" aria-valuemax="<%= total_kanji %>">
             <!--
-            <%= @total_captured_kanji %> / <%= @total_kanji %>
+            <%= @total_captured_kanji %> / <%= total_kanji %>
             -->
 
       </div>
@@ -34,7 +42,14 @@
     <br>
 
     <% learned_fraction = " (#{@total_learned_kanji} / #{@total_captured_kanji})" %>
-    <h3>Kanji Learned<%= learned_fraction %></h3>
+    <h3>
+      Kanji Learned
+      <span class="fs-5">
+        <%= learned_fraction %>
+      </span>
+      <%= render 'partials/qa_button', topic: "learning_progress" %>
+    </h3>
+
     <div class="progress">
 
       <div  class="progress-bar"

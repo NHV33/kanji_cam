@@ -1,2 +1,81 @@
-Howdy Y'all
-<%= @topic %>
+<% topic_title = (@topic) ? @topic.split("_").map { |word| word.capitalize!}.join(" ") : nil %>
+<%= render 'partials/title_bar', destination: :back, title: (topic_title) ? "About #{topic_title}" : "Q&A" %>
+
+<div class="mt-3 container d-flex flex-column align-items-center">
+  <div class="us-n box col-12 mt-4">
+
+    <% unless @topic %>
+      <h1 class="text-center">Topic Not Found</h1>
+    <% else %>
+      <!-- Heading is automatically generated from topic_title var-->
+      <div id="topic-heading" class="row">
+        <span class="col-1"></span>
+        <h1 class="col-11"><%= topic_title %></h1>
+      </div>
+
+      <!--
+        Article content should be formatted as seen below
+        <% if @topic == "TOPIC_NAME" %>
+          <div id="q-row" class="row">
+            <span class="col-1 fs-3">Q: </span>
+            <span class="col-11 fs-4 fst-italic">"QUESTION"</span>
+          </div>
+          <br>
+          <div id="a-row" class="row">
+            <span class="col-1 fs-3">A: </span>
+            <div id="answer" class="col-11">
+              ANSWER
+            </div>
+        <% end %>
+      -->
+      <% if @topic == "standard_kanji" %>
+        <div id="q-row" class="row">
+          <span class="col-1 fs-3">Q: </span>
+          <span class="col-11 fs-4 fst-italic">"Why 2136 Kanji?"</span>
+        </div>
+        <br>
+        <div id="a-row" class="row">
+          <span class="col-1 fs-3">A: </span>
+          <div id="answer" class="col-11">
+            <p>
+              The
+              <a href="https://en.wikipedia.org/wiki/Ministry_of_Education,_Culture,_Sports,_Science_and_Technology">
+                Japanese Ministry of Education
+              </a>
+              maintains a list of
+              <a href="https://en.wikipedia.org/wiki/J%C5%8Dy%C5%8D_kanji">
+                "standard-use" (<i>Jōyō</i> 常用) kanji
+              </a>
+              that children are expected to learn by the completion of secondary school.
+              These standard <i>Jōyō</i> Kanji are also used as the basis for the
+              <a href="https://en.wikipedia.org/wiki/Japanese-Language_Proficiency_Test">
+                Japanese Language Proficiency Test (JLPT)
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @topic == "learning_progress" %>
+        <div id="q-row" class="row">
+          <span class="col-1 fs-3">Q: </span>
+          <span class="col-11 fs-4 fst-italic">"How is Learning Progress Measured?"</span>
+        </div>
+        <br>
+        <div id="a-row" class="row">
+          <span class="col-1 fs-3">A: </span>
+          <div id="answer" class="col-11">
+            Your learning progress is a measure of how many of the kanji cards
+            in your collection have been studied. Currently, Kanji Cam marks a
+            kanji as studied after the first practice. In a future update, kanji
+            will be marked as "learned" after successfully remembering a card
+            several times in a row.
+          </div>
+        <% end %>
+
+
+    <% end %> <!-- Topic Articles above this line-->
+
+  </div>
+</div>
