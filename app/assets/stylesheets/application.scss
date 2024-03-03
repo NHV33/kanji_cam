@@ -14,3 +14,7 @@
 @import "components/camera";
 @import "components/flashcard";
 @import "components/titlebar";
+
+// Utilities
+.us-n { user-select: none; }
+.us-t { user-select: text !important;}
