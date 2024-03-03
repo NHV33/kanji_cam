@@ -45,29 +45,7 @@ export default class extends Controller {
 
   addPulsingDot() {
     const size = 200;
-    let longitude, latitude;
-
-    // get user's location and display the pin there
-  navigator.geolocation.getCurrentPosition(position => {
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    console.log(latitude, longitude, "user's position");
-
-    const userMarker = new mapboxgl.Marker()
-      .setLngLat([longitude, latitude])
-      .addTo(this.map);
-
-    // adjust map showing range to user's location
-    // comment out as this animation can be annoying
-    // this.map.flyTo({
-    //     center: [longitude, latitude], // set user's location to the center
-    //     zoom: 12,
-    //     essential: true,
-    //     duration: 1000
-    // });
-}, error => {
-    console.error("Error occurred while getting geolocation:", error);
-});
+    let longitude, latitude; // Define variables here
 
     // Define the pulsing dot icon
     const pulsingDot = {
@@ -82,16 +60,20 @@ export default class extends Controller {
 
         const radius = (size / 2) * 0.3;
         const outerRadius = (size / 2) * 0.7 * t + radius;
-        const context = this.context;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const context = canvas.getContext('2d');
 
         // Clear the canvas
-        context.clearRect(0, 0, this.width, this.height);
+        context.clearRect(0, 0, size, size);
 
         // Draw the outer circle
         context.beginPath();
         context.arc(
-          this.width / 2,
-          this.height / 2,
+          size / 2,
+          size / 2,
           outerRadius,
           0,
           Math.PI * 2
@@ -102,8 +84,8 @@ export default class extends Controller {
         // Draw the inner circle
         context.beginPath();
         context.arc(
-          this.width / 2,
-          this.height / 2,
+          size / 2,
+          size / 2,
           radius,
           0,
           Math.PI * 2
@@ -114,25 +96,36 @@ export default class extends Controller {
         context.fill();
         context.stroke();
 
-        // Update the image data with data from the canvas
-        this.data = context.getImageData(
-          0,
-          0,
-          this.width,
-          this.height
-        ).data;
-
-        // Repaint the map to show the updated image
-        map.triggerRepaint();
-
-        // Return true to indicate that the image was updated
-        return true;
+        // Return the canvas containing the pulsing dot
+        return canvas;
       }
     };
 
     // Add the pulsing dot icon to the map
     this.map.on('load', () => {
       this.map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+      // Get user's location and display the pin there
+      navigator.geolocation.getCurrentPosition(position => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude, longitude, "user's position");
+
+        const userMarker = new mapboxgl.Marker()
+          .setLngLat([longitude, latitude])
+          .addTo(this.map);
+
+        // Adjust map showing range to user's location
+        // Comment out as this animation can be annoying
+        // this.map.flyTo({
+        //     center: [longitude, latitude], // set user's location to the center
+        //     zoom: 12,
+        //     essential: true,
+        //     duration: 1000
+        // });
+      }, error => {
+        console.error("Error occurred while getting geolocation:", error);
+      });
 
       // Add a source and layer using the pulsing dot icon
       this.map.addSource('dot-point', {
@@ -161,6 +154,7 @@ export default class extends Controller {
       });
     });
   }
+
 
   #addMarkersToMap() {
     let popup = null; // set the variable

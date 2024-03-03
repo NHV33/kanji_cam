@@ -15,6 +15,7 @@ $dark-color: $primary;
 
 .btn3d:disabled, button[disabled] {
   background-color: gray !important;
+  box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #646589, 0 8px 8px 1px rgba(0, 0, 0, 0.5) !important;
 }
 
 /*Not necessary because relative elements
@@ -36,12 +37,16 @@ also, this div is just a point with no width or height */
 
 .marker-icon {
   background-color: $dark-color;
-  border-color: $light-color;
-  border-style: solid;
+  // border-color: $light-color;
+  // border-style: solid;
   border-radius: 100% 100% 0 100%;
-  border-width: 1px;
+  border: 1px solid rgba(0,0,0,.2);
+  // border-width: 1px;
   // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
-  color: $light-color;
+  // color: $light-color;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.3) 0%,transparent 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image:         linear-gradient(rgba(255,255,255,.3) 0%,transparent 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.1) inset,0 2px 10px 0 rgba(255,255,255,.2) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
   position: absolute;
   // z-index: 1;
 
@@ -59,12 +64,11 @@ also, this div is just a point with no width or height */
 .pinpoint-active {
   z-index: 9999;
   .marker-icon {
-    background-color: $light-color;
-    border-color: $dark-color;
-    z-index: 9999;
-    .marker-text {
-      color: $dark-color;
-    }
+    background: rgb(180,58,131);
+    background: linear-gradient(90deg, rgba(180,58,131,1) 0%, rgba(159,29,253,1) 50%, rgba(73,69,252,1) 100%);
+    // .marker-text {
+    //   color: $dark-color;
+    // }
   }
 }
 
