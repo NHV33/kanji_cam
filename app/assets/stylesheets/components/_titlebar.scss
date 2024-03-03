@@ -1,9 +1,10 @@
-$titlebar-color: rgb(33,33,33);
-$titlebar-height: 50px;
+$titlebar-color: $primary;
+$titlebar-height: 64px;
+
 
 .titlebar {
   height: $titlebar-height;
-  background-color: $titlebar-color;
+  background-color: rgba(26, 188, 156, 1);
   margin: 0px;
 }
 
@@ -16,5 +17,4 @@ $titlebar-height: 50px;
   width: $titlebar-height;
   background: $titlebar-color;
   background: linear-gradient(to right, rgba($titlebar-color ,1) 0%,rgba($titlebar-color ,1) 75%,rgba($titlebar-color ,0) 100%);
-
 }
