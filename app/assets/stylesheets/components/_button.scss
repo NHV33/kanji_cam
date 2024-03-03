@@ -1,30 +1,17 @@
 // Page Button
 .page-btn {
-  background: linear-gradient(#42A1EC, #0070C9);
-  box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
-  border: 1px solid #0077CC;
+  padding: 10px;
+  background: $bg-color;
   border-radius: 10px;
-  box-sizing: border-box;
-  color: #FFFFFF;
+  color: $font-color;
+  box-shadow: 5px 5px 10px #c9c8c2, -5px -5px 10px #ffffff;
   cursor: pointer;
-  direction: ltr;
-  display: block;
-  font-size: 17px;
-  min-width: 30px;
-  overflow: visible;
-  padding: 8px;
-  text-align: center;
   user-select: none;
   text-decoration: none;
-  touch-action: manipulation;
-  white-space: nowrap;
 
   &:active {
-    background: linear-gradient(#42A1EC, #0070C9);
-    // border-color: #006DBC;
-    // outline: none;
-    border-radius: 10px;
-    box-shadow: inset 5px 5px 10px #919192, inset -5px -5px 10px #ffffff;
+  background: $bg-color;
+  box-shadow: inset 5px 5px 10px #c9c8c2, inset -5px -5px 10px #ffffff;
   }
 
 }
