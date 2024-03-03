@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   get "reset_learned" => "decks#reset_learned", as: :reset_learned
 
   get "qa" => "pages#qa", as: :qa
+
+  get "tomo" => "pages#tomo", as: :tomo
 end
