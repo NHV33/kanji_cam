@@ -1,7 +1,8 @@
 class MapsController < ApplicationController
   def index
     # limit this to current user later
-    @cards = current_user.cards.where.not(latitude: nil, longitude: nil)
+    @cards = current_user.cards
+    @cards_with_position = current_user.cards.where.not(latitude: nil, longitude: nil)
     @markers = @cards.map do |card|
       {
         lat: card.latitude,

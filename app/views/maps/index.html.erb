@@ -10,14 +10,14 @@
     <%# <div class="top-message bg-white d-flex align-items-center px-3 py-2"> %>
     <%# if user found 0 kanji %>
   <%# "Go find some kanji!"" %>
-  <p class="top-message d-flex align-items-center px-3 text-center"><% if @cards.count == 0 %><%= "No kanji to show" %>
+  <p class="top-message d-flex align-items-center px-3 text-center"><% if @cards_with_position.count == 0 %><%= "No kanji to show" %>
       <%# if user found some kanji, but no location is available %>
       <%# "No location available" %>
-    <% elsif @cards.select { |card| card.longitude.present? && card.latitude.present? }.count == 0 %>
+    <% elsif @cards_with_position == 0 %>
       <%= "No location data is available" %>
       <%# if user found some kanji, but some cards' location are missing %>
       <%# xx positions are available %>
-    <% else %><%= "Displaying" %> <%= @cards.count %> of <%= @cards.select { |card| card.longitude.present? && card.latitude.present? }.count %> <%= "kanji" %>
+    <% else %><%= "Displaying" %> <%= @cards_with_position.count %> of <%= @cards.count %> <%= "kanji" %>
     <% end %></p>
 
 
