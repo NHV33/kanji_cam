@@ -1,9 +1,12 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Map" %>
-<div class="container">
+<%# <div class="container"> %>
 
-  <div class="map-bg box justify-content-center mt-4 p-2">
-    <button disabled class="btn3d btn-primary text-white">My Map</button>
-    <%= link_to "Global Map", all_kanji_map_path, class: 'btn3d btn-primary text-white' %>
+<div class="d-flex map-buttons mt-4">
+    <div class="tab-label py-2 px-3">My Map</div>
+    <%= link_to "Global Map", all_kanji_map_path, class: 'tab-label py-2 px-3' %>
+    </div>
+  <%# <div class="map-bg bg-white p-2"> %>
+    <%# <button disabled class="text-white">My Map</button> %>
   <%# if user found 0 kanji %>
   <%# "Go find some kanji!"" %>
   <p class="text-center mb-1"><% if @cards.count == 0 %><%= "No kanji to show" %>
@@ -20,5 +23,5 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  </div>
-</div>
+  <%# </div> %>
+<%# </div> %>

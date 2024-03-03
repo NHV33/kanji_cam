@@ -2,20 +2,33 @@ $icon-width: 48px;
 $light-color: white;
 $dark-color: $primary;
 
-.map-bg {
-  border-radius: 20px;
-}
+// .map-bg {
+//   border-radius: 0 20px 20px 20px;
+// }
 
 .map {
-  border-radius: 20px;
-  height: 65vh;
+  // border-radius: 20px;
+  height: 100vh;
+  width: 100vw;
   position: relative;
   z-index: 0;
 }
 
-.btn3d:disabled, button[disabled] {
-  background-color: gray !important;
-  box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #646589, 0 8px 8px 1px rgba(0, 0, 0, 0.5) !important;
+// .btn3d:disabled, button[disabled] {
+//   background-color: gray !important;
+//   box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #646589, 0 8px 8px 1px rgba(0, 0, 0, 0.5) !important;
+// }
+
+.tab-label {
+  text-decoration: none;
+  border-radius: 16px 16px 0 0;
+}
+
+.map-buttons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
 }
 
 /*Not necessary because relative elements
