@@ -1,5 +1,5 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
-<div class="map-container mt-3">
+<div class="map-container">
   <%# <div class="map-bg box p-2"> %>
     <div class="tab-button-container d-flex justify-content-between">
     <%= link_to maps_path, class: 'text-white tab-button transparent' do %>
@@ -9,7 +9,7 @@
     </div>
     <p class="top-message d-flex align-items-center px-3 text-center"><%= @cards.count %> kanji collected</p>
 
-    <div class="map mx-auto mb-2"
+    <div class="map mx-auto"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
