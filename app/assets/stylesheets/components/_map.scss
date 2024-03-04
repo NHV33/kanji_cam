@@ -33,6 +33,8 @@ $dark-color: $primary;
 .btn3d:disabled, button[disabled] {
   box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #434979, 0 8px 8px 1px rgba(0, 0, 0, 0.5) !important;
   background-color: #6b6ea4 !important;
+  // lower than the other button
+  top: 2px;
 }
 
 .top-message {
@@ -72,6 +74,37 @@ also, this div is just a point with no width or height */
   border: 2px solid #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+}
+
+.user-speech-bubble {
+  background-color: black;
+  color: $light-color;
+  padding: 6px;
+  border-radius: 10px;
+  width: 100px;
+  position: absolute;
+  top: 38px;
+  left: -37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: calc(50% - 8px);
+  /* border to shape triangle */
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 15px solid black;
+}
+
+.speech-bubble-text {
+  padding: 0;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .marker-icon {
@@ -114,7 +147,6 @@ also, this div is just a point with no width or height */
   }
 }
 
-
 .marker-text {
   color: $light-color;
   font-size: 20px;
@@ -129,5 +161,3 @@ also, this div is just a point with no width or height */
   max-width: 400px;
   // border: solid 2px $dark-color;
 }
-
-// .mapboxgl-popup
