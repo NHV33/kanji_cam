@@ -13,38 +13,61 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v11",
+      // center: [0, 0],
+      zoom: 0
     });
 
-    // get user's location and display the pin there
+    this.map.on('load', () => {
+      // this.map.setCenter([0, 0]);
+      // this.map.setZoom(0);
+    // get user's location and display the pin, add other markers as well
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        console.log(latitude, longitude, "user's position");
+        this.#addUserMarker(position.coords);
+        this.#addMarkersToMap();
+        // this.#fitMapToMarkers(position.coords);
+      }, (error) => {
+        console.error("Error occurred while getting geolocation:", error);
+        // if getting user location fails, display other markers
+        this.#addMarkersToMap();
+        // this.#fitMapToMarkers();
+      });
+    });
+  }
 
-        const userMarker = new mapboxgl.Marker()
-          .setLngLat([longitude, latitude])
+    // update userMarker when user location changes
+  //   this.map.on("geolocate", function (e) {
+  //     userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
+  //   });
+  // }
+
+  // #fitMapToMarkers() {
+  //   const bounds = new mapboxgl.LngLatBounds();
+  //   this.markersValue.forEach((marker) => {
+  //     bounds.extend([marker.lng, marker.lat]);
+  //   });
+  //   this.map.fitBounds(bounds, { padding: 50, duration: 10 });
+  // }
+
+  #addUserMarker(coords) {
+    const userMarker = document.createElement('div');
+    userMarker.className = 'user-marker';
+
+    new mapboxgl.Marker(userMarker)
+          .setLngLat([coords.longitude, coords.latitude])
           .addTo(this.map);
+          console.log(userMarker, "user marker created");
 
         // adjust map showing range to user's location
         // comment out as this animation can be annoying
-        // this.map.flyTo({
-        //     center: [longitude, latitude], // set user's location to the center
-        //     zoom: 12,
-        //     essential: true,
-        //     duration: 1000
-        // });
-      },
-      (error) => {
-        console.error("Error occurred while getting geolocation:", error);
-      }
-    );
+        this.map.flyTo({
+            center: [coords.longitude, coords.latitude], // set user's location to the center
+            zoom: 12,
+            essential: true,
+            duration: 1000
+        });
 
-    // this.addPulsingDot();
-    this.#addMarkersToMap();
-    this.#fitMapToMarkers();
-
-    this.map.addControl(
+      this.map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true,
@@ -53,132 +76,7 @@ export default class extends Controller {
         showUserLocation: true,
       })
     );
-
-    // update userMarker when user location changes
-    this.map.on("geolocate", function (e) {
-      userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
-    });
-  }
-
-  #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds();
-    this.markersValue.forEach((marker) => {
-      bounds.extend([marker.lng, marker.lat]);
-    });
-    this.map.fitBounds(bounds, { padding: 50, duration: 10 });
-  }
-
-  // addPulsingDot() {
-  //   const size = 200;
-  //   let longitude, latitude; // Define variables here
-
-  //   // Define the pulsing dot icon
-  //   const pulsingDot = {
-  //     width: size,
-  //     height: size,
-  //     data: new Uint8Array(size * size * 4),
-
-  //     // Function to render the pulsing dot
-  //     render: function () {
-  //       const duration = 1000; // Animation duration in milliseconds
-  //       const t = (performance.now() % duration) / duration; // Current animation progress
-
-  //       const radius = (size / 2) * 0.3;
-  //       const outerRadius = (size / 2) * 0.7 * t + radius;
-
-  //       const canvas = document.createElement('canvas');
-  //       canvas.width = size;
-  //       canvas.height = size;
-  //       const context = canvas.getContext('2d');
-
-  //       // Clear the canvas
-  //       context.clearRect(0, 0, size, size);
-
-  //       // Draw the outer circle
-  //       context.beginPath();
-  //       context.arc(
-  //         size / 2,
-  //         size / 2,
-  //         outerRadius,
-  //         0,
-  //         Math.PI * 2
-  //       );
-  //       context.fillStyle = `rgba(255, 200, 200, ${1 - t})`; // Outer circle color
-  //       context.fill();
-
-  //       // Draw the inner circle
-  //       context.beginPath();
-  //       context.arc(
-  //         size / 2,
-  //         size / 2,
-  //         radius,
-  //         0,
-  //         Math.PI * 2
-  //       );
-  //       context.fillStyle = 'rgba(255, 100, 100, 1)'; // Inner circle color
-  //       context.strokeStyle = 'white'; // Inner circle stroke color
-  //       context.lineWidth = 2 + 4 * (1 - t); // Inner circle stroke width
-  //       context.fill();
-  //       context.stroke();
-
-  //       // Return the canvas containing the pulsing dot
-  //       return canvas;
-  //     }
-  //   };
-
-  //   // Add the pulsing dot icon to the map
-  //   this.map.on('load', () => {
-  //     this.map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-
-  //     // Get user's location and display the pin there
-  //     navigator.geolocation.getCurrentPosition(position => {
-  //       latitude = position.coords.latitude;
-  //       longitude = position.coords.longitude;
-  //       console.log(latitude, longitude, "user's position");
-
-  //       const userMarker = new mapboxgl.Marker()
-  //         .setLngLat([longitude, latitude])
-  //         .addTo(this.map);
-
-  //       // Adjust map showing range to user's location
-  //       // Comment out as this animation can be annoying
-  //       // this.map.flyTo({
-  //       //     center: [longitude, latitude], // set user's location to the center
-  //       //     zoom: 12,
-  //       //     essential: true,
-  //       //     duration: 1000
-  //       // });
-  //     }, error => {
-  //       console.error("Error occurred while getting geolocation:", error);
-  //     });
-
-  //     // Add a source and layer using the pulsing dot icon
-  //     this.map.addSource('dot-point', {
-  //       'type': 'geojson',
-  //       'data': {
-  //         'type': 'FeatureCollection',
-  //         'features': [
-  //           {
-  //             'type': 'Feature',
-  //             'geometry': {
-  //               'type': 'Point',
-  //               'coordinates': [longitude, latitude] // Set the initial coordinates of the pulsing dot
-  //             }
-  //           }
-  //         ]
-  //       }
-  //     });
-
-  //     this.map.addLayer({
-  //       'id': 'layer-with-pulsing-dot',
-  //       'type': 'symbol',
-  //       'source': 'dot-point',
-  //       'layout': {
-  //         'icon-image': 'pulsing-dot'
-  //       }
-  //     });
-  //   });
-  // }
+      }
 
   #addMarkersToMap() {
     let popup = null; // set the variable
@@ -264,4 +162,17 @@ export default class extends Controller {
     };
   })
 }
+
+// #fitMapToMarkers(userCoords = null) {
+//   const bounds = new mapboxgl.LngLatBounds();
+//   if (userCoords) {
+//     bounds.extend([userCoords.longitude, userCoords.latitude]);
+//   }
+//   this.markersValue.forEach((marker) => {
+//     bounds.extend([marker.lng, marker.lat]);
+//   });
+//   if (!bounds.isEmpty()) {
+//     this.map.fitBounds(bounds, { padding: 50, duration: 0 });
+//   }
+// }
 }
