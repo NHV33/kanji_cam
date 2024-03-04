@@ -1,0 +1,19 @@
+<% frame_style = "width: #{frame_size}; height: #{frame_size}; position: relative;" %>
+<div id="tomo-frame" class="" style="<%= frame_style %>">
+
+  <% kanji_rot = (kanji_rot) ? kanji_rot : "0, 1, 0, 0deg" %>
+  <% kanji_wh = "calc((#{frame_size} / 100) * #{kanji_size})" %>
+  <% kanji_style = "transform: rotate3d(#{kanji_rot}); position: absolute; left: #{kanji_pos[:x]}%; top: #{kanji_pos[:y]}%; width: #{kanji_wh}; height: #{kanji_wh};" %>
+  <div class="" style="<%= kanji_style %>">
+
+    <svg viewBox="0 0 17 17">
+      <text x="0.5" y="14">
+        <%= kanji_char %>
+      </text>
+    </svg>
+
+  </div>
+
+  <%= image_tag image_path, style: "height: 100%;" %>
+
+</div>
