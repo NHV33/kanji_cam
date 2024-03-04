@@ -1,26 +1,66 @@
-.custom-card {
-  padding: 20px;
-  border-radius: 18px;
-  // background: $custom-color;
-  // box-shadow:  5px 5px 10px #c4c3c6, -5px -5px 10px #ffffff;
-  color: $font-color;
-  width: 190px;
-  height: 254px;
-  backdrop-filter: blur(7px);
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
-  transition: all 0.3s;
-  cursor: pointer;
+// .custom-card {
+//   padding: 20px;
+//   border-radius: 18px;
+//   // background: $custom-color;
+//   // box-shadow:  5px 5px 10px #c4c3c6, -5px -5px 10px #ffffff;
+//   color: $font-color;
+//   width: 190px;
+  // height: 254px;
+  // backdrop-filter: blur(7px);
+  // background-color: rgba(255, 255, 255, 0.5);
+  // box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+  // transition: all 0.3s;
+  // cursor: pointer;
 
-  &:active {
-    transition-property: box-shadow;
-    transition: ease;
-    transition-duration: 300ms;
-    border-radius: 18px;
-    background: $custom-color;
-    box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
-  }
-}
+  // &:active {
+  //   transition-property: box-shadow;
+  //   transition: ease;
+  //   transition-duration: 300ms;
+  //   border-radius: 18px;
+  //   background: $custom-color;
+  //   box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
+  // }
+
+// }
+// brown paper
+// .custom-card {
+//   width: 190px;
+//   height: 254px;
+//   display: flex;
+//   padding: 2em;
+//   box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
+//   background: #fffef0;
+//   filter: url(#wavy2);
+//   color: $font-color;
+// }
+
+// computer looking
+// .custom-card {
+  // --font-color: #323232;
+  // --font-color-sub: #666;
+//   --bg-color: #fff;
+//   --main-color: #323232;
+//   --main-focus: #2d8cf0;
+//   color: $font-color;
+//   width: 230px;
+//   height: 300px;
+//   background: var(--bg-color);
+//   border: 2px solid var(--main-color);
+//   box-shadow: 4px 4px var(--main-color);
+//   border-radius: 5px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   padding: 20px;
+//   gap: 10px;
+//   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+//   &:active {
+//     box-shadow: inset 4px 4px var(--main-color);
+//   }
+// }
+
+
 
 .card-img-top {
   border-radius: 10px;
