@@ -29,6 +29,11 @@ class CardsController < ApplicationController
 
     #Regex to extract kanji found within the Japanese section of the Unicode standard.
     capture_result = match_kanji(params[:kanji_data])
+    kanji_debug_str = "original: #{params[:kanji_data]} regex filtered: #{capture_result} chars_equal: #{params[:kanji_data] == capture_result}"
+
+    # FOR DEBUGGING
+    # puts kanji_debug_str
+    # raise kanji_debug_str
 
     if capture_result.nil?
       redirect_to dashboard_url #TODO should redirect to error page
@@ -36,9 +41,10 @@ class CardsController < ApplicationController
       @card.character = capture_result
       # Search for Kanji matching modern form OR old form (kyujitai)
       database_kanji = Kanji.where("character = :term OR old_form = :term", term: capture_result).first
-
       # If Kanji instance is not found, set ID to 1 (special hidden kanji)
       database_kanji_id = (database_kanji) ? database_kanji.id : 1;
+      # FOR DEBUGGING
+      # raise "#{database_kanji_id}"
       @card.kanji_id = database_kanji_id
       @points = current_user.points
       @points += 100
