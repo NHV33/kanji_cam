@@ -2,9 +2,11 @@
 <div class="map-container mt-3">
 
   <%# <div class="map-bg box justify-content-center mt-4 p-2"> %>
-  <div class="tab-buttons d-flex">
-    <button class="text-white">My Map</button>
-    <%= link_to "Global Map", all_kanji_map_path, class: 'text-white' %>
+  <div class="tab-button-container d-flex justify-content-between">
+    <button class="text-white tab-button yellow"><i class="fa-solid fa-user"></i> My Map</button>
+    <%= link_to all_kanji_map_path, class: 'text-white tab-button transparent' do %>
+  Global Map <i class="fa-solid fa-globe"></i>
+<% end %>
     </div>
     <%# </div> %>
     <%# <div class="top-message bg-white d-flex align-items-center px-3 py-2"> %>

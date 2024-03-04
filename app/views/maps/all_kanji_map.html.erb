@@ -1,9 +1,11 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
 <div class="map-container mt-3">
   <%# <div class="map-bg box p-2"> %>
-    <div class="map-buttons d-flex">
-    <%= link_to "My Map", maps_path, class: 'btn3d btn-primary text-white' %>
-    <button disabled class="btn3d btn-primary text-white">Global Map</button>
+    <div class="tab-button-container d-flex justify-content-between">
+    <%= link_to maps_path, class: 'text-white tab-button transparent' do %>
+    <i class="fas fa-user"></i> My Map
+<% end %>
+    <button class="text-white tab-button green">Global Map <i class="fa-solid fa-globe"></i></button>
     </div>
     <p class="top-message d-flex align-items-center px-3 text-center"><%= @cards.count %> kanji collected</p>
 
