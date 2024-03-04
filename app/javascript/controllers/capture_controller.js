@@ -55,7 +55,8 @@ export default class extends Controller {
   modalButtonStyle = "camera-modal-button btn btn-primary text-white w-100 rounded-pill shadow-sm m-1";
 
   connect() {
-    console.log("I'm connected");
+
+    this.kanjiField.value = null;
 
     this.setPageStyle();
 
@@ -71,6 +72,11 @@ export default class extends Controller {
       this.getLocation();
     }
 
+  }
+
+  disconnect() {
+    this.kanjiField.value = null;
+    this.stopCamera();
   }
 
   handleDevicePermissions() {
@@ -278,7 +284,13 @@ export default class extends Controller {
   }
 
   stopCamera() {
-    this.videoElement.srcObject = null;
+    if (this.videoElement.srcObject) {
+      const stream = this.videoElement.srcObject;
+      const tracks = stream.getTracks();
+
+      tracks.forEach(track => track.stop());
+      this.videoElement.srcObject = null;
+    }
   }
 
   // +++ Segmentation Modes +++
@@ -317,7 +329,7 @@ export default class extends Controller {
     });
 
     const ret = await worker.recognize(this.canvas.toDataURL("image/png"), "jpn");
-    console.log(ret.data.text);
+    // console.log(ret.data.text);
 
     const recognizedKanji = this.stripKanji(ret.data.text);
 
@@ -414,7 +426,6 @@ export default class extends Controller {
   }
 
   updateTouchPos(event, newTouch=false) {
-    console.log("touch");
     // Example touch event:
     // Touch { identifier: 1815, target: canvas#canvas.full-screen, screenX: 880, screenY: 174, clientX: 712, clientY: 133, pageX: 712, pageY: 133, radiusX: 1, radiusY: 1 }
     if (event.touches[0] === undefined) { return; }
@@ -537,7 +548,7 @@ export default class extends Controller {
       // This needs to happen with an async function.
       this.loadImageFromDataURL(imageDataURL)
         .then((image) => {
-          console.log("Image loaded:", image);
+          // console.log("Image loaded:", image);
           this.captureImage = image;
         })
         .catch((error) => {
@@ -555,11 +566,9 @@ export default class extends Controller {
       this.stopCamera();
 
       const kanjiText = document.querySelector('.selected').innerText;
-      console.log("kanjiText: ", kanjiText);
       // const newDataURL = canvas.toDataURL('image/png'); // Adjust format as needed
       // imageField.value = newDataURL;
       this.kanjiField.value = kanjiText;
-      console.log("kanjiField: ", this.kanjiField);
 
       // submitFormWithImageData();
       if (this.kanjiField !== "") {
