@@ -11,6 +11,7 @@ export default class extends Controller {
 
   captureButton = document.getElementById('capture-button');
   retakeButton = document.getElementById('retake-button');
+  homeButton = document.getElementById('home-button');
 
   alertText = document.getElementById('alert-text');
   errorText = document.getElementById('error-text');
@@ -589,6 +590,11 @@ export default class extends Controller {
       this.clearCanvas();
       this.turnElement("button-bar", "on");
       this.updateAlertText(this.captureInstruction);
+    });
+
+    this.homeButton.addEventListener('mouseup', () => {
+      this.stopCamera();
+      window.location.href = "/dashboard";
     });
 
     // Prevent pull-to-refresh
