@@ -1,10 +1,10 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Map" %>
-<div class="map-container">
+<div class="map-container mt-3">
 
   <%# <div class="map-bg box justify-content-center mt-4 p-2"> %>
-  <div class="map-buttons d-flex">
-    <button disabled class="btn3d btn-primary text-white">My Map</button>
-    <%= link_to "Global Map", all_kanji_map_path, class: 'btn3d btn-primary text-white' %>
+  <div class="tab-buttons d-flex">
+    <button class="text-white">My Map</button>
+    <%= link_to "Global Map", all_kanji_map_path, class: 'text-white' %>
     </div>
     <%# </div> %>
     <%# <div class="top-message bg-white d-flex align-items-center px-3 py-2"> %>

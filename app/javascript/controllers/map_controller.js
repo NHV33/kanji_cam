@@ -17,27 +17,48 @@ export default class extends Controller {
       zoom: 1
     });
 
-    this.map.on('load', () => {
-    // get user's location and display the pin, add other markers as well
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.#addUserMarker(position.coords);
-        this.#addMarkersToMap();
-        // this.#fitMapToMarkers(position.coords);
-      }, (error) => {
-        console.error("Error occurred while getting geolocation:", error);
-        // if getting user location fails, display other markers
-        this.#addMarkersToMap();
-        // this.#fitMapToMarkers();
-      });
-    });
-  }
+    navigator.geolocation.getCurrentPosition(position => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      console.log(latitude, longitude, "user's position");
 
-    // update userMarker when user location changes
-  //   this.map.on("geolocate", function (e) {
-  //     userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
-  //   });
-  // }
+    this.#addUserMarker({ latitude, longitude });
+  }, error => {
+    console.error("Error occurred while getting geolocation:", error);
+  });
+    this.#addMarkersToMap();
+
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+      },
+      trackUserLocation: true,
+      showUserLocation: true
+  }));
+    // this.#fitMapToMarkers();
+
+    // There was time lag with the following, as all process is executed after map loading is done
+    // this.map.on('load', () => {
+    // // get user's location and display the pin, add other markers as well
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => {
+    //     this.#addUserMarker(position.coords);
+    //     this.#addMarkersToMap();
+    //     // this.#fitMapToMarkers(position.coords);
+    //   }, (error) => {
+    //     console.error("Error occurred while getting geolocation:", error);
+    //     // if getting user location fails, display other markers
+    //     this.#addMarkersToMap();
+    //     // this.#fitMapToMarkers();
+    //   });
+    // });
+
+  // update userMarker when user location changes
+  this.map.on('geolocate', function (e) {
+    userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
+  });
+  }
 
   // #fitMapToMarkers() {
   //   const bounds = new mapboxgl.LngLatBounds();
@@ -48,22 +69,21 @@ export default class extends Controller {
   // }
 
   #addUserMarker(coords) {
-    const userMarker = document.createElement('div');
-    userMarker.className = 'user-marker';
+    const userMarkerElement = document.createElement('div');
+    userMarkerElement.className = 'user-marker';
 
     const userSpeechBubble = document.createElement("div");
     userSpeechBubble.className = "user-speech-bubble";
-    userMarker.appendChild(userSpeechBubble);
+    userMarkerElement.appendChild(userSpeechBubble);
 
     const speechBubbleText = document.createElement("p");
     speechBubbleText.className = "speech-bubble-text";
     speechBubbleText.textContent = "You are here!"
     userSpeechBubble.appendChild(speechBubbleText);
 
-    new mapboxgl.Marker(userMarker)
+    const userMarker = new mapboxgl.Marker(userMarkerElement)
           .setLngLat([coords.longitude, coords.latitude])
           .addTo(this.map);
-          console.log(userMarker, "user marker created");
 
         // adjust map showing range to user's location
         // comment out if this animation can be annoying
@@ -74,16 +94,7 @@ export default class extends Controller {
             duration: 2000
         });
 
-        // userMarker.getElement().addEventListener("click", () => {
-        //     this.map.flyTo({
-        //       center: [marker.lng, marker.lat], // set marker in the center
-        //       zoom: 12, // zoom level
-        //       essential: true, // animation: true
-        //       duration: 1000,
-        //     });
-        //   })
-
-        userMarker.addEventListener('click', () => {
+        userMarker.getElement().addEventListener('click', () => {
         const currentZoom = this.map.getZoom();
         let newZoomLevel = currentZoom >= 12 ? currentZoom + 2 : 12;
         // Limit zoom up to Mapbox maximum zoom level
@@ -96,16 +107,6 @@ export default class extends Controller {
           duration: 1000
               });
     })
-
-      this.map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-        showUserLocation: true,
-      })
-    );
       }
 
   #addMarkersToMap() {
