@@ -21,78 +21,47 @@
   //   box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
   // }
 
-// }
-// brown paper
-// .custom-card {
-//   width: 190px;
-//   height: 254px;
-//   display: flex;
-//   padding: 2em;
-//   box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
-//   background: #fffef0;
-//   filter: url(#wavy2);
-//   color: $font-color;
-// }
-
-// computer looking
-// .custom-card {
-  // --font-color: #323232;
-  // --font-color-sub: #666;
-//   --bg-color: #fff;
-//   --main-color: #323232;
-//   --main-focus: #2d8cf0;
-//   color: $font-color;
-//   width: 230px;
-//   height: 300px;
-//   background: var(--bg-color);
-//   border: 2px solid var(--main-color);
-//   box-shadow: 4px 4px var(--main-color);
-//   border-radius: 5px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   padding: 20px;
-//   gap: 10px;
-//   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-//   &:active {
-//     box-shadow: inset 4px 4px var(--main-color);
-//   }
-// }
-
-// .custom-card {
-//   border-radius: 18px;
-//   background: $bg-color;
-//   box-shadow:  5px 5px 9px #dbdbd4,
-//   -5px -5px 9px #fdfbf4;
-//   color: $font-color;
-// }
 
 .parchment-card {
+  background-image: url('parchment.png');
+  background-size: cover; /* Cover the entire element with the image */
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  color: #5a5343;
+  font-family: 'Times New Roman', serif;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+  border-radius: 5px; /* Optional: to smooth out edges */
+  position: relative;
+  max-width: 100%;
+  max-height: 100%; /* Adjust based on your image's aspect ratio */
+  margin: 20px; /* Gives space around the card */
   height: auto;
-    overflow: hidden;
-    padding: 20px;
-    background: #fffef0;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.05);
-    color: $font-color;
-    position: relative;
+  overflow: hidden;
+}
 
-    &:before, &:after {
-      content: ""; height: 2px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      clip-path: polygon(0% 0%, 5%  100%, 10% 0%, 15%  100%, 20% 0%, 25% 100%, 30% 0%, 35%  100%, 40% 0%, 45%  100%, 50% 0%, 55%  100%, 60% 0%, 65%  100%, 70% 0%, 75%  100%, 80% 0%, 85%  100%, 90% 0%, 95%  100%, 100% 0%);
-    }
-    &:before {
-      background-color: #eee;
-      top: 0;
-    }
-    &:after {
-      background-color: #fff;
-      bottom: -2px;
-    }
-  }
+/* Add pseudo-elements for the top and bottom rolls if desired */
+.parchment-card::before,
+.parchment-card::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 20px; /* Adjust based on your design */
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+.parchment-card::before {
+  top: -10px; /* Adjust to position just above the card */
+  border-radius: 10px 10px 0 0; /* Round the top edge */
+}
+
+.parchment-card::after {
+  bottom: -10px; /* Adjust to position just below the card */
+  border-radius: 0 0 10px 10px; /* Round the bottom edge */
+}
+
 
 .card-img-top {
   border-radius: 10px;
