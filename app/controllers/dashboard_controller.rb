@@ -5,14 +5,14 @@ class DashboardController < ApplicationController
     @total_kanji = Kanji.count
     @total_captured_kanji = current_user.cards.count
     @decks = current_user.decks.limit(2)
-    @learned_kanji_by_jlpt = learned_kanji_by_jlpt.sort.to_h.transform_keys { |key| "JLPT#{key}" }
+    @collected_kanji_by_jlpt = collected_kanji_by_jlpt.sort.to_h.transform_keys { |key| "JLPT#{key}" }
   end
 
   private
 
-  def learned_kanji_by_jlpt
+  def collected_kanji_by_jlpt
     Card.joins(:kanji)
-        .where(user: current_user, learned: true)
+        .where(user: current_user)
         .group('kanjis.jlpt')
         .count
   end
