@@ -14,29 +14,33 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [139.70817, 35.63395], //Le Wagon Tokyo!
-      zoom: 1
+      zoom: 1,
     });
 
-    navigator.geolocation.getCurrentPosition(position => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      console.log(latitude, longitude, "user's position");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        console.log(latitude, longitude, "user's position");
 
-    this.#addUserMarker({ latitude, longitude });
-  }, error => {
-    console.error("Error occurred while getting geolocation:", error);
-  });
+        this.#addUserMarker({ latitude, longitude });
+      },
+      (error) => {
+        console.error("Error occurred while getting geolocation:", error);
+      }
+    );
     this.#addMarkersToMap();
 
     this.map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
-          enableHighAccuracy: true
-      },
-      trackUserLocation: true,
-      showUserLocation: true
-  }));
-    // this.#fitMapToMarkers();
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserLocation: true,
+      })
+    );
+    this.#fitMapToMarkers();
 
     // There was time lag with the following, as all process is executed after map loading is done
     // this.map.on('load', () => {
@@ -54,60 +58,118 @@ export default class extends Controller {
     //   });
     // });
 
-  // update userMarker when user location changes
-  this.map.on('geolocate', function (e) {
-    userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
-  });
+    // update userMarker when user location changes
+    this.map.on("geolocate", function (e) {
+      userMarker.setLngLat([e.coords.longitude, e.coords.latitude]);
+    });
   }
 
-  // #fitMapToMarkers() {
-  //   const bounds = new mapboxgl.LngLatBounds();
-  //   this.markersValue.forEach((marker) => {
-  //     bounds.extend([marker.lng, marker.lat]);
-  //   });
-  //   this.map.fitBounds(bounds, { padding: 50, duration: 10 });
-  // }
+  #fitMapToMarkers() {
+    const bounds = new mapboxgl.LngLatBounds();
+    this.markersValue.forEach((marker) => {
+      bounds.extend([marker.lng, marker.lat]);
+    });
+    this.map.fitBounds(bounds, { padding: 100, duration: 10 });
+  }
 
   #addUserMarker(coords) {
-    const userMarkerElement = document.createElement('div');
-    userMarkerElement.className = 'user-marker';
+    const userMarkerElement = document.createElement("div");
+    userMarkerElement.className = "user-marker";
 
-    const userSpeechBubble = document.createElement("div");
-    userSpeechBubble.className = "user-speech-bubble";
-    userMarkerElement.appendChild(userSpeechBubble);
+    // disabling speech bubble as it doesn't change its position
+    // const userSpeechBubble = document.createElement("div");
+    // userSpeechBubble.className = "user-speech-bubble";
+    // userMarkerElement.appendChild(userSpeechBubble);
 
-    const speechBubbleText = document.createElement("p");
-    speechBubbleText.className = "speech-bubble-text";
-    speechBubbleText.textContent = "You are here!"
-    userSpeechBubble.appendChild(speechBubbleText);
+    // Check if enough hight and width for speech bubble to fit
+    // const userSpeechBubbleRect = userSpeechBubble.getBoundingClientRect();
+    // const viewportHeight = window.innerHeight;
+    // const viewportWidth = window.innerWidth;
+    // const afterElement = userSpeechBubble.querySelector("::after");
+
+    // function adjustUserMarkerPosition() {
+    //   console.log("fired");
+    //   // If speech bubble is in the below viewport bottom, adjust position
+    // adjustVerticalPosition(
+    //   userSpeechBubble,
+    //   userSpeechBubbleRect,
+    //   viewportHeight
+    // );
+    // // Check if speech bubble can fit left and right side and adjust position
+    // adjustHorizontalPosition(
+    //   userSpeechBubble,
+    //   userSpeechBubbleRect,
+    //   viewportWidth
+    // );
+
+    // }
+
+    // function adjustVerticalPosition(
+    //   userSpeechBubble,
+    //   userSpeechBubbleRect,
+    //   viewportHeight
+    // ) {
+    //   if (userSpeechBubbleRect.bottom > viewportHeight) {
+    //     userSpeechBubble.style.top = "auto";
+    //     userSpeechBubble.style.bottom = "38px";
+
+    //     if (afterElement) {
+    //       afterElement.style.borderBottom = "none";
+    //       afterElement.style.borderTop = `15px solid #434979`;
+    //       afterElement.style.top = "auto";
+    //       afterElement.style.bottom = "-15px";
+    //     }
+    //   }
+    // }
+
+    // function adjustHorizontalPosition(
+    //   userSpeechBubble,
+    //   userSpeechBubbleRect,
+    //   viewportWidth
+    // ) {
+    //   if (userSpeechBubbleRect.left < 0) {
+    //     userSpeechBubble.style.left = "0px";
+    //   }
+    //   if (userSpeechBubbleRect.right > viewportWidth) {
+    //     userSpeechBubble.style.right = '0px';
+    //     userSpeechBubble.style.left = 'auto';
+    //     // adjustment for arrow
+    //   }
+    //   }
+
+    // const speechBubbleText = document.createElement("p");
+    // speechBubbleText.className = "speech-bubble-text";
+    // speechBubbleText.textContent = "You are here!";
+    // userSpeechBubble.appendChild(speechBubbleText);
 
     const userMarker = new mapboxgl.Marker(userMarkerElement)
-          .setLngLat([coords.longitude, coords.latitude])
-          .addTo(this.map);
+      .setLngLat([coords.longitude, coords.latitude])
+      .addTo(this.map);
 
-        // adjust map showing range to user's location
-        // comment out if this animation can be annoying
-        this.map.flyTo({
-            center: [coords.longitude, coords.latitude], // set user's location to the center
-            zoom: 12,
-            essential: true,
-            duration: 2000
-        });
+    // adjust map showing range to user's location
+    // comment out if this animation can be annoying
+    // this.map.flyTo({
+    //     center: [coords.longitude, coords.latitude], // set user's location to the center
+    //     zoom: 12,
+    //     essential: true,
+    //     duration: 2000
+    // });
 
-        userMarker.getElement().addEventListener('click', () => {
-        const currentZoom = this.map.getZoom();
-        let newZoomLevel = currentZoom >= 12 ? currentZoom + 2 : 12;
-        // Limit zoom up to Mapbox maximum zoom level
-        newZoomLevel = Math.min(newZoomLevel, this.map.getMaxZoom());
+    userMarker.getElement().addEventListener("click", () => {
+      const currentZoom = this.map.getZoom();
+      let newZoomLevel = currentZoom >= 12 ? currentZoom + 2 : 12;
+      // Limit zoom up to Mapbox maximum zoom level
+      newZoomLevel = Math.min(newZoomLevel, this.map.getMaxZoom());
 
-        this.map.flyTo({
-          center: [coords.longitude, coords.latitude],
-          zoom: newZoomLevel,
-          essential: true,
-          duration: 1000
-              });
-    })
-      }
+      this.map.flyTo({
+        center: [coords.longitude, coords.latitude],
+        zoom: newZoomLevel,
+        essential: true,
+        duration: 1000,
+      });
+    });
+    // this.map.on('moveend', adjustUserMarkerPosition);
+  }
 
   #addMarkersToMap() {
     let popup = null; // set the variable
@@ -130,67 +192,67 @@ export default class extends Controller {
           .setLngLat([marker.lng, marker.lat])
           .addTo(this.map);
 
-          markerIcon.addEventListener("click", () => {
-            const activeMarkers =
-              document.getElementsByClassName("pinpoint-active");
-            if (popup) {
-              popup.remove();
-              for (let i = 0; i < activeMarkers.length; i++) {
-                activeMarkers[i].classList.remove("pinpoint-active");
-                // console.log(document.getElementsByClassName("pinpoint-active"));
-              }
+        markerIcon.addEventListener("click", () => {
+          const activeMarkers =
+            document.getElementsByClassName("pinpoint-active");
+          if (popup) {
+            popup.remove();
+            for (let i = 0; i < activeMarkers.length; i++) {
+              activeMarkers[i].classList.remove("pinpoint-active");
+              // console.log(document.getElementsByClassName("pinpoint-active"));
             }
-            // markerIcon.classList.add("pinpoint-active");
-            markerPinPoint.classList.add("pinpoint-active");
-            // markerPinPoint.style.zIndex = 9999;
-            const meaningText = `<p class="m-0">Meaning: ${marker.meaning}</p>`;
-            const linkText = `<a href="/kanjis/${marker.kanji_id}">Check details</a>`;
+          }
+          // markerIcon.classList.add("pinpoint-active");
+          markerPinPoint.classList.add("pinpoint-active");
+          // markerPinPoint.style.zIndex = 9999;
+          const meaningText = `<p class="m-0">Meaning: ${marker.meaning}</p>`;
+          const linkText = `<a href="/kanjis/${marker.kanji_id}">Check details</a>`;
 
-            const onText = `<p class="m-0">on reaning: ${marker.on_reading}</p>`;
-            const kunText = `<p class="m-0">kun reaning: ${marker.kun_reading}</p>`;
-            const formattedDate = new Date(
-              marker.captured_date
-            ).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            });
-            const dateText = `<p class="m-0">Added on: ${formattedDate}</p>`;
-            console.log(formattedDate, "formatted date");
-
-            popup = new mapboxgl.Popup({
-              closeButton: false,
-              closeOnClick: false,
-            })
-              .setLngLat([marker.lng, marker.lat])
-              .setHTML(meaningText + onText + kunText + dateText + linkText)
-              .setOffset([0, -50])
-              .addTo(this.map);
-
-            // When marker is clicked, zoom in as needed
-            console.log("fly to marker");
-            this.map.flyTo({
-              center: [marker.lng, marker.lat], // set marker in the center
-              zoom: 12, // zoom level
-              essential: true, // animation: true
-              duration: 1000,
-            });
+          const onText = `<p class="m-0">on reaning: ${marker.on_reading}</p>`;
+          const kunText = `<p class="m-0">kun reaning: ${marker.kun_reading}</p>`;
+          const formattedDate = new Date(
+            marker.captured_date
+          ).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
           });
+          const dateText = `<p class="m-0">Added on: ${formattedDate}</p>`;
+          console.log(formattedDate, "formatted date");
 
-          newMarker.getElement().addEventListener('click', () => {
-            const currentZoom = this.map.getZoom();
-            let newZoomLevel = currentZoom >= 12 ? currentZoom + 2 : 12;
-        // Limit zoom up to Mapbox maximum zoom level
-        newZoomLevel = Math.min(newZoomLevel, this.map.getMaxZoom());
+          popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false,
+          })
+            .setLngLat([marker.lng, marker.lat])
+            .setHTML(meaningText + onText + kunText + dateText + linkText)
+            .setOffset([0, -50])
+            .addTo(this.map);
 
-        this.map.flyTo({
-          center: [marker.lng, marker.lat],
-          zoom: newZoomLevel,
-          essential: true,
-          duration: 1000
-              });
-      })
-    };
-  })
-}
+          // When marker is clicked, zoom in as needed
+          console.log("fly to marker");
+          this.map.flyTo({
+            center: [marker.lng, marker.lat], // set marker in the center
+            zoom: 12, // zoom level
+            essential: true, // animation: true
+            duration: 1000,
+          });
+        });
+
+        newMarker.getElement().addEventListener("click", () => {
+          const currentZoom = this.map.getZoom();
+          let newZoomLevel = currentZoom >= 12 ? currentZoom + 2 : 12;
+          // Limit zoom up to Mapbox maximum zoom level
+          newZoomLevel = Math.min(newZoomLevel, this.map.getMaxZoom());
+
+          this.map.flyTo({
+            center: [marker.lng, marker.lat],
+            zoom: newZoomLevel,
+            essential: true,
+            duration: 1000,
+          });
+        });
+      }
+    });
+  }
 }
