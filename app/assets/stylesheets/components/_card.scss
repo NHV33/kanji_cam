@@ -1,30 +1,66 @@
-.box {
-  border-radius: 10px;
-  border: none;
-  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  background-color: #dde1e7;
-  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
-}
-
 .custom-card {
-  border-radius: 10px;
-  border: none;
-  // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset;
-  box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
-  // background-image: linear-gradient(to bottom, #eeaeca, #94bbe9);
+  border-radius: 18px;
+  background: $bg-color;
+  box-shadow:  5px 5px 5px #d7d6cf, -5px -5px 5px #fffff9;
+  color: $font-color;
+  width: 190px;
+  height: 254px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+
   &:active {
     transition-property: box-shadow;
     transition: ease;
     transition-duration: 300ms;
-    // box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.3);
-    // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px 0px 0px 0px inset;
-    box-shadow: inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3);
+    border-radius: 18px;
+    background: $custom-color;
+    box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
   }
 }
+
+
+// .parchment-card {
+//   background-image: url('parchment.png');
+//   background-size: cover; /* Cover the entire element with the image */
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   padding: 20px;
+//   color: #5a5343;
+//   font-family: 'Times New Roman', serif;
+//   box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+//   border-radius: 5px; /* Optional: to smooth out edges */
+//   position: relative;
+//   max-width: 100%;
+//   max-height: 100%; /* Adjust based on your image's aspect ratio */
+//   margin: 20px; /* Gives space around the card */
+//   height: auto;
+//   overflow: hidden;
+// }
+
+// /* Add pseudo-elements for the top and bottom rolls if desired */
+// .parchment-card::before,
+// .parchment-card::after {
+//   content: '';
+//   position: absolute;
+//   left: 10%;
+//   right: 10%;
+//   height: 20px; /* Adjust based on your design */
+//   background: rgba(0, 0, 0, 0.1);
+//   z-index: -1;
+// }
+
+// .parchment-card::before {
+//   top: -10px; /* Adjust to position just above the card */
+//   border-radius: 10px 10px 0 0; /* Round the top edge */
+// }
+
+// .parchment-card::after {
+//   bottom: -10px; /* Adjust to position just below the card */
+//   border-radius: 0 0 10px 10px; /* Round the bottom edge */
+// }
+
 
 .card-img-top {
   border-radius: 10px;
@@ -103,3 +139,28 @@
 // .card-container:hover .flashcard {
 //   transform: rotateY(180deg);
 // }
+
+// Dashboard point display
+.points-display {
+  outline: none;
+  box-sizing: border-box;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  line-height: 2.5em;
+  padding: 0 1em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4),
+    inset 0 -2px 5px 1px rgba(139, 66, 8, 1),
+    inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+  background-image: linear-gradient(
+    160deg,
+    #a54e07,
+    #b47e11,
+    #fef1a2,
+    #bc881b,
+    #a54e07
+  );
+  border: 1px solid #a55d07;
+  color: rgb(120, 50, 5);
+  text-shadow: 0 2px 2px rgba(250, 227, 133, 1);
+}

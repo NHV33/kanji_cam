@@ -1,5 +1,6 @@
 .kanji-character {
   font-size: 3em; /* Adjust the size as needed */
+  color: $font-color;
 }
 
 .card {
@@ -39,6 +40,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: $font-color;
 }
 
 .card-front {
@@ -76,3 +78,7 @@
 .btn-margin-right {
   margin-right: 10px; /* Adjust the margin as needed */
 }
+
+// .content-wrapper .btn-group {
+//   max-width: 260px;
+// }
