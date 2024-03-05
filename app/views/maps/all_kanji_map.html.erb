@@ -1,6 +1,7 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
 <div class="map-container">
   <%# <div class="map-bg box p-2"> %>
+  <div class="top-element-container d-flex flex-column align-items-center">
     <div class="tab-button-container d-flex justify-content-between">
     <%= link_to maps_path, class: 'text-white tab-button transparent' do %>
     <i class="fas fa-user"></i> My Map
@@ -8,6 +9,7 @@
     <button class="text-white tab-button green">Global Map <i class="fa-solid fa-globe"></i></button>
     </div>
     <p class="top-message d-flex align-items-center px-3 text-center"><%= @cards.count %> kanji collected</p>
+    </div>
 
     <div class="map mx-auto"
   data-controller="map"

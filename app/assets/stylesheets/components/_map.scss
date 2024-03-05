@@ -18,11 +18,15 @@ $light-color: white;
   z-index: 0;
 }
 
+// .top-element-container {
+//   position: absolute;
+// }
+
 .tab-button-container {
   position: absolute;
   top: 8px;
   left: 10px;
-  z-index: 1;
+  z-index: 2;
   background: #434979;
   padding: 10px;
   border-radius: 28px;
@@ -56,13 +60,14 @@ button{
 
 .top-message {
   border-radius: 20px;
-  position: absolute;
-  top: 66px;
-  left: 12px;
+  // position: absolute;
+  // top: 64px;
+  // left: 12px;
   // top: 30px;
   // right: 8px;
   z-index: 1;
   background-color: #faf9f7;
+  box-shadow: 0px 0px 12px 11px #faf9f7;
 }
 
 /*Not necessary because relative elements
@@ -146,7 +151,8 @@ also, this div is just a point with no width or height */
 .pinpoint-active {
   z-index: 2;
   .marker-icon {
-    background: #2e15cd;
+    box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #3e4997, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background: #422fba;
     z-index: 9999;
   }
 }
@@ -160,8 +166,24 @@ also, this div is just a point with no width or height */
   transform: translateX(-50%) rotate(-45deg);
 }
 
+.detail-link {
+  text-decoration: none;
+  font-size: 13px;
+  background-color: gray;
+  color: $light-color;
+  padding: 2px 4px;
+  margin-top: 6px;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background-color: $light-color;
+    color: gray;
+    border: solid 1px gray;
+  }
+}
+
 .mapboxgl-popup {
   z-index: 99999;
   max-width: 400px;
-  // border: solid 2px $dark-color;
 }
