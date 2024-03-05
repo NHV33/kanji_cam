@@ -3,7 +3,7 @@
 <%= render 'partials/title_bar', destination: decks_url, title: title_bar_title %>
 <!-- style="height: calc(100vh - 2rem);" -->
 <div class="content-wrapper mt-2">
-  <% if @card.nil? %>
+  <% if @card.nil? || session[:finished_session] == true %>
     <div style="height: 70vh;" class="container d-flex flex-column justify-content-center align-items-center">
       <div class="mb-3 badge fs-2 bg-success">
         All finished!
@@ -17,7 +17,7 @@
         <div data-controller="flashcard">
           <h2 data-flashcard-target="points" data-points="<%= session[:session_points] %>">+ 0p</h2>
           <br>
-          <p>🎴You learned <%= session[:total_cards] %> Kanji</p>
+          <p>🎴You learned <%= session[:learned_cards] %> Kanji</p>
           <p>💰Total: <%= @user_points %>p</p>
         </div>
       </div>
@@ -60,7 +60,6 @@
            aria-valuemin="0" aria-valuemax="100">
       </div>
     </div>
-
     <div class="btn-group mt-3" role="group" aria-label="Recall Level Buttons">
       <div class="btn-margin-right">
         <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn btn-success', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
@@ -78,5 +77,6 @@
         <% end %>
       </div>
     </div>
+    <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, class: "btn btn-secondary" %>
   <% end %>
 </div>
