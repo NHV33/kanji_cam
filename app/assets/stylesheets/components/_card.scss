@@ -69,43 +69,30 @@
 // }
 
 .parchment-card {
-  background-color: #f7f4e9; /* Base color for parchment */
-  color: #5a5343; /* Text color */
-  padding: 20px;
-  margin: 20px auto; /* Center the card */
-  max-width: 600px; /* Set a max-width for the card */
-  font-family: 'Times New Roman', serif;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Soft shadow for depth */
-  border: solid 2px #a99876; /* Border to simulate the edges of parchment */
-  text-align: justify;
-  transform: rotate(-1deg); /* Slight rotation for an aged look */
-  border-radius: 8px; /* Rounded corners */
-  position: relative; /* Needed for pseudo-elements */
-  overflow: hidden; /* Ensures the pseudo-elements don't overflow the card's rounded corners */
-}
+  height: auto;
+    overflow: hidden;
+    padding: 20px;
+    background: #fffef0;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.05);
+    color: $font-color;
+    position: relative;
 
-.parchment-card::before, .parchment-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0)); /* Fading edges */
-  z-index: 1;
-}
-
-.parchment-card::before {
-  left: 0;
-  transform: rotate(-2deg);
-}
-
-.parchment-card::after {
-  right: 0;
-  transform: rotate(2deg);
-  color: $font-color;
-}
-
-
+    &:before, &:after {
+      content: ""; height: 2px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      clip-path: polygon(0% 0%, 5%  100%, 10% 0%, 15%  100%, 20% 0%, 25% 100%, 30% 0%, 35%  100%, 40% 0%, 45%  100%, 50% 0%, 55%  100%, 60% 0%, 65%  100%, 70% 0%, 75%  100%, 80% 0%, 85%  100%, 90% 0%, 95%  100%, 100% 0%);
+    }
+    &:before {
+      background-color: #eee;
+      top: 0;
+    }
+    &:after {
+      background-color: #fff;
+      bottom: -2px;
+    }
+  }
 
 .card-img-top {
   border-radius: 10px;

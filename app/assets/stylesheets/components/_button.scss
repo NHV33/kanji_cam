@@ -20,22 +20,23 @@
 // ICON Button
 
 .icon-btn {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: linear-gradient(145deg, #ffffff, #dad9dc);
-    box-shadow: 5px 5px 10px #c4c3c6, -5px -5px 10px #ffffff;
+    background: linear-gradient(145deg, #fdfbf4, #d4d4cd);
+    box-shadow:   5px 5px 10px #d2d1cb,
+    -5px -5px 10px #fffffd;
     display: flex;
     text-decoration: none;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     color: $font-color;
     transition: all .5s ease;
-    // position: absolute;
-    // top: 0;
-    // right: 0;
+    position: absolute;
+    top: 85px;
+    right: 20px;
 
     &:active {
       box-shadow: inset 5px 5px 10px #c4c3c6, inset -5px -5px 10px #ffffff;
