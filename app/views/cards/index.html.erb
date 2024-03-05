@@ -2,12 +2,14 @@
 
 <div class="container d-flex flex-column">
   <div class="row justify-content-center mt-4">
-    <div>
-      <h2 class="dented-box"><strong><%= @cards.length %></strong> <small>collected</small></h2>
+
+    <div class="mt-1 mb-2 d-flex justify-content-end">
+      <div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px"><%= @cards.length %>字</div>
     </div>
+
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
-      <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 parchment-card m-1" %>
+      <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" %>
 
       <%= link_to card_path(card), class: button_styles, style: "text-decoration: none;" do %>
 

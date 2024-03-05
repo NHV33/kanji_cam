@@ -66,17 +66,17 @@
 
       <div class="btn-group mt-3" role="group" aria-label="Recall Level Buttons" style="width: 260px;">
         <div class="btn-margin-right" style="width: 33.33%;">
-          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-success btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
+          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d flashcard-green-btn btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'easy' } do %>
             <i class="fa-solid fa-check fs-4"></i>
           <% end %>
         </div>
         <div class="btn-margin-right" style="width: 33.33%;">
-          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-warning btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
+          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d flashcard-yellow-btn btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'medium' } do %>
             <i class="fa-solid fa-caret-up" style="font-size: 30px;"></i>
           <% end %>
         </div>
         <div style="width: 33.33%;">
-          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d btn-danger btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
+          <%= button_to learn_card_deck_path(@deck), method: :patch, class: 'text-white btn-3d flashcard-red-btn btn-fixed-size', params: { current_card_id: @card.id, recall_level: 'hard' } do %>
             <i class="fa-solid fa-xmark fs-4"></i>
           <% end %>
         </div>

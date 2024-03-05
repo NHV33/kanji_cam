@@ -1,66 +1,65 @@
-// .custom-card {
-//   padding: 20px;
-//   border-radius: 18px;
-//   // background: $custom-color;
-//   // box-shadow:  5px 5px 10px #c4c3c6, -5px -5px 10px #ffffff;
-//   color: $font-color;
-//   width: 190px;
-  // height: 254px;
-  // backdrop-filter: blur(7px);
-  // background-color: rgba(255, 255, 255, 0.5);
-  // box-shadow: 35px 35px 68px 0px rgba(157, 177, 255, 0.2), inset -8px -8px 16px 0px rgba(157, 177, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
-  // transition: all 0.3s;
-  // cursor: pointer;
-
-  // &:active {
-  //   transition-property: box-shadow;
-  //   transition: ease;
-  //   transition-duration: 300ms;
-  //   border-radius: 18px;
-  //   background: $custom-color;
-  //   box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
-  // }
-
-
-.parchment-card {
-  background-image: url('parchment.png');
-  background-size: cover; /* Cover the entire element with the image */
-  background-repeat: no-repeat;
-  background-position: center;
+.custom-card {
   padding: 20px;
-  color: #5a5343;
-  font-family: 'Times New Roman', serif;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-  border-radius: 5px; /* Optional: to smooth out edges */
-  position: relative;
-  max-width: 100%;
-  max-height: 100%; /* Adjust based on your image's aspect ratio */
-  margin: 20px; /* Gives space around the card */
-  height: auto;
-  overflow: hidden;
+  border-radius: 18px;
+  background: $bg-color;
+  box-shadow:  5px 5px 5px #d7d6cf, -5px -5px 5px #fffff9;
+  color: $font-color;
+  width: 190px;
+  height: 254px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+
+  &:active {
+    transition-property: box-shadow;
+    transition: ease;
+    transition-duration: 300ms;
+    border-radius: 18px;
+    background: $custom-color;
+    box-shadow: inset 5px 5px 10px #cbcacd, inset -5px -5px 10px #ffffff;
+  }
 }
 
-/* Add pseudo-elements for the top and bottom rolls if desired */
-.parchment-card::before,
-.parchment-card::after {
-  content: '';
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  height: 20px; /* Adjust based on your design */
-  background: rgba(0, 0, 0, 0.1);
-  z-index: -1;
-}
 
-.parchment-card::before {
-  top: -10px; /* Adjust to position just above the card */
-  border-radius: 10px 10px 0 0; /* Round the top edge */
-}
+// .parchment-card {
+//   background-image: url('parchment.png');
+//   background-size: cover; /* Cover the entire element with the image */
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   padding: 20px;
+//   color: #5a5343;
+//   font-family: 'Times New Roman', serif;
+//   box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+//   border-radius: 5px; /* Optional: to smooth out edges */
+//   position: relative;
+//   max-width: 100%;
+//   max-height: 100%; /* Adjust based on your image's aspect ratio */
+//   margin: 20px; /* Gives space around the card */
+//   height: auto;
+//   overflow: hidden;
+// }
 
-.parchment-card::after {
-  bottom: -10px; /* Adjust to position just below the card */
-  border-radius: 0 0 10px 10px; /* Round the bottom edge */
-}
+// /* Add pseudo-elements for the top and bottom rolls if desired */
+// .parchment-card::before,
+// .parchment-card::after {
+//   content: '';
+//   position: absolute;
+//   left: 10%;
+//   right: 10%;
+//   height: 20px; /* Adjust based on your design */
+//   background: rgba(0, 0, 0, 0.1);
+//   z-index: -1;
+// }
+
+// .parchment-card::before {
+//   top: -10px; /* Adjust to position just above the card */
+//   border-radius: 10px 10px 0 0; /* Round the top edge */
+// }
+
+// .parchment-card::after {
+//   bottom: -10px; /* Adjust to position just below the card */
+//   border-radius: 0 0 10px 10px; /* Round the bottom edge */
+// }
 
 
 .card-img-top {
