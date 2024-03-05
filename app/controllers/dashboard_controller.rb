@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
     @total_kanji = Kanji.count
     @total_captured_kanji = current_user.cards.count
     @decks = current_user.decks.limit(2)
-    @collected_kanji_by_jlpt = collected_kanji_by_jlpt.sort.to_h.transform_keys { |key| "JLPT#{key}" }
+    @collected_kanji_by_jlpt = collected_kanji_by_jlpt.sort.to_h.transform_keys { |key| "JLPT N#{key}" }
   end
 
   private
