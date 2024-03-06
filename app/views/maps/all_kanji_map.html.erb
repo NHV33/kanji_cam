@@ -1,19 +1,37 @@
+<style>
+  body {
+    background-color: black;
+    overflow: hidden;
+  }
+</style>
+
 <%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
+
 <div class="map-container">
   <%# <div class="map-bg box p-2"> %>
-  <div class="top-element-container ">
+  <div class="top-element-container">
+
     <div class="tab-button-container d-flex justify-content-between">
-    <%= link_to maps_path, class: 'text-white tab-button transparent' do %>
-    <i class="fas fa-user"></i> My Map
-<% end %>
-    <button class="text-white tab-button green">Global Map <i class="fa-solid fa-globe"></i></button>
-    </div>
-    <p class="top-message d-flex align-items-center px-3 text-center"><%= @cards.count %> kanji collected</p>
+
+      <%= link_to maps_path, class: 'fade-in text-white tab-button transparent' do %>
+        <i class="fas fa-user"></i> My Map
+      <% end %>
+
+      <button class="text-white tab-button green slide-right">
+        Global Map <i class="fa-solid fa-globe"></i>
+      </button>
+
     </div>
 
-    <div class="map mx-auto"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  <%# </div> %>
+    <p class="top-message pb-2 d-flex align-items-center px-3 text-center">
+      <%= @cards.count %> Kanji Collected
+    </p>
+  </div>
+
+  <div class="map mx-auto"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
 </div>
