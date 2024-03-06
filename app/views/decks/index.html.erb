@@ -5,12 +5,16 @@
 
   <% unlearned_kanji = current_user.cards.count - current_user.cards.where(learned: true).joins(:kanji).distinct.count %>
 
-  <div class="badge bg-danger col-12">
+  <div class="badge bg-danger fs-6 p-2 col-12 mt-2">
     You have <%= unlearned_kanji %> unlearned kanji.
   </div>
 
   <div class="my-3">
-    <%= link_to 'Study All Unlearned Kanji', deck_path(@master_deck), class: 'col-12 fs-6 page-btn' %>
+    <%= link_to deck_path(@master_deck), class: 'btn-deck-wrapper text-white' do %>
+      <div class="p-3 n4-gradient text-center">
+        Study All Unlearned Kanji
+      </div>
+    <% end %>
   </div>
 
 </div>
@@ -26,14 +30,22 @@
 
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
+      <div class="">
 
         <% @jlpt_decks.each do |jlpt_deck| %>
-          <% button_label = "#{jlpt_deck.title} Kanji" %>
-          <%= link_to button_label, deck_path(jlpt_deck), class: 'col-12 my-1 p-2 page-btn text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+          <%= link_to deck_path(jlpt_deck), class: 'btn-deck-wrapper' do %>
+            <% jlpt_level = jlpt_deck.title.match(/\d{1}/)[0] %>
+            <% button_classes = "btn-deck n#{jlpt_level}-gradient" %>
+            <div class="<%= button_classes %>">
+              <span class="btn-deck-text">
+                <%= "#{jlpt_deck.title} Kanji" %>
+              </span>
+            </div>
+          <% end %>
         <% end %>
 
-      </div>    </div>
+      </div>
+    </div>
   </div>
 
   <div class="accordion-item">
@@ -45,11 +57,14 @@
 
     </h2>
     <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
+      <div class="">
 
         <% @custom_decks.each do |custom_deck| %>
-          <% button_label = "#{custom_deck.title} | #{custom_deck.comment}" %>
-          <%= link_to button_label, deck_path(custom_deck), class: 'col-12 my-1 p-2 page-btn text-start', style: "font-size: 5vmin; white-space: nowrap; overflow: hidden;" %>
+          <%= link_to deck_path(custom_deck), class: 'btn-deck-wrapper' do %>
+            <div class="btn-deck n0-gradient">
+              <%= "#{custom_deck.title} | #{custom_deck.comment}" %>
+            </div>
+          <% end %>
         <% end %>
 
       </div>
