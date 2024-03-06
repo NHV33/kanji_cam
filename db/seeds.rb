@@ -17,6 +17,11 @@ if User.all.empty?
     password: "Kanji-ga-daisuki!"
   )
   user.save!
+  user = User.new(
+    email: "maptest@me.com",
+    password: "secret"
+  )
+  user.save!
 end
 
 # Kanji seeds
@@ -65,6 +70,23 @@ if Card.all.empty?
       comment: nil,
       character: kanji.character
     )
+    card.save!
+    puts "Saved Card: # #{kanji.id}"
+  end
+    Kanji.limit(10).all.each do |kanji|
+      card = Card.new(
+        user_id: User.find_by(email: "maptest@me.com").id,
+        kanji_id: kanji.id,
+        learned: [true, false].sample,
+        practice_count: rand(1..5),
+        prev_practice_at: nil,
+        next_practice_at: nil,
+        latitude: rand(-40.00...40.00),
+        longitude: rand(-140.00...140.00),
+        favorite: false,
+        comment: nil,
+        character: kanji.character
+      )
     card.save!
     puts "Saved Card: # #{kanji.id}"
   end
