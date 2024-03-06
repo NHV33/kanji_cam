@@ -120,7 +120,7 @@ also, this div is just a point with no width or height */
   border-radius: 50%;
   background-color: #3FB1CE;
   border: 2px solid $light-color;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
@@ -157,7 +157,8 @@ also, this div is just a point with no width or height */
 // }
 
 .marker-icon {
-  box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #4D5BBE;
   background-color: #4274D7;
   border-radius: 100% 100% 0 100%;
   position: absolute;
