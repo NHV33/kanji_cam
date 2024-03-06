@@ -1,6 +1,9 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
-<%= render 'partials/title_bar', destination: root_url, title: "Dashboard" %>
+
+<% title_content = "#{current_user.email.split("@").first.capitalize}'s Dashboard | #{@points} Points" %>
+
+<%= render 'partials/title_bar', destination: root_url, title: title_content %>
 <div class="container">
 
 <!-- Tiger changes. Keeping the code now just in case. Please don't touch for now. -->
@@ -12,11 +15,14 @@
       <%# <div class="text-center points-display" style="height: 48px;"><%= @points <i class="fa-solid fa-gem"></i></div> %>
 
 <div class="mt-4 d-flex justify-content-end">
-<div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px"><%= @points %> <i class="fa-solid fa-gem p-0 text-white"></i></div>
+
+<!-- Points moved to titlebar
+<div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px">
+  <%= @points %> <i class="fa-solid fa-gem p-0 text-white"></i>
 </div>
-  <div class="box mt-3">
-    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 btn btn-primary' %>
-  </div>
+-->
+
+</div>
 
   <div class="box mt-3">
     <!-- Adjusted due to "special" hidden kanji -->
@@ -69,6 +75,10 @@
       </div>
 
     </div>
+  </div>
+
+  <div class="box mt-3">
+    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 text-white fs-5 btn btn-primary' %>
   </div>
 
   <div class="box mt-3">
