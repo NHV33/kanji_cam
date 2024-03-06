@@ -1,0 +1,11 @@
+<div>
+  <style>
+    <% class_name = button_text.gsub(/[^A-Za-z\d]{1}/, "-").downcase %>
+    <% class_content = "color: red; background-color: #000; background: linear-gradient(to bottom, rgba(#fff ,1) 0%, rgba(#000 ,1) 100%);" %>
+    <%= ".#{class_name}{#{class_content}}" %>
+  </style>
+  <div
+    class="<%= class_name %> btn-deck">
+    <%= class_name %>
+  </div>
+</div>
