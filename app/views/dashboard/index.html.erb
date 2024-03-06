@@ -1,8 +1,15 @@
 <!-- FILEPATH: /Users/takahirokamio/code/kanji_cam/app/views/dashboards/index.html.erb -->
 <%# <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> %>
 <%= render 'partials/title_bar', destination: root_url, title: "Dashboard" %>
-
 <div class="container">
+
+<!-- Tiger changes. Keeping the code now just in case. Please don't touch for now. -->
+  <%# <div class="d-flex justify-content-between align-items-center mt-5 gap-2">
+    <div class="col-8">
+      <%= link_to 'Study Kanji Flashcards', decks_path, class: 'fs-5 page-btn' %>
+    <%# </div> %>
+    <%# <div class="col fs-3"> %>
+      <%# <div class="text-center points-display" style="height: 48px;"><%= @points <i class="fa-solid fa-gem"></i></div> %>
 
 <div class="mt-4 d-flex justify-content-end">
 <div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px"><%= @points %> <i class="fa-solid fa-gem p-0 text-white"></i></div>
@@ -24,9 +31,9 @@
       <%= render 'partials/qa_button', topic: "standard_kanji" %>
     </h3>
 
-    <div class="progress">
+    <div class="progress my-progress-bar">
 
-      <div  class="progress-bar"
+      <div  class="progress-bar my-progress-bar-value"
             role="progressbar"
             style="width: <%= (@total_captured_kanji.to_f / total_kanji * 100).round(2) %>%;"
             aria-valuenow="<%= @total_captured_kanji %>"
@@ -50,9 +57,9 @@
       <%= render 'partials/qa_button', topic: "learning_progress" %>
     </h3>
 
-    <div class="progress">
+    <div class="progress my-progress-bar">
 
-      <div  class="progress-bar"
+      <div  class="progress-bar my-progress-bar-value"
             role="progressbar"
             style="width: <%= (@total_learned_kanji.to_f / @total_captured_kanji * 100).round(2) %>%;"
             aria-valuenow="<%= @total_learned_kanji %>"
@@ -62,14 +69,11 @@
       </div>
 
     </div>
-
   </div>
 
-  <br>
-
-  <div class="box">
+  <div class="box mt-3">
     <h3>Kanji Collected by JLPT Level</h3>
-    <%= pie_chart @learned_kanji_by_jlpt,
+    <%= pie_chart @collected_kanji_by_jlpt,
                 id: "jlpt_kanji_distribution",
                 height: "250px",
                 library: {
@@ -87,9 +91,7 @@
                   }
                 } %>
   </div>
-
 </div>
-
 <!--
 <div class="container mt-4">
   <div class="row">

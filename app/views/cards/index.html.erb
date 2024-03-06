@@ -1,10 +1,12 @@
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Collection" %>
 
 <div class="container d-flex flex-column">
-  <div class="row justify-content-center mt-3">
-    <div>
-      <h2><strong><%= @cards.length %></strong> <small>collected</small></h2>
+  <div class="row justify-content-center mt-4">
+
+    <div class="mt-1 mb-2 d-flex justify-content-end">
+      <div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px"><%= @cards.length %>字</div>
     </div>
+
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
       <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" %>
@@ -16,7 +18,7 @@
           <%# image_tag "kanji_image.png", class: "card-img-top py-1 justify-content-center"%>
         </div>
 
-        <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1 font-color">
+        <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1">
 
           <!-- Checks the character saved on the card instance -->
           <span class="text-center fs-1"><%= card.character %></span>

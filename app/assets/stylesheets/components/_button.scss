@@ -1,0 +1,141 @@
+// Page Button
+// .page-btn {
+//   padding: 10px;
+//   background: $bg-color;
+//   border-radius: 10px;
+//   color: $font-color;
+//   box-shadow: 5px 5px 10px #c9c8c2, -5px -5px 10px #ffffff;
+//   cursor: pointer;
+//   user-select: none;
+//   text-decoration: none;
+
+//   &:active {
+//   background: $bg-color;
+//   box-shadow: inset 5px 5px 10px #c9c8c2, inset -5px -5px 10px #ffffff;
+//   }
+
+// }
+
+.page-btn {
+  display: block;
+  font-family: helvetica;
+  color: #000;
+  font-size: 16px;
+  box-shadow: 9px 8px 0px -1px#BEE2F9, 9px 8px 0px 1px #000;
+  padding: 12px 25px;
+  border-radius: 11px;
+  border: 2px solid #000;
+  background: linear-gradient(to top, #63B8EE, #468CCF);
+  transition: .3s;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.page-btn:hover {
+  transition: .3s;
+  transform: translate(-.3em, -.3em);
+  box-shadow: 14px 13px 0px -1px #BEE2F9, 14px 13px 0px 1px #000;
+  border: 2px solid #000;
+}
+
+.page-btn:active {
+  transition: .3s;
+  transform: translate(.6em, .6em);
+  box-shadow: 0px 0px 0px -1px #BEE2F9, 0px 0px 0px 0.1px#000;
+}
+
+// ICON Button
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #fdfbf4, #d4d4cd);
+    box-shadow:   5px 5px 10px #d2d1cb,
+    -5px -5px 10px #fffffd;
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: $font-color;
+    transition: all .5s ease;
+    position: absolute;
+    top: 81px;
+    right: 20px;
+
+    &:active {
+      box-shadow: inset 5px 5px 10px #c4c3c6, inset -5px -5px 10px #ffffff;
+      color: $primary;
+    }
+
+  }
+
+  // 3D Button
+
+  .btn-3d {
+    position: relative;
+    top: -6px;
+    border: 0;
+    transition: all 40ms linear;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+
+    &:active {
+      top: 2px;
+    }
+  }
+
+  .btn-3d.flashcard-blue-btn {
+    box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #4274D7;
+
+    &:active {
+      box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #4274D7;
+    }
+  }
+
+  .btn-3d.flashcard-green-btn {
+    box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #78d739;
+
+    &:active {
+      box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #78d739;
+    }
+  }
+
+  .btn-3d.flashcard-yellow-btn {
+    box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #FEAF20;
+
+    &:active {
+      box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #FEAF20;
+    }
+  }
+
+
+  .btn-3d.flashcard-red-btn {
+    box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #D73814;
+
+    &:active {
+      box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #D73814;
+    }
+  }
+
+  .btn-fixed-size {
+    width: 70px;  /* Adjust as needed */
+    height: 40px;  /* Adjust as needed */
+  }
