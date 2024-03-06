@@ -5,7 +5,8 @@
       <div class="col-3">
         <span>JLPT: </span>
         <h3>
-          <% rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
+          <%# rank_emoji = ["", "👹", "🕺", "😎", "😺", "🐣"] %>
+          <% rank_emoji = ["", "😯", "😮", "😬", "😁", "😄"] %>
           <%= "N#{@kanji.jlpt} #{rank_emoji[@kanji.jlpt]}" %>
         </h3>
       </div>

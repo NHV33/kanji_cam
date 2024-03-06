@@ -1,16 +1,16 @@
-$n0: hsl(0  ,   0%, 33%);
-$n1: hsl(0  , 100%, 69%);
-$n2: hsl(72 , 100%, 69%);
-$n3: hsl(144, 100%, 69%);
-$n4: hsl(216, 100%, 69%);
-$n5: hsl(288, 100%, 69%);
+$n0: hsl(0  ,  0%, 33%);
+$n1: hsl(0  , 55%, 55%);
+$n2: hsl(39 , 55%, 55%);
+$n3: hsl(113, 55%, 55%);
+$n4: hsl(216, 55%, 55%);
+$n5: hsl(288, 55%, 55%);
 
-$n0-dark: hsl(0  ,   0%,  0%);
-$n1-dark: hsl(0  , 100%, 33%);
-$n2-dark: hsl(72 , 100%, 33%);
-$n3-dark: hsl(144, 100%, 33%);
-$n4-dark: hsl(216, 100%, 33%);
-$n5-dark: hsl(288, 100%, 33%);
+$n0-dark: hsl(0  ,  0%,  0%);
+$n1-dark: hsl(0  , 55%, 33%);
+$n2-dark: hsl(39 , 55%, 33%);
+$n3-dark: hsl(113, 55%, 33%);
+$n4-dark: hsl(216, 55%, 33%);
+$n5-dark: hsl(288, 55%, 33%);
 
 .n0-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n0 ,1) 0%, rgba($n0-dark ,1) 100%); }
 .n1-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n1 ,1) 0%, rgba($n1-dark ,1) 100%); }
@@ -42,6 +42,10 @@ $n5-dark: hsl(288, 100%, 33%);
   margin: 0px;
   // background: #000;
   // top: 0px;
+}
+
+.jlpt-text-shadow {
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, .33);
 }
 
 .jlpt-shadow {
