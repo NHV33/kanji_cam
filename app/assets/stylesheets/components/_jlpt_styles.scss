@@ -1,0 +1,51 @@
+$n0: black;
+$n1: hsl(0  , 100%, 69%);
+$n2: hsl(72 , 100%, 69%);
+$n3: hsl(144, 100%, 69%);
+$n4: hsl(216, 100%, 69%);
+$n5: hsl(288, 100%, 69%);
+
+
+// .svg-shadow {
+//   -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+//   filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+//   /* Similar syntax to box-shadow */
+// }
+
+.jlpt-flag-box {
+  // background-color: aqua;
+  position: absolute;
+  right: 13px;
+  top: 0px;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.jlpt-flag {
+  box-sizing: border-box;
+  margin: 0px;
+  // background: #000;
+  // top: 0px;
+}
+
+.jlpt-shadow {
+  -webkit-filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .33));
+  filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .33));
+}
+
+.bg-n0 { background-color: $n0; }
+.bg-n1 { background-color: $n1; }
+.bg-n2 { background-color: $n2; }
+.bg-n3 { background-color: $n3; }
+.bg-n4 { background-color: $n4; }
+.bg-n5 { background-color: $n5; }
+
+.fill-n0 { fill: $n0; }
+.fill-n1 { fill: $n1; }
+.fill-n2 { fill: $n2; }
+.fill-n3 { fill: $n3; }
+.fill-n4 { fill: $n4; }
+.fill-n5 { fill: $n5; }

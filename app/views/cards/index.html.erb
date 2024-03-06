@@ -9,13 +9,17 @@
 
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
-      <% button_styles = "user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 custom-card m-1" %>
-
+      <% button_styles = "custom-card position-relative user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 m-1" %>
       <%= link_to card_path(card), class: button_styles, style: "text-decoration: none;" do %>
 
-        <div class="position-relative">
-          <!-- <div class="big-kanji"><%= card.kanji.character %></div> -->
-          <%# image_tag "kanji_image.png", class: "card-img-top py-1 justify-content-center"%>
+        <%# jlpt_fill = "fill-n#{jlpt_level}" %>
+
+        <div class="jlpt-flag-box">
+          <%= render 'partials/jlpt_flag', jlpt_level: card.kanji.jlpt %>
+        </div>
+
+        <div class="jlpt-flag-box text-white">
+          N<%= card.kanji.jlpt %>
         </div>
 
         <div class="kanji-badge d-flex flex-column align-items-center justify-content-center my-1">
