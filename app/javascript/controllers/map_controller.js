@@ -93,7 +93,7 @@ export default class extends Controller {
     // comment out if this animation can be annoying
     // this.map.flyTo({
     //     center: [coords.longitude, coords.latitude], // set user's location to the center
-    //     zoom: 12,
+    //     zoom: 14,
     //     essential: true,
     //     duration: 2000
     // });
@@ -101,7 +101,7 @@ export default class extends Controller {
     userMarker.getElement().addEventListener("click", () => {
       this.map.flyTo({
         center: [coords.longitude, coords.latitude],
-        zoom: 12,
+        zoom: 14,
         essential: true,
         duration: 1000,
       });
@@ -175,7 +175,7 @@ export default class extends Controller {
           // console.log("fly to marker");
           this.map.flyTo({
             center: [marker.lng, marker.lat], // set marker in the center
-            zoom: 12, // zoom level
+            zoom: 14, // zoom level
             essential: true, // animation: true
             duration: 1000,
           });
@@ -184,7 +184,7 @@ export default class extends Controller {
         newMarker.getElement().addEventListener("click", () => {
           this.map.flyTo({
             center: [marker.lng, marker.lat],
-            zoom: 12,
+            zoom: 14,
             essential: true,
             duration: 1000,
           });

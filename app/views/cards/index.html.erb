@@ -1,16 +1,20 @@
-<%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Collection" %>
+<% title_content = "My Collection | #{@cards.length} Kanji" %>
+<%= render 'partials/title_bar', destination: dashboard_url, title: title_content %>
 
 <div class="container d-flex flex-column">
   <div class="row justify-content-center mt-4">
 
-    <div class="mt-1 mb-2 d-flex justify-content-center">
-      <div class="bg-primary px-2 py-1 text-center text-white" style="border-radius: 16px">
-        Collected <%= @cards.length %> Kanji</div>
-    </div>
+    <!-- Relocated this information to the title bar
+      <div class="mt-1 mb-2 d-flex justify-content-center">
+        <div class="bg-primary px-2 py-1 text-center text-white" style="border-radius: 16px">
+          Collected <%= @cards.length %> Kanji
+        </div>
+      </div>
+    -->
 
     <% @cards.each do |card| %>
       <%# card_kanji = KanjiData.new(card.kanji.id) %>
-      <% button_styles = "custom-card position-relative user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 m-1" %>
+      <% button_styles = "m-2 custom-card position-relative user-select-none temp-fix d-flex flex-column align-items-center justify-content-center col-4 col-md-3 m-1" %>
       <%= link_to card_path(card), class: button_styles, style: "text-decoration: none;" do %>
 
         <%# jlpt_fill = "fill-n#{jlpt_level}" %>
@@ -19,7 +23,7 @@
           <%= render 'partials/jlpt_flag', jlpt_level: card.kanji.jlpt %>
         </div>
 
-        <div class="jlpt-flag-box text-white">
+        <div class="jlpt-flag-box text-white jlpt-text-shadow">
           N<%= card.kanji.jlpt %>
         </div>
 

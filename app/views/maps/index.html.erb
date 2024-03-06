@@ -1,32 +1,37 @@
+<style>
+  body {
+    background-color: black;
+    overflow: hidden;
+  }
+</style>
+
 <%= render 'partials/title_bar', destination: dashboard_url, title: "My Kanji Map" %>
+
 <div class="map-container">
+  <%# <div class="map-bg box p-2"> %>
+  <div class="top-element-container">
 
-  <%# <div class="map-bg box justify-content-center mt-4 p-2"> %>
-  <div class="tab-button-container d-flex justify-content-between">
-    <button class="text-white tab-button yellow"><i class="fa-solid fa-user"></i> My Map</button>
-    <%= link_to all_kanji_map_path, class: 'text-white tab-button transparent' do %>
-  Global Map <i class="fa-solid fa-globe"></i>
-<% end %>
+    <div class="tab-button-container d-flex justify-content-between">
+
+      <button class="text-white tab-button yellow slide-left">
+        <i class="fa-solid fa-user"></i> My Map
+      </button>
+
+      <%= link_to all_kanji_map_path, class: 'fade-in text-white tab-button transparent' do %>
+        Global Map <i class="fa-solid fa-globe"></i>
+      <% end %>
+
     </div>
-    <%# </div> %>
-    <%# <div class="top-message bg-white d-flex align-items-center px-3 py-2"> %>
-    <%# if user found 0 kanji %>
-  <%# "Go find some kanji!"" %>
-  <p class="top-message d-flex align-items-center px-3 text-center"><% if @cards_with_position.count == 0 %><%= "No kanji to show" %>
-      <%# if user found some kanji, but no location is available %>
-      <%# "No location available" %>
-    <% elsif @cards_with_position == 0 %>
-      <%= "No location data is available" %>
-      <%# if user found some kanji, but some cards' location are missing %>
-      <%# xx positions are available %>
-    <% else %><%= "Displaying" %> <%= @cards_with_position.count %> of <%= @cards.count %> <%= "kanji" %>
-    <% end %></p>
 
-
-    <div class="map mx-auto"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  <%# Please advise me good wording... the following will redirect to all user's kanji map %>
+    <p class="top-message pb-2 d-flex align-items-center px-3 text-center">
+      Displaying <%= @cards_with_position.count %> of <%= @cards.count %> Kanji
+    </p>
   </div>
-<%# </div> %>
+
+  <div class="map mx-auto"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
+</div>
