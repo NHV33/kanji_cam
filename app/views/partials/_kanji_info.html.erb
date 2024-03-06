@@ -1,6 +1,6 @@
 <div class="us-n box col-12 mt-3" style="position: relative;">
 
-  <% if @card && @card.comment == "" %>
+  <% if @card && (@card.comment == "" || @card.comment == nil) %>
     <%= link_to edit_card_path(@card),
         class: "p-2 rounded-4 bg-primary",
         style: "position: absolute; height: 45px; width: 45px; right: 17px; top: 17px; z-index: 10;" do %>
