@@ -1,10 +1,23 @@
-$n0: black;
+$n0: hsl(0  ,   0%, 33%);
 $n1: hsl(0  , 100%, 69%);
 $n2: hsl(72 , 100%, 69%);
 $n3: hsl(144, 100%, 69%);
 $n4: hsl(216, 100%, 69%);
 $n5: hsl(288, 100%, 69%);
 
+$n0-dark: hsl(0  ,   0%,  0%);
+$n1-dark: hsl(0  , 100%, 33%);
+$n2-dark: hsl(72 , 100%, 33%);
+$n3-dark: hsl(144, 100%, 33%);
+$n4-dark: hsl(216, 100%, 33%);
+$n5-dark: hsl(288, 100%, 33%);
+
+.n0-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n0 ,1) 0%, rgba($n0-dark ,1) 100%); }
+.n1-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n1 ,1) 0%, rgba($n1-dark ,1) 100%); }
+.n2-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n2 ,1) 0%, rgba($n2-dark ,1) 100%); }
+.n3-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n3 ,1) 0%, rgba($n3-dark ,1) 100%); }
+.n4-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n4 ,1) 0%, rgba($n4-dark ,1) 100%); }
+.n5-gradient { background-color: #000; background: linear-gradient(to bottom, rgba($n5 ,1) 0%, rgba($n5-dark ,1) 100%); }
 
 // .svg-shadow {
 //   -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));

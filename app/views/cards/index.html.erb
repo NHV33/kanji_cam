@@ -3,8 +3,9 @@
 <div class="container d-flex flex-column">
   <div class="row justify-content-center mt-4">
 
-    <div class="mt-1 mb-2 d-flex justify-content-end">
-      <div class="bg-primary px-2 py-1 col-3 col-md-2 col-lg-1 text-center text-white" style="border-radius: 16px"><%= @cards.length %>字</div>
+    <div class="mt-1 mb-2 d-flex justify-content-center">
+      <div class="bg-primary px-2 py-1 text-center text-white" style="border-radius: 16px">
+        Collected <%= @cards.length %> Kanji</div>
     </div>
 
     <% @cards.each do |card| %>
