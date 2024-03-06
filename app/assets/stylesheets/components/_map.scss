@@ -3,7 +3,6 @@ $light-color: white;
 
 .map-container {
   position: relative;
-  // top: 50px;
   top: 15px;
   // remove title and nav bar hight from vh
   height: calc(100vh - 45px - 72.25px);
@@ -18,12 +17,20 @@ $light-color: white;
   z-index: 0;
 }
 
-// .top-element-container {
-//   position: absolute;
-// }
+.top-element-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // position: absolute;
+  // top: 8px;
+  // left: 10px;
+}
 
 .tab-button-container {
   position: absolute;
+  // top: 64px;
+  // left: 50%;
+  // transform: translateX(-50%);
   top: 8px;
   left: 10px;
   z-index: 2;
@@ -60,9 +67,11 @@ button{
 
 .top-message {
   border-radius: 20px;
-  // position: absolute;
-  // top: 64px;
-  // left: 12px;
+  position: absolute;
+  top: 64px;
+  left: 8px;
+  // left: 50%;
+  // transform: translateX(-50%);
   // top: 30px;
   // right: 8px;
   z-index: 1;
