@@ -28,14 +28,12 @@ class DecksController < ApplicationController
 
 
   def show
-    session[:progress] = 0
-    session[:session_points] = 0
-    session[:finished_session] = false
     @cards = @deck.entries.where(card: :kanji)
-    @cards = @deck.cards
-    session[:total_cards] = @cards.count
-    # session[:learned_cards] = @cards.where(learned: true).count
+    session[:total_cards] = @deck.cards.where(learned: false).count
     session[:learned_cards] = 0
+    session[:session_points] = 0
+    session[:progress] = 0
+    session[:finished_session] = false
 
     redirect_to next_card_deck_path(@deck)
   end
