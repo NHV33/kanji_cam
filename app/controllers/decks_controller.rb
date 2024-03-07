@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: [:show, :next_card]
+  before_action :set_deck, only: [:show, :next_card, :finish_session]
 
   def index
     # excluded_titles = ["Master Deck"] + (1..5).map { |level| "JLPT N#{level}" }
@@ -28,12 +28,13 @@ class DecksController < ApplicationController
 
 
   def show
-    session[:progress] = 0
+    @cards = @deck.entries.where(card: :kanji)
+    session[:total_cards] = @deck.cards.where(learned: false).count
+    session[:learned_cards] = 0
     session[:session_points] = 0
-    # @cards = @deck.entries.where(card: :kanji)
-    @cards = @deck.cards
-    session[:total_cards] = @cards.count
-    session[:learned_cards] = @cards.where(learned: true).count
+    session[:progress] = 0
+    session[:finished_session] = false
+
     redirect_to next_card_deck_path(@deck)
   end
 
@@ -81,6 +82,12 @@ class DecksController < ApplicationController
     end
   end
 
+  def finish_session
+    if session[:finished_session] = true
+      redirect_to next_card_deck_path(@deck)
+      p "session finished"
+    end
+  end
 
   def reset_learned
     current_user.cards.all.each do |user_card|

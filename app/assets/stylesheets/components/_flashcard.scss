@@ -12,14 +12,6 @@
   background-color: #f0f0f0;
 }
 
-.card-container {
-  // height: 50vh;
-  perspective: 1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .flashcard {
   user-select: none;
   width: 260px;
@@ -64,14 +56,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // overflow: hidden;
-  overflow: hidden;
   max-height: 70vh;
 }
 
 .card-container {
-  height: 55vh;
   perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45vh;
   margin-bottom: 20px;
 }
 
