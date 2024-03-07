@@ -1,20 +1,99 @@
 $icon-width: 48px;
 $light-color: white;
-$dark-color: $primary;
 
-.map-bg {
-  border-radius: 20px;
+.map-container {
+  position: relative;
+  top: 15px;
+  // remove title and nav bar hight from vh
+  height: calc(100vh - 45px - 72.25px);
 }
 
 .map {
-  border-radius: 20px;
-  height: 65vh;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
 
-.btn3d:disabled, button[disabled] {
-  background-color: gray !important;
+.top-element-container {
+  position: absolute;
+  // top: 64px;
+  // left: 50%;
+  // transform: translateX(-50%);
+  top: 14px;
+  left: 10px;
+  z-index: 2;
+
+  // position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: start;
+  align-items: start;
+  // position: absolute;
+  // top: 8px;
+  // left: 10px;
+}
+
+.tab-button-container {
+  // position: absolute;
+  // // top: 64px;
+  // // left: 50%;
+  // // transform: translateX(-50%);
+  // top: 14px;
+  // left: 10px;
+  // z-index: 2;
+  background: $secondary;
+  padding: 10px;
+  border-radius: 28px 28px 28px 0px;
+  gap: 8px;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+.tab-button {
+  text-decoration: none;
+  background-color: $yellow;
+  padding: 6px 17px;
+  border-radius: 18px;
+  &.yellow {
+    background-color: $yellow;
+  }
+  &.green {
+    background-color: $green;
+  }
+  &.transparent {
+    background-color: transparent;
+    opacity: 0%;
+    // background-color: rgba(0, 0, 0, 0.03);
+    // border-style: solid;
+    // border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.top-message {
+  border-radius: 0px 0px 20px 20px;
+  color: white;
+  background-color: $secondary;
+  // position: absolute;
+  // top: 70px;
+  // left: 8px;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // top: 30px;
+  // right: 8px;
+  // z-index: 1;
+  // background-color: #faf9f7;
+  // box-shadow: 0px 0px 12px 11px #faf9f7;
 }
 
 /*Not necessary because relative elements
@@ -34,14 +113,54 @@ also, this div is just a point with no width or height */
 //   transform-origin: right bottom;
 // }
 
+.user-marker {
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #3FB1CE;
+  border: 2px solid $light-color;
+  // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+// disabling speech bubble
+// .user-speech-bubble {
+//   background-color: #434979;
+//   color: $light-color;
+//   padding: 6px;
+//   border-radius: 10px;
+//   width: 100px;
+//   position: absolute;
+//   top: 38px;
+//   left: -37px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .user-speech-bubble::after {
+//   content: '';
+//   position: absolute;
+//   top: -15px;
+//   left: calc(50% - 8px);
+//   /* border to shape triangle */
+//   border-left: 8px solid transparent;
+//   border-right: 8px solid transparent;
+//   border-bottom: 15px solid #434979;
+// }
+
+// .speech-bubble-text {
+//   padding: 0;
+//   text-align: center;
+//   margin-bottom: 0;
+// }
+
 .marker-icon {
-  background-color: $dark-color;
-  border-color: $light-color;
-  border-style: solid;
+  // box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #4D5BBE;
+  background-color: #4274D7;
   border-radius: 100% 100% 0 100%;
-  border-width: 1px;
-  // box-shadow: 8px 8px 16px rgba(42, 44, 46, 0.08);
-  color: $light-color;
   position: absolute;
   // z-index: 1;
 
@@ -57,17 +176,13 @@ also, this div is just a point with no width or height */
 }
 
 .pinpoint-active {
-  z-index: 9999;
+  z-index: 2;
   .marker-icon {
-    background-color: $light-color;
-    border-color: $dark-color;
+    box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 #3e4997, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background: #422fba;
     z-index: 9999;
-    .marker-text {
-      color: $dark-color;
-    }
   }
 }
-
 
 .marker-text {
   color: $light-color;
@@ -78,10 +193,53 @@ also, this div is just a point with no width or height */
   transform: translateX(-50%) rotate(-45deg);
 }
 
+.detail-link {
+  text-decoration: none;
+  font-size: 13px;
+  background-color: gray;
+  color: $light-color;
+  padding: 2px 4px;
+  margin-top: 6px;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background-color: $light-color;
+    color: gray;
+    border: solid 1px gray;
+  }
+}
+
 .mapboxgl-popup {
   z-index: 99999;
   max-width: 400px;
-  // border: solid 2px $dark-color;
 }
 
-// .mapboxgl-popup
+@keyframes slideRight {
+  0% { transform: translateX(-100px); }
+  100% { transform: translateX(0px); }
+}
+
+.slide-right {
+  animation: slideRight 500ms ease forwards;
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(100px); }
+  100% { transform: translateX(0px); }
+}
+
+.slide-left {
+  animation: slideLeft 500ms ease forwards;
+}
+
+
+@keyframes fadeIn {
+  0% { opacity: (0%); }
+  100% { opacity: (50%); }
+}
+
+.fade-in {
+  animation: fadeIn 133ms ease forwards;
+  animation-delay: 500ms;
+}

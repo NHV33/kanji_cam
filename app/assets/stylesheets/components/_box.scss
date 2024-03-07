@@ -1,0 +1,15 @@
+.box {
+  padding: 20px;
+  background: $bg-color;
+  border-radius: 14px;
+  //box-shadow: 6px 6px 12px #d0cfd2, -6px -6px 12px #ffffff;
+  color: $font-color;
+  box-shadow: 5px 5px 10px #c0c5ce, -5px -5px 10px #ffffff;
+}
+
+// need to create a dented box
+.dented-box {
+  // border-radius: 14px;
+  // background: $bg-color;
+  // box-shadow: inset 5px 5px 10px #c9c8c2, inset -5px -5px 10px #ffffff;
+}

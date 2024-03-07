@@ -1,7 +1,7 @@
 
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $bg-color;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -13,17 +13,19 @@
 }
 
 .navbar {
-  background: rgb(23,23,23);
-  background: #d9fae9;
+  background: $bg-color;
+  // box-shadow:  5px 5px 10px #b9bec6, -5px -5px 10px #ffffff;
   // justify-content: space-between;
 }
 
 .navbar-icon {
-  height: 15vmin;
-  width: 15vmin;
+  height: 14vmin;
+  width: 14vmin;
   max-height: 10vh;
   max-width: 10vh;
-  fill: url(#default-gradient) #454545;
+  fill: $secondary2;
+  box-shadow: 5px 5px 10px #b9bec6, -5px -5px 10px #ffffff;
+  border-radius: 10px;
 }
 
 // .navbar-icon:hover {
@@ -31,6 +33,7 @@
 // }
 
 .navbar-icon-active .navbar-icon {
-  // fill: url(#my-cool-gradient) $success;
   fill: $primary;
+  // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
+  box-shadow: inset 5px 5px 10px #d7d6cf, inset -5px -5px 10px #fffff9;
 }

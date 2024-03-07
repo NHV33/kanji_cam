@@ -1,0 +1,24 @@
+// $button-color
+
+.btn-deck-wrapper {
+  text-decoration: none;
+  width: 100vw !important;
+}
+
+.btn-deck {
+  margin: 0;
+  text-decoration: none;
+  padding: 2vmin 5vmin 2vmin 5vmin;
+  font-size: 5vmin;
+  white-space: nowrap;
+  overflow: hidden;
+  // height: 300px;
+  width: 100vw !important;
+  color:white;
+}
+
+.btn-deck:active {
+  transform: translate(10px, 0px);
+  // filter: invert(1) grayscale(1);
+}
+// transform: scaleY(-1);

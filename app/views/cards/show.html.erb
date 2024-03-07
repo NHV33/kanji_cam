@@ -16,7 +16,7 @@
     <!-- Hide note if absent. -->
     <% unless @card.comment.nil? || @card.comment == "" %>
 
-      <div class="post-it-note col-12 mb-2">
+      <div class="post-it-note col-12 mb-2 mt-4">
         <div class="d-flex">
           <h3 class="fs-5">Notes:</h3>
           <%= link_to edit_card_path(@card) do %>
@@ -28,10 +28,9 @@
         </div>
       </div>
 
-    <%# Add Note button if note is hidden. %>
-    <% else %>
-      <%= link_to 'Add Note', edit_card_path(@card), class: "rounded-pill btn btn-primary text-shadow text-white w-100" %>
     <% end %>
+    <%# Add Note button if note is hidden. %>
+    <!-- Moved to kanji_info partial -->
 
   </div>
 

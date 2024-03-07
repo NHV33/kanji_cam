@@ -1,13 +1,37 @@
+<style>
+  body {
+    background-color: black;
+    overflow: hidden;
+  }
+</style>
+
 <%= render 'partials/title_bar', destination: dashboard_url, title: "Kanji for All Users" %>
-<div class="container">
-  <div class="map-bg box p-2">
-    <!-- Please advise me good wording... the following will redirect to all user's kanji map -->
-    <%= link_to "My Map", maps_path, class: 'btn3d btn-primary text-white' %>
-    <button disabled class="btn3d btn-primary text-white">Global Map</button>
-    <p class="text-center mb-1"><%= @cards.count %> kanji collected on our app</p>
-    <div class="map mx-auto mb-2"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+<div class="map-container">
+  <%# <div class="map-bg box p-2"> %>
+  <div class="top-element-container">
+
+    <div class="tab-button-container d-flex justify-content-between">
+
+      <%= link_to maps_path, class: 'fade-in text-white tab-button transparent' do %>
+        <i class="fas fa-user"></i> My Map
+      <% end %>
+
+      <button class="text-white tab-button green slide-right">
+        Global Map <i class="fa-solid fa-globe"></i>
+      </button>
+
+    </div>
+
+    <p class="top-message pb-2 d-flex align-items-center px-3 text-center">
+      <%= @cards.count %> Kanji Collected
+    </p>
   </div>
+
+  <div class="map mx-auto"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
 </div>
