@@ -36,7 +36,7 @@
 
   <%= render 'partials/kanji_info' %>
 
-  <div class="container text-center mt-3">
+  <div class="container text-center mt-3 mb-3">
     <%= link_to card_path(@card),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
       <i class="fa-solid fa-trash-can"></i>
