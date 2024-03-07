@@ -174,7 +174,7 @@ export default class extends Controller {
           // When marker is clicked, zoom in as needed
           // console.log("fly to marker");
           this.map.flyTo({
-            center: [marker.lng, marker.lat + 0.005138], // set marker in the center
+            center: [marker.lng, marker.lat + 0.003138], // set marker in the center
             zoom: 14, // zoom level
             essential: true, // animation: true
             duration: 1000,
@@ -183,7 +183,7 @@ export default class extends Controller {
 
         newMarker.getElement().addEventListener("click", () => {
           this.map.flyTo({
-            center: [marker.lng, marker.lat + 0.005138],
+            center: [marker.lng, marker.lat + 0.003138],
             zoom: 14,
             essential: true,
             duration: 1000,
