@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       get 'next_card'
       patch 'learn_card'
+      patch 'finish_session'
     end
   end
 # adding custom routes to the resources? https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
