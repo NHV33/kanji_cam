@@ -65,11 +65,8 @@ button{
   background-color: $yellow;
   padding: 6px 17px;
   border-radius: 18px;
-  &.yellow {
-    background-color: $yellow;
-  }
   &.green {
-    background-color: $green;
+    background-color: $primary;
   }
   &.transparent {
     background-color: transparent;
@@ -193,26 +190,36 @@ also, this div is just a point with no width or height */
   transform: translateX(-50%) rotate(-45deg);
 }
 
+.popup-text {
+  font-size: 15px;
+}
+
 .detail-link {
   text-decoration: none;
-  font-size: 13px;
-  background-color: gray;
+  background-color: $primary;
   color: $light-color;
-  padding: 2px 4px;
-  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
   &:focus {
     outline: none;
   }
   &:active {
     background-color: $light-color;
-    color: gray;
-    border: solid 1px gray;
+    color: $primary;
+    border: solid 1px $primary;
   }
 }
 
+// .mapboxgl-popup-content {
+//   z-index: 99999;
+//   // width: 200px;
+//   // height: 150px
+// }
+
 .mapboxgl-popup {
   z-index: 99999;
-  max-width: 400px;
+  // width: 200px;
+  // height: 150px
 }
 
 @keyframes slideRight {
