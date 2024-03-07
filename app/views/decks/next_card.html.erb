@@ -18,7 +18,7 @@
         </div>
         <br>
         <br>
-        <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+        <div class="box" style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
           <h2><%= @deck.title %></h2>
           <br>
           <br>
@@ -29,9 +29,11 @@
             <p>💰Total: <%= @user_points %>p</p>
           </div>
         </div>
-        <%= button_to decks_url, method: :get, class: "mt-5 btn btn-primary text-white" do %>
+        <div>
+        <%= button_to decks_url, method: :get, class: "mt-5 text-white page-btn d-flex col-12 px-4" do %>
           See all decks
         <% end %>
+        </div>
         <br>
         <br>
         <br>
@@ -85,10 +87,10 @@
           <% end %>
         </div>
       </div>
-      <div>
-        <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, style: "width: 100%;", class: "btn btn-secondary" %>
+      <div class="mt-5">
+        <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, style: "width: 100%;", class: "page-btn rounded-pill px-5" %>
       </div>
     <% end %>
   </div>
-  
+
 </div>

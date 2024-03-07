@@ -15,7 +15,8 @@
 
   <% end %>
 
-  <div class="post-it-note post-it-wiggle col-12 mt-4 mb-2">
+  <div class="post-it-note-form post-it-wiggle col-12 mb-2" style="margin-top: 3rem;">
+  <%# <div class="post-it-note post-it-wiggle col-12 mt-4 mb-2"> %> <!-- Vincent's changes -->
 
     <div class="d-flex">
       <h3 class="fs-5">Notes:</h3>
@@ -28,7 +29,7 @@
     <div class="mx-0 fs-4">
       <%= simple_form_for [@card] do |f| %>
         <%# TODO: Add image upload. %>
-        <%= f.input :comment, label: false %>
+        <%= f.input :comment, label: false, input_html: { style: 'background-color: white;' } %>
         <div class="d-flex justify-content-around">
           <%= f.button :submit, "Update", class: "rounded-pill btn btn-primary text-shadow text-white col-5" %>
           <%= link_to 'Cancel', card_path(@card), class: "rounded-pill btn btn-danger text-shadow text-white col-5"%>

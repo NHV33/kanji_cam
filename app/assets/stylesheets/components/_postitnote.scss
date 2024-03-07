@@ -74,3 +74,52 @@
   right: 20px; // Adjust this to move the tape left/right
   transform: rotate(6deg);
 }
+
+
+/* Animation to adjust sticky note back to horizontal */
+@keyframes adjustToHorizontal {
+  0% {
+    transform: rotate(-10deg); /* Starting from a slanted position */
+  }
+  100% {
+    transform: rotate(0deg); /* Ending at a horizontal position */
+  }
+}
+
+// post-it-note on edit page
+.post-it-note-form {
+  position: relative;
+  background-color: #fffa90; /* Light yellow for the sticky note */
+  padding: 20px;
+  margin: 20px auto; /* Center the note */
+  width: 85%;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Tape effect */
+.post-it-note-form::before, .post-it-note-form::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  width: 55px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  transform: rotate(-5deg);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.post-it-note-form::before {
+  top: -7px;
+  left: 20px; // Adjust this to move the tape left/right
+  transform: rotate(-6deg);
+}
+
+.post-it-note-form::after {
+  // top: 10px;
+  right: 20px; // Adjust this to move the tape left/right
+  transform: rotate(6deg);
+}

@@ -14,7 +14,7 @@
     <%= render partial: "partials/navbar_icons/nav_camera", class: "navbar-icon"%>
   <% end %>
 
-  <%= link_to maps_path, class: active_page?([maps_path]) do %>
+  <%= link_to maps_path, class: active_page?([maps_path, all_kanji_map_path]) do %>
     <%= render partial: "partials/navbar_icons/nav_map", class: "navbar-icon"%>
   <% end %>
 
