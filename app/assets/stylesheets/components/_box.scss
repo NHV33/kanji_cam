@@ -1,10 +1,10 @@
 .box {
   padding: 20px;
-  background: $bg-color;
+  background: white;
   border-radius: 14px;
-  //box-shadow: 6px 6px 12px #d0cfd2, -6px -6px 12px #ffffff;
+  box-shadow:  5px 5px 5px #d7d6cf;
   color: $font-color;
-  box-shadow: 5px 5px 10px #c0c5ce, -5px -5px 10px #ffffff;
+  // box-shadow: 5px 5px 10px #c0c5ce, -5px -5px 10px #ffffff;
 }
 
 // need to create a dented box
@@ -20,5 +20,5 @@
   border-radius: 14px;
   //box-shadow: 6px 6px 12px #d0cfd2, -6px -6px 12px #ffffff;
   color: $font-color;
-  box-shadow: 5px 5px 10px #c0c5ce;
+  // box-shadow: 5px 5px 10px #c0c5ce;
 }

@@ -1,49 +1,17 @@
 // Page Button
-// .page-btn {
-//   padding: 10px;
-//   background: $bg-color;
-//   border-radius: 10px;
-//   color: $font-color;
-//   box-shadow: 5px 5px 10px #c9c8c2, -5px -5px 10px #ffffff;
-//   cursor: pointer;
-//   user-select: none;
-//   text-decoration: none;
-
-//   &:active {
-//   background: $bg-color;
-//   box-shadow: inset 5px 5px 10px #c9c8c2, inset -5px -5px 10px #ffffff;
-//   }
-
-// }
-
 .page-btn {
-  display: block;
-  font-family: helvetica;
-  color: #000;
-  font-size: 16px;
-  box-shadow: 9px 8px 0px -1px#BEE2F9, 9px 8px 0px 1px #000;
-  padding: 12px 25px;
+  padding: 10px;
+  max-width: 100%;
+  background: $primary;
   border-radius: 11px;
-  border: 2px solid #000;
-  background: linear-gradient(to top, #63B8EE, #468CCF);
-  transition: .3s;
+  color: white;
+  box-shadow: 5px 5px 10px #c9c8c2;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
 }
 
-.page-btn:hover {
-  transition: .3s;
-  transform: translate(-.3em, -.3em);
-  box-shadow: 14px 13px 0px -1px #BEE2F9, 14px 13px 0px 1px #000;
-  border: 2px solid #000;
-}
 
-.page-btn:active {
-  transition: .3s;
-  transform: translate(.6em, .6em);
-  box-shadow: 0px 0px 0px -1px #BEE2F9, 0px 0px 0px 0.1px#000;
-}
 
 // ICON Button
 
@@ -140,30 +108,30 @@
     height: 40px;  /* Adjust as needed */
   }
 
-  .test-btn {
-    user-select: none;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    outline: none;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    background-image: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
-    animation: rotate 4s linear infinite;
-    box-shadow: 5px 5px 10px #c9c8c2, -5px -5px 10px #ffffff;
+  // .test-btn {
+  //   user-select: none;
+  //   width: 100%;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   color: #ffffff;
+  //   outline: none;
+  //   height: 50px;
+  //   border: none;
+  //   border-radius: 5px;
+  //   text-decoration: none;
+  //   background-image: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+  //   animation: rotate 4s linear infinite;
+  //   box-shadow: 5px 5px 10px #c9c8c2, -5px -5px 10px #ffffff;
 
-    &:active {
-      // box-shadow: none;
-      filter: brightness(1.5);
-    }
-  }
+  //   &:active {
+  //     // box-shadow: none;
+  //     filter: brightness(1.5);
+  //   }
+  // }
 
-  @keyframes rotate {
-    100% {
-      filter: hue-rotate(-360deg)
-    }
-  }
+  // @keyframes rotate {
+  //   100% {
+  //     filter: hue-rotate(-360deg)
+  //   }
+  // }
