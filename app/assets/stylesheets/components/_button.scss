@@ -1,7 +1,7 @@
 // Page Button
 .page-btn {
   padding: 10px;
-  background: rgba(darken($primary, 28%), 0.6);
+  background: #AA78A6;
   border-radius: 40px;
   color: white;
   box-shadow: 5px 5px 5px #a5a5a3;
@@ -13,22 +13,6 @@
   justify-content: center;
   height: 45px;
 }
-
-.page-btn-update {
-  padding: 10px;
-  background: rgba(darken($primary, 28%), 0.6);
-  border-radius: 40px;
-  color: white;
-  // box-shadow: 5px 5px 5px #a5a5a3;
-  cursor: pointer;
-  user-select: none;
-  text-decoration: none;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  height: 45px;
-}
-
 
 
 // ICON Button

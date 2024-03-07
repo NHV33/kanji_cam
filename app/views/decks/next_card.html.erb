@@ -29,9 +29,11 @@
             <p>💰Total: <%= @user_points %>p</p>
           </div>
         </div>
-        <%= button_to decks_url, method: :get, class: "mt-5 text-white page-btn" do %>
+        <div>
+        <%= button_to decks_url, method: :get, class: "mt-5 text-white page-btn d-flex col-12 px-4" do %>
           See all decks
         <% end %>
+        </div>
         <br>
         <br>
         <br>
@@ -86,9 +88,9 @@
         </div>
       </div>
       <div class="mt-5">
-        <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, style: "width: 100%;", class: "page-btn rounded-pill" %>
+        <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, style: "width: 100%;", class: "page-btn rounded-pill px-5" %>
       </div>
     <% end %>
   </div>
-  
+
 </div>
