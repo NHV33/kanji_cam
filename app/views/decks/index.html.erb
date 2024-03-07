@@ -9,9 +9,9 @@
     You have <%= unlearned_kanji %> unlearned kanji.
   </div>
 
-  <div class="my-3">
+  <div class="my-3 box mb-4">
     <%= link_to deck_path(@master_deck), class: 'btn-deck-wrapper text-white' do %>
-      <div class="p-3 n4-gradient text-center">
+      <div class="p-3 test-btn text-center">
         Study All Unlearned Kanji
       </div>
     <% end %>
@@ -73,7 +73,7 @@
 
 </div>
 
-<div class="box">
+<div class="box-end" style="border-radius: 0px;">
   <%= link_to 'Reset Flashcards', reset_learned_url %>
 </div>
 <!--
