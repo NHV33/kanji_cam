@@ -1,3 +1,9 @@
+<style>
+  body {
+    overflow: hidden;
+  }
+</style>
+
 <%# The gsub erases the word "Deck" if it occurs at the end of the title to avoid duplication %>
 <% title_bar_title = "#{@deck.title.gsub(/ deck[ ]?$/i, "")} Deck" %>
 <br>
