@@ -64,6 +64,16 @@
     }
   }
 
+  .btn-3d.homepage-btn {
+    box-shadow: 0 0 0 1px $primary inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 adjust-color($color: $primary, $lightness: -30%), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    background-color: #1abc9c;
+
+    &:active {
+      box-shadow: 0 0 0 1px $primary inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+      background-color: #1abc9c;
+    }
+  }
+
   .btn-3d.flashcard-blue-btn {
     box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
     background-color: #4274D7;

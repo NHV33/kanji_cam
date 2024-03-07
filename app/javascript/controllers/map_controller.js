@@ -100,7 +100,7 @@ export default class extends Controller {
 
     userMarker.getElement().addEventListener("click", () => {
       this.map.flyTo({
-        center: [coords.longitude, coords.latitude],
+        center: [coords.longitude, coords.latitude - 0.0138],
         zoom: 14,
         essential: true,
         duration: 1000,
@@ -141,11 +141,11 @@ export default class extends Controller {
             }
           }
           this.setActiveMarkerPinPoint(markerPinPoint);
-          const meaningText = `<p class="m-0">Meaning: ${marker.meaning}</p>`;
-          const linkText = `<a class="detail-link" href="/kanjis/${marker.kanji_id}">Check details</a>`;
+          const meaningText = `<p class="m-1 popup-text">Meaning: ${marker.meaning}</p>`;
+          const linkText = `<a class="detail-link popup-text" href="/kanjis/${marker.kanji_id}">Check details</a>`;
 
-          const onText = marker.on_reading !== null ? `<p class="m-0">on reaning: ${marker.on_reading}</p>`: `<p class="m-0">on reaning: None</p>`;
-          const kunText = marker.kun_reading !== null ?`<p class="m-0">kun reaning: ${marker.kun_reading}</p>`: `<p class="m-0">Kun reaning: None</p>`;
+          const onText = marker.on_reading !== null ? `<p class="m-1 popup-text">on reaning: ${marker.on_reading}</p>`: `<p class="m-1 popup-text">on reaning: None</p>`;
+          const kunText = marker.kun_reading !== null ?`<p class="m-1 popup-text">kun reaning: ${marker.kun_reading}</p>`: `<p class="m-1 popup-text">Kun reaning: None</p>`;
           const formattedDate = new Date(
             marker.captured_date
           ).toLocaleDateString("en-us", {
@@ -153,7 +153,7 @@ export default class extends Controller {
             month: "short",
             day: "numeric",
           });
-          const dateText = `<p class="m-0">Added on: ${formattedDate}</p>`;
+          const dateText = `<p class="m-1 mb-3 popup-text">Added on: ${formattedDate}</p>`;
           console.log(formattedDate, "formatted date");
           // if (markerIcon === this.activeMarker) {
           //   this.closePopup(popup);
@@ -174,7 +174,7 @@ export default class extends Controller {
           // When marker is clicked, zoom in as needed
           // console.log("fly to marker");
           this.map.flyTo({
-            center: [marker.lng, marker.lat], // set marker in the center
+            center: [marker.lng, marker.lat + 0.003138], // set marker in the center
             zoom: 14, // zoom level
             essential: true, // animation: true
             duration: 1000,
@@ -183,7 +183,7 @@ export default class extends Controller {
 
         newMarker.getElement().addEventListener("click", () => {
           this.map.flyTo({
-            center: [marker.lng, marker.lat],
+            center: [marker.lng, marker.lat + 0.003138],
             zoom: 14,
             essential: true,
             duration: 1000,
