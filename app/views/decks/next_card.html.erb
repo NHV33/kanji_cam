@@ -77,6 +77,8 @@
         <% end %>
       </div>
     </div>
-    <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, class: "btn btn-secondary" %>
+    <div>
+      <%= button_to 'Finish Session', finish_session_deck_path(@deck), method: :patch, style: "width: 100%;", class: "btn btn-secondary" %>
+    </div>
   <% end %>
 </div>
