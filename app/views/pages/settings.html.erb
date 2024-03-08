@@ -1,8 +1,12 @@
-<% title_content = "#{current_user.email.split("@").first.capitalize}'s Dashboard | #{@points} Points" %>
+<% title_content = "#{current_user.email.split("@").first.capitalize}'s Settings | #{@points} Points" %>
 
 <%= render 'partials/title_bar', destination: root_url, title: title_content %>
 <div class="container mt-3">
-    <div class="box mt-3">
-      hi
+    <div class="box mt-3 p-5">
+      <div class="" style="">
+        <%= link_to 'Reset Flashcards', reset_learned_url, class: "col-12 rounded-pill text-white fs-4 btn btn-danger" %>
+        <br>
+        <%= link_to "Logout", destroy_user_session_path,   class: "col-12 rounded-pill text-white fs-4 btn btn-secondary mt-5", data: {turbo_method: :delete} %>
+      </div>
     </div>
 </div>

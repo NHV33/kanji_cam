@@ -18,7 +18,7 @@
     <%= render partial: "partials/navbar_icons/nav_map", class: "navbar-icon"%>
   <% end %>
 
-  <%= link_to "#" do %>
+  <%= link_to settings_url, class: active_page?([settings_url]) do %>
     <%= render partial: "partials/navbar_icons/nav_settings", class: "navbar-icon"%>
   <% end %>
 
