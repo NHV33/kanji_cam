@@ -5,7 +5,7 @@
 
   <% unlearned_kanji = current_user.cards.count - current_user.cards.where(learned: true).joins(:kanji).distinct.count %>
 
-  <div class="badge bg-danger fs-6 p-2 col-12 mt-2">
+  <div class="badge bg-info text-shadow fs-5 p-2 col-12 my-2">
     You have <%= unlearned_kanji %> unlearned kanji.
   </div>
 
@@ -73,9 +73,6 @@
 
 </div>
 
-<div class="box-end" style="border-radius: 0px;">
-  <%= link_to 'Reset Flashcards', reset_learned_url %>
-</div>
 <!--
 <div class="container">
 

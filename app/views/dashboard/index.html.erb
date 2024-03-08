@@ -76,11 +76,19 @@
 
     </div>
 
+<!-- Only uses n0 color if user has n0 kanji -->
+<% current_user_id = current_user.id %>
+<% n0_count = Card.joins(:kanji).where("kanjis.jlpt = ? AND cards.user_id = ?", 0, current_user_id).count %>
+
+<% jlpt_colors = ['#CB4D4D', '#CB9F4D', '#5BCB4D', '#4D7FCB', '#B24DCB'] %>
+<% if n0_count > 0 %>
+  <% jlpt_colors = ['#545454', '#CB4D4D', '#CB9F4D', '#5BCB4D', '#4D7FCB', '#B24DCB'] %>
+<% end %>
 
   <div class="mt-3">
     <h3>Kanji Collected by JLPT Level</h3>
     <%= pie_chart @collected_kanji_by_jlpt,
-                colors:['#545454', '#CB4D4D', '#CB9F4D', '#5BCB4D', '#4D7FCB', '#B24DCB'],
+                colors: jlpt_colors,
                 id: "jlpt_kanji_distribution",
                 height: "250px",
                 library: {
@@ -100,7 +108,7 @@
   </div>
   </div>
   <div class="mt-3" style="max-width: 100%;">
-    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 page-btn' %>
+    <%= link_to 'Study Kanji Flashcards', decks_path, class: 'col-12 fs-5 page-btn d-flex align-items-center' %>
   </div>
 </div>
 

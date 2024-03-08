@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   get "qa" => "pages#qa", as: :qa
 
   get "tomo" => "pages#tomo", as: :tomo
+
+  get "settings" => "pages#settings", as: :settings
 end
