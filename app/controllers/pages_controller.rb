@@ -13,4 +13,8 @@ class PagesController < ApplicationController
     @points = current_user.points
   end
 
+  def settings
+    @points = current_user.points
+  end
+
 end

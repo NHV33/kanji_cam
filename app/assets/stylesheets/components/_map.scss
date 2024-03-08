@@ -3,9 +3,9 @@ $light-color: white;
 
 .map-container {
   position: relative;
-  top: 15px;
+  top: 0px;
   // remove title and nav bar hight from vh
-  height: calc(100vh - 45px - 72.25px);
+  height: calc(100vh - 50px - 72.25px);
 }
 
 .map {
