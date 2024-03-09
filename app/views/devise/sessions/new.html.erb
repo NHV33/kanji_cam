@@ -1,5 +1,11 @@
-<h2>Log in</h2>
+<div class="container d-flex justify-content-center align-items-center"
+ <%# style="width: 90%;" %>
+ >
+<div class="container border border-secondary p-2">
+<%= image_tag 'kanji_cam_logo.svg', class: "mb-4 svg-shadow", style: "width: 40%; max-height: 20vmin;" %>
+<h2>Log in to your account</h2>
 
+<div>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
     <%= f.input :email,
@@ -12,9 +18,11 @@
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions btn-3d homepage-btn bg-primary text-center">
     <%= f.button :submit, "Log in" %>
   </div>
 <% end %>
-
+</div>
 <%= render "devise/shared/links" %>
+</div>
+</div>
